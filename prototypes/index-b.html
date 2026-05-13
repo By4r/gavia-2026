@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gavia Works — AI destekli özel yazılım ve dijital ürün stüdyosu." />
+  <title>Gavia Works — AI Destekli Yazılım Stüdyosu</title>
+
+  <link rel="icon" type="image/png" href="./assets/logo/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/brand.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gavia-deep': '#020837',
+            'gavia-night': '#141533',
+            'gavia-dark': '#0A0E27',
+            'gavia-mint': '#3FD5AD',
+            'gavia-mint-bright': '#4FE5BD',
+            'gavia-light': '#E9EEF1',
+            'gavia-muted': '#6B7280',
+            'gavia-border': '#1F2740',
+          },
+          fontFamily: {
+            display: ['Manrope', 'system-ui', 'sans-serif'],
+            sans: ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-gavia-deep text-white antialiased">
+
+  <!-- ========== HEADER ========== -->
+  <header data-header class="sticky top-0 z-40 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="flex items-center justify-between h-20">
+
+        <a href="./index.html" class="flex items-center gap-2">
+          <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto" />
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-1">
+
+          <!-- Hizmetler -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Hizmetler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="#" class="mega-link"><!-- TODO: alt sayfa -->
+                    <span class="mega-link-icon"><i class="fa-solid fa-code"></i></span>
+                    <span><span class="block font-semibold text-white">Özel Yazılım Sistemleri</span><span class="block text-sm text-gray-400 mt-0.5">CRM, ERP, portal, panel, e-ticaret.</span></span>
+                  </a>
+                  <a href="#" class="mega-link"><!-- TODO: alt sayfa -->
+                    <span class="mega-link-icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                    <span><span class="block font-semibold text-white">Mobil Uygulama</span><span class="block text-sm text-gray-400 mt-0.5">iOS, Android, Flutter, React Native.</span></span>
+                  </a>
+                  <a href="#" class="mega-link"><!-- TODO: alt sayfa -->
+                    <span class="mega-link-icon"><i class="fa-solid fa-network-wired"></i></span>
+                    <span><span class="block font-semibold text-white">Sistem Entegrasyonu</span><span class="block text-sm text-gray-400 mt-0.5">CRM/ERP, ödeme, kargo, pazaryeri.</span></span>
+                  </a>
+                  <a href="#" class="mega-link"><!-- TODO: alt sayfa -->
+                    <span class="mega-link-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <span><span class="block font-semibold text-white">Bulut & Güvenlik</span><span class="block text-sm text-gray-400 mt-0.5">Bulut mimarisi, KVKK, DevSecOps.</span></span>
+                  </a>
+                </div>
+                <div class="mega-featured">
+                  <span class="badge-mint mb-3">AI Analiz</span>
+                  <h4 class="font-display font-bold text-white text-lg mb-2">AI Dönüşüm Analizi</h4>
+                  <p class="text-sm text-gray-400 mb-4"><!-- TODO: Yasin Bey copy -->Süreçlerinize uygun AI fırsatlarını haritalandıralım.</p>
+                  <a href="#cta" class="text-sm font-semibold text-gavia-mint hover:text-gavia-mint-bright inline-flex items-center gap-1.5">Başla <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yapay Zekâ -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Yapay Zekâ <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-robot"></i></span><span><span class="block font-semibold text-white">AI Otomasyonlar</span><span class="block text-sm text-gray-400 mt-0.5">Teklif, e-posta, destek, rapor.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-comments"></i></span><span><span class="block font-semibold text-white">AI Agent & Asistanlar</span><span class="block text-sm text-gray-400 mt-0.5">Web, WhatsApp, CRM, satış.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-chart-line"></i></span><span><span class="block font-semibold text-white">Veri Analitiği</span><span class="block text-sm text-gray-400 mt-0.5">Dashboard, KPI, tahminleme.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-file-lines"></i></span><span><span class="block font-semibold text-white">Belge Zekâsı</span><span class="block text-sm text-gray-400 mt-0.5">PDF analizi, sözleşme özetleme.</span></span></a>
+                  <a href="#" class="mega-link md:col-span-2"><span class="mega-link-icon"><i class="fa-solid fa-lock"></i></span><span><span class="block font-semibold text-white">Entegrasyon, Güvenlik & Etik</span><span class="block text-sm text-gray-400 mt-0.5">OpenAI/Azure/Google, KVKK, insan onayı.</span></span></a>
+                </div>
+                <div class="mega-featured">
+                  <span class="badge-mint mb-3">Showcase</span>
+                  <h4 class="font-display font-bold text-white text-lg mb-2">AI Çözüm Vitrini</h4>
+                  <p class="text-sm text-gray-400 mb-4"><!-- TODO: Yasin Bey copy -->Sektör bazlı AI örneklerine bakın.</p>
+                  <a href="#ai" class="text-sm font-semibold text-gavia-mint hover:text-gavia-mint-bright inline-flex items-center gap-1.5">İncele <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ürünler -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Ürünler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2">
+                  <p class="text-xs uppercase tracking-wider text-gavia-muted mb-3">Ana Vitrin</p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-5">
+                    <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-users"></i></span><span><span class="block font-semibold text-white">Gavia CRM <span class="badge-soon ml-1">Yakında</span></span><span class="block text-sm text-gray-400 mt-0.5">Satış, müşteri, teklif.</span></span></a>
+                    <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-diagram-project"></i></span><span><span class="block font-semibold text-white">Gavia Flow <span class="badge-soon ml-1">Yakında</span></span><span class="block text-sm text-gray-400 mt-0.5">İş akışı, onay, otomasyon.</span></span></a>
+                    <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span><span class="block font-semibold text-white">Gavia Assistant <span class="badge-soon ml-1">Yakında</span></span><span class="block text-sm text-gray-400 mt-0.5">AI destekli asistan.</span></span></a>
+                    <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-chart-line"></i></span><span><span class="block font-semibold text-white">Gavia Insight <span class="badge-soon ml-1">Yakında</span></span><span class="block text-sm text-gray-400 mt-0.5">Veri analitiği, tahminleme.</span></span></a>
+                  </div>
+                  <p class="text-xs uppercase tracking-wider text-gavia-muted mb-3">Geliştirilen</p>
+                  <div class="flex flex-wrap gap-2">
+                    <a href="#" class="chip-sector text-xs">Gavia Commerce</a>
+                    <a href="#" class="chip-sector text-xs">Gavia ESG</a>
+                    <a href="#" class="chip-sector text-xs">Gavia Portal</a>
+                  </div>
+                </div>
+                <div class="mega-featured">
+                  <span class="badge-soon mb-3">Yakında</span>
+                  <h4 class="font-display font-bold text-white text-lg mb-2">Erken Erişim</h4>
+                  <p class="text-sm text-gray-400 mb-4"><!-- TODO: Yasin Bey copy -->Bekleme listesine katılın.</p>
+                  <a href="#cta" class="text-sm font-semibold text-gavia-mint hover:text-gavia-mint-bright inline-flex items-center gap-1.5">Kayıt ol <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sürdürülebilirlik -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Sürdürülebilirlik <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-leaf"></i></span><span><span class="block font-semibold text-white">Dijital Verimlilik</span><span class="block text-sm text-gray-400 mt-0.5">Kâğıtsız süreç, uzaktan erişim.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-chart-pie"></i></span><span><span class="block font-semibold text-white">ESG ve Raporlama</span><span class="block text-sm text-gray-400 mt-0.5">Karbon ayak izi, enerji, atık.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-recycle"></i></span><span><span class="block font-semibold text-white">Sürdürülebilir Yazılım</span><span class="block text-sm text-gray-400 mt-0.5">Modüler mimari, bulut verimliliği.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-bolt"></i></span><span><span class="block font-semibold text-white">AI for Sustainability</span><span class="block text-sm text-gray-400 mt-0.5">Enerji analizi, israf azaltma.</span></span></a>
+                  <a href="#" class="mega-link md:col-span-2"><span class="mega-link-icon"><i class="fa-solid fa-heart"></i></span><span><span class="block font-semibold text-white">Sosyal Fayda</span><span class="block text-sm text-gray-400 mt-0.5">STK, eğitim, kültürel miras, erişim.</span></span></a>
+                </div>
+                <div class="mega-featured">
+                  <span class="badge-mint mb-3">Manifesto</span>
+                  <h4 class="font-display font-bold text-white text-lg mb-2">Sorumlu Teknoloji</h4>
+                  <p class="text-sm text-gray-400 mb-4"><!-- TODO: Yasin Bey copy -->Sürdürülebilirlik bir bölüm değil, çalışma biçimi.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gavia -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Gavia <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-circle-info"></i></span><span><span class="block font-semibold text-white">Hakkımızda</span><span class="block text-sm text-gray-400 mt-0.5">Gavia kimdir, ne yapar.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-compass"></i></span><span><span class="block font-semibold text-white">Yaklaşım</span><span class="block text-sm text-gray-400 mt-0.5">Analiz → Tasarım → Yazılım → AI.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-people-group"></i></span><span><span class="block font-semibold text-white">Ekip</span><span class="block text-sm text-gray-400 mt-0.5">Stüdyo arkasındaki insanlar.</span></span></a>
+                  <a href="#" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-briefcase"></i></span><span><span class="block font-semibold text-white">Kariyer</span><span class="block text-sm text-gray-400 mt-0.5">Açık pozisyonlar ve staj.</span></span></a>
+                </div>
+                <div class="mega-featured">
+                  <span class="badge-mint mb-3">İletişim</span>
+                  <h4 class="font-display font-bold text-white text-lg mb-2">Projenizi Anlatalım</h4>
+                  <p class="text-sm text-gray-400 mb-4"><!-- TODO: Yasin Bey copy -->30 dakikalık keşif görüşmesi.</p>
+                  <a href="#cta" class="text-sm font-semibold text-gavia-mint hover:text-gavia-mint-bright inline-flex items-center gap-1.5">Görüşme aç <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors"><!-- TODO: alt sayfa -->İletişim</a>
+        </nav>
+
+        <a href="#cta" class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gavia-mint hover:bg-gavia-mint-bright text-gavia-deep text-sm font-semibold transition-colors">
+          Projenizi Anlatalım <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+
+        <button data-mobile-menu-btn class="lg:hidden p-2 text-gray-200 hover:text-gavia-mint" aria-label="Menü">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <div data-mobile-menu class="hidden lg:hidden pb-6">
+        <nav class="flex flex-col gap-1 border-t border-gavia-border pt-4">
+          <a href="#hizmetler" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Hizmetler</a>
+          <a href="#ai" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Yapay Zekâ</a>
+          <a href="#urunler" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Ürünler</a>
+          <a href="#sektorler" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Sektörler</a>
+          <a href="#surdurulebilirlik" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Sürdürülebilirlik</a>
+          <a href="#" class="px-3 py-2 text-gray-200 hover:text-gavia-mint"><!-- TODO: alt sayfa -->Gavia</a>
+          <a href="#" class="px-3 py-2 text-gray-200 hover:text-gavia-mint"><!-- TODO: alt sayfa -->İletişim</a>
+          <a href="#cta" class="mt-3 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gavia-mint text-gavia-deep font-semibold">
+            Projenizi Anlatalım <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO — VARYANT 2: Innova+ video bg ========== -->
+  <section class="relative min-h-[700px] md:min-h-[800px] overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&q=80" alt="" class="w-full h-full object-cover" />
+    </div>
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&q=80" class="absolute inset-0 w-full h-full object-cover z-[1]">
+      <source src="https://cdn.pixabay.com/video/2023/10/13/184471-873083587_large.mp4" type="video/mp4" />
+      <source src="https://videos.pexels.com/video-files/3129976/3129976-uhd_3840_2160_30fps.mp4" type="video/mp4" />
+    </video>
+
+    <div class="absolute inset-0 bg-gradient-to-br from-gavia-deep/75 via-gavia-deep/55 to-gavia-night/70 z-10"></div>
+    <div class="absolute inset-0 dot-pattern opacity-30 z-10"></div>
+
+    <div class="relative z-20 max-w-7xl mx-auto px-6 md:px-8 min-h-[700px] md:min-h-[800px] flex items-center">
+      <div class="max-w-4xl">
+        <span class="badge-mint mb-6 inline-flex"><i class="fa-solid fa-sparkles mr-1.5"></i>Yapay Zekâ × Yazılım Stüdyosu</span>
+
+        <h1 class="font-display font-extrabold text-5xl md:text-7xl lg:text-8xl leading-[1.02] tracking-tight mb-8 text-white">
+          <!-- TODO: Yasin Bey copy -->
+          Fikirden ölçeğe,<br />
+          <span class="gradient-text-mint">AI destekli</span><br />
+          yazılım ortaklığı.
+        </h1>
+
+        <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed">
+          <!-- TODO: Yasin Bey copy -->
+          Markaların dijital dönüşümünü özel yazılım, mobil uygulama, sistem
+          entegrasyonu ve yapay zekâ çözümleriyle uçtan uca kuruyoruz.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="#cta" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg bg-gavia-mint hover:bg-gavia-mint-bright text-gavia-deep font-semibold transition-colors">
+            Projenizi Anlatalım <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="#ai" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg border border-white/30 backdrop-blur text-white hover:border-gavia-mint transition-colors">
+            AI Dönüşüm Analizi
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+      <i class="fa-solid fa-chevron-down text-gavia-mint text-2xl"></i>
+    </div>
+  </section>
+
+  <!-- ========== STATS — Itransition "At a Glance" 5-sütun ========== -->
+  <section class="bg-gavia-deep border-y border-gavia-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-4">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">7+</div>
+          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Yıl Deneyim</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Tamamlanan Proje</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Sektör</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Ürün Ailesi</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Teknik Destek</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 3. NE YAPIYORUZ — AÇIK ZEMİN ========== -->
+  <section id="hizmetler" class="bg-gavia-light text-gavia-deep py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="max-w-3xl mb-14">
+        <span class="badge-mint badge-mint-dark mb-4">Hizmetler</span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight mb-5 text-gavia-deep">
+          <!-- TODO: Yasin Bey copy -->Ne yapıyoruz?
+        </h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          <!-- TODO: Yasin Bey copy -->
+          Dört ana hizmet hattıyla; ihtiyacı analiz ediyor, sistemi tasarlıyor,
+          yazılımı geliştiriyor ve yapay zekâyla zenginleştiriyoruz.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all"><!-- TODO: alt sayfa -->
+          <div class="aspect-[3/2] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Özel Yazılım" class="image-cover-img group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="p-6">
+            <div class="w-11 h-11 rounded-lg bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-4">
+              <i class="fa-solid fa-code text-lg"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-gavia-deep mb-2">Özel Yazılım Sistemleri</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4"><!-- TODO: Yasin Bey copy -->CRM, ERP, portal ve raporlama panelleri — sıfırdan markaya özel.</p>
+            <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-gavia-mint group-hover:gap-2 transition-all">Detay <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+        </a>
+
+        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all"><!-- TODO: alt sayfa -->
+          <div class="aspect-[3/2] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80" alt="Mobil" class="image-cover-img group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="p-6">
+            <div class="w-11 h-11 rounded-lg bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-4">
+              <i class="fa-solid fa-mobile-screen-button text-lg"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-gavia-deep mb-2">Mobil Uygulama</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4"><!-- TODO: Yasin Bey copy -->iOS, Android, Flutter, React Native — müşteri ve saha uygulamaları.</p>
+            <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-gavia-mint group-hover:gap-2 transition-all">Detay <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+        </a>
+
+        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all"><!-- TODO: alt sayfa -->
+          <div class="aspect-[3/2] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="Sistem Entegrasyonu" class="image-cover-img group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="p-6">
+            <div class="w-11 h-11 rounded-lg bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-4">
+              <i class="fa-solid fa-network-wired text-lg"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-gavia-deep mb-2">Sistem Entegrasyonları</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4"><!-- TODO: Yasin Bey copy -->CRM/ERP, muhasebe, ödeme, kargo, pazaryeri entegrasyonu.</p>
+            <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-gavia-mint group-hover:gap-2 transition-all">Detay <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+        </a>
+
+        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all"><!-- TODO: alt sayfa -->
+          <div class="aspect-[3/2] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80" alt="Bulut Güvenlik" class="image-cover-img group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="p-6">
+            <div class="w-11 h-11 rounded-lg bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-4">
+              <i class="fa-solid fa-shield-halved text-lg"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-gavia-deep mb-2">Bulut & Güvenlik</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4"><!-- TODO: Yasin Bey copy -->Bulut mimarisi, performans, KVKK uyumu, DevSecOps.</p>
+            <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-gavia-mint group-hover:gap-2 transition-all">Detay <i class="fa-solid fa-arrow-right text-xs"></i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4. AI SHOWCASE — KOYU + BG image ========== -->
+  <section id="ai" class="section-fade-top relative bg-gavia-night py-20 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-50">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=80" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-gavia-night/75 via-gavia-night/65 to-gavia-deep/85 z-10"></div>
+    <div class="absolute inset-0 dot-pattern opacity-30 z-10"></div>
+    <div class="relative z-20 max-w-7xl mx-auto px-6 md:px-8">
+      <div class="max-w-3xl mb-14">
+        <span class="badge-mint mb-4"><i class="fa-solid fa-brain mr-1.5"></i>Yapay Zekâ</span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight mb-5">
+          <!-- TODO: Yasin Bey copy -->
+          <span class="gradient-text-mint">Yapay zekâyı</span> işin içine koyuyoruz.
+        </h2>
+        <p class="text-lg text-gray-400 leading-relaxed">
+          <!-- TODO: Yasin Bey copy -->
+          Otomasyon, asistan ve belge zekâsı; üç katmanda iş süreçlerinizi
+          akıllı sistemlere bağlıyoruz.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <article class="image-card">
+          <div class="aspect-[3/2] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80" alt="Otomasyon" class="image-cover-img" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="w-11 h-11 rounded-lg bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-4">
+              <i class="fa-solid fa-robot text-lg"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-3">AI Destekli Otomasyon</h3>
+            <p class="text-sm text-gray-400 leading-relaxed flex-1"><!-- TODO: Yasin Bey copy -->Teklif, e-posta, müşteri desteği ve raporlama akışlarını AI ile otomatikleştirin.</p>
+            <a href="#" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gavia-mint hover:text-gavia-mint-bright"><!-- TODO: alt sayfa -->Daha fazla <i class="fa-solid fa-arrow-right text-xs"></i></a>
+          </div>
+        </article>
+
+        <article class="image-card">
+          <div class="aspect-[3/2] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&q=80" alt="AI Agent" class="image-cover-img" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="w-11 h-11 rounded-lg bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-4">
+              <i class="fa-solid fa-comments text-lg"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-3">AI Agent & Asistanlar</h3>
+            <p class="text-sm text-gray-400 leading-relaxed flex-1"><!-- TODO: Yasin Bey copy -->Web, WhatsApp, CRM ve satış için göreve özel dijital asistanlar.</p>
+            <a href="#" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gavia-mint hover:text-gavia-mint-bright"><!-- TODO: alt sayfa -->Daha fazla <i class="fa-solid fa-arrow-right text-xs"></i></a>
+          </div>
+        </article>
+
+        <article class="image-card">
+          <div class="aspect-[3/2] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80" alt="Belge Zekası" class="image-cover-img" />
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="w-11 h-11 rounded-lg bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-4">
+              <i class="fa-solid fa-file-lines text-lg"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-3">Belge Zekâsı</h3>
+            <p class="text-sm text-gray-400 leading-relaxed flex-1"><!-- TODO: Yasin Bey copy -->PDF analizi, sözleşme özetleme, teklif ve rapor üretimi — yapay zekâ ile.</p>
+            <a href="#" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gavia-mint hover:text-gavia-mint-bright"><!-- TODO: alt sayfa -->Daha fazla <i class="fa-solid fa-arrow-right text-xs"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-gavia-mint"><!-- TODO: alt sayfa -->Tüm AI çözümleri <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 5. ÜRÜN AİLESİ — GRADIENT KOYU + BG image + glows ========== -->
+  <section id="urunler" class="section-fade-top section-fade-bottom relative bg-gavia-deep py-20 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=80" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-gavia-mint/10 rounded-full blur-[100px] z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/[0.06] rounded-full blur-[100px] z-10 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-tr from-gavia-deep/70 via-gavia-deep/60 to-gavia-night/80 z-10"></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-8 relative z-20">
+      <div class="max-w-3xl mb-14">
+        <span class="badge-mint mb-4"><i class="fa-solid fa-cubes mr-1.5"></i>Ürünler</span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight mb-5">
+          <!-- TODO: Yasin Bey copy -->Gavia <span class="gradient-text-mint">ürün ailesi</span>
+        </h2>
+        <p class="text-lg text-gray-400 leading-relaxed">
+          <!-- TODO: Yasin Bey copy -->Hızlı başlamak isteyen ekipler için dört temel ürün. Hepsi yakında.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="product-card rounded-2xl p-7">
+          <span class="badge-soon absolute top-4 right-4">Yakında</span>
+          <div class="w-14 h-14 rounded-xl bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-6 relative">
+            <i class="fa-solid fa-users text-2xl"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-white mb-2 relative">Gavia CRM</h3>
+          <p class="text-sm text-gray-400 leading-relaxed relative"><!-- TODO: Yasin Bey copy -->Satış, müşteri ve teklif yönetimi tek panelde.</p>
+        </div>
+
+        <div class="product-card rounded-2xl p-7">
+          <span class="badge-soon absolute top-4 right-4">Yakında</span>
+          <div class="w-14 h-14 rounded-xl bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-6 relative">
+            <i class="fa-solid fa-diagram-project text-2xl"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-white mb-2 relative">Gavia Flow</h3>
+          <p class="text-sm text-gray-400 leading-relaxed relative"><!-- TODO: Yasin Bey copy -->İş akışı, onay süreçleri ve otomasyon motoru.</p>
+        </div>
+
+        <div class="product-card rounded-2xl p-7">
+          <span class="badge-soon absolute top-4 right-4">Yakında</span>
+          <div class="w-14 h-14 rounded-xl bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-6 relative">
+            <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-white mb-2 relative">Gavia Assistant</h3>
+          <p class="text-sm text-gray-400 leading-relaxed relative"><!-- TODO: Yasin Bey copy -->Departmanlara özel AI destekli dijital asistan.</p>
+        </div>
+
+        <div class="product-card rounded-2xl p-7">
+          <span class="badge-soon absolute top-4 right-4">Yakında</span>
+          <div class="w-14 h-14 rounded-xl bg-gavia-mint/10 text-gavia-mint inline-flex items-center justify-center mb-6 relative">
+            <i class="fa-solid fa-chart-line text-2xl"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-white mb-2 relative">Gavia Insight</h3>
+          <p class="text-sm text-gray-400 leading-relaxed relative"><!-- TODO: Yasin Bey copy -->Veri analitiği, dashboard ve tahminleme.</p>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-gavia-mint"><!-- TODO: alt sayfa -->Tüm ürünler <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 6. SEKTÖRLER — BEYAZ ZEMİN, FULL IMAGE TILE ========== -->
+  <section id="sektorler" class="bg-white text-gavia-deep py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="max-w-3xl mb-14">
+        <span class="badge-mint badge-mint-dark mb-4"><i class="fa-solid fa-layer-group mr-1.5"></i>Sektörler</span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight mb-5 text-gavia-deep">
+          <!-- TODO: Yasin Bey copy -->Hangi alanlarda çalışıyoruz?
+        </h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          <!-- TODO: Yasin Bey copy -->
+          Sekiz farklı sektörde proje deneyimi; teknolojiyi sektörün diliyle
+          konuşmayı önemsiyoruz.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+
+        <a href="#" class="sector-tile-v2 group">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&q=80" alt="Perakende" />
+          <div class="sector-tile-v2-grad"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-display font-bold text-xl">Perakende</h3>
+            <p class="text-gray-300 text-xs mt-1"><!-- TODO: Yasin Bey copy -->E-ticaret, CRM, sadakat</p>
+          </div>
+        </a>
+
+        <a href="#" class="sector-tile-v2 group">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80" alt="İnşaat" />
+          <div class="sector-tile-v2-grad"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-display font-bold text-xl">İnşaat</h3>
+            <p class="text-gray-300 text-xs mt-1"><!-- TODO: Yasin Bey copy -->Şantiye, proje, takip</p>
+          </div>
+        </a>
+
+        <a href="#" class="sector-tile-v2 group">
+          <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=400&q=80" alt="Denizcilik" />
+          <div class="sector-tile-v2-grad"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-display font-bold text-xl">Denizcilik</h3>
+            <p class="text-gray-300 text-xs mt-1"><!-- TODO: Yasin Bey copy -->Liman, lojistik, filo</p>
+          </div>
+        </a>
+
+        <a href="#" class="sector-tile-v2 group">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=80" alt="Eğitim" />
+          <div class="sector-tile-v2-grad"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-display font-bold text-xl">Eğitim</h3>
+            <p class="text-gray-300 text-xs mt-1"><!-- TODO: Yasin Bey copy -->LMS, içerik, ölçme</p>
+          </div>
+        </a>
+
+        <a href="#" class="sector-tile-v2 group">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80" alt="Sağlık" />
+          <div class="sector-tile-v2-grad"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-display font-bold text-xl">Sağlık</h3>
+            <p class="text-gray-300 text-xs mt-1"><!-- TODO: Yasin Bey copy -->Klinik, hasta, randevu</p>
+          </div>
+        </a>
+
+        <a href="#" class="sector-tile-v2 group">
+          <img src="https://images.unsplash.com/photo-1565514020179-026b92b4ed28?w=400&q=80" alt="Üretim" />
+          <div class="sector-tile-v2-grad"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-display font-bold text-xl">Üretim</h3>
+            <p class="text-gray-300 text-xs mt-1"><!-- TODO: Yasin Bey copy -->MES, kalite, bakım</p>
+          </div>
+        </a>
+
+        <a href="#" class="sector-tile-v2 group">
+          <img src="https://images.unsplash.com/photo-1555848962-6e79363ec59f?w=400&q=80" alt="Kamu" />
+          <div class="sector-tile-v2-grad"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-display font-bold text-xl">Kamu</h3>
+            <p class="text-gray-300 text-xs mt-1"><!-- TODO: Yasin Bey copy -->E-belediye, vatandaş</p>
+          </div>
+        </a>
+
+        <a href="#" class="sector-tile-v2 group">
+          <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&q=80" alt="Medya" />
+          <div class="sector-tile-v2-grad"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-display font-bold text-xl">Medya</h3>
+            <p class="text-gray-300 text-xs mt-1"><!-- TODO: Yasin Bey copy -->Yayın, içerik, abonelik</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 7. SÜRDÜRÜLEBİLİRLİK BANDI — AÇIK ZEMİN (mint accent) ========== -->
+  <section id="surdurulebilirlik" class="relative bg-gavia-light text-gavia-deep py-16 md:py-20 overflow-hidden">
+    <i class="fa-solid fa-leaf absolute top-1/2 -right-12 -translate-y-1/2 text-gavia-mint/[0.18] text-[300px] pointer-events-none"></i>
+    <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-gavia-mint/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-6 md:px-8">
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
+        <div class="flex-shrink-0">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gavia-mint/15 text-gavia-mint inline-flex items-center justify-center border border-gavia-mint/30">
+            <i class="fa-solid fa-leaf text-3xl md:text-4xl"></i>
+          </div>
+        </div>
+        <div class="flex-1">
+          <span class="badge-mint badge-mint-dark mb-3">Sürdürülebilirlik</span>
+          <p class="font-display font-bold text-xl md:text-2xl text-gavia-deep leading-snug mt-2">
+            <!-- TODO: Yasin Bey copy -->
+            Sorumlu teknoloji; bir bölüm değil,
+            <span class="gradient-text-mint">çalışma biçimimiz.</span>
+          </p>
+        </div>
+        <div class="flex-shrink-0">
+          <a href="#" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-gavia-deep/20 hover:border-gavia-mint hover:text-gavia-mint text-gavia-deep font-semibold transition-colors"><!-- TODO: alt sayfa -->
+            Yaklaşımımızı görün <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 8. FINAL CTA — KOYU + BG image ========== -->
+  <section id="cta" class="section-fade-top relative bg-gavia-dark py-20 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-55">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=80" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-gavia-deep/70 via-gavia-dark/75 to-gavia-deep/70 z-10"></div>
+    <div class="absolute inset-0 dot-pattern opacity-40 z-10"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gavia-mint/15 rounded-full blur-[120px] z-10 pointer-events-none"></div>
+    <div class="relative z-20 max-w-5xl mx-auto px-6 md:px-8 text-center">
+      <span class="badge-mint mb-5"><i class="fa-solid fa-envelope mr-1.5"></i>İletişim</span>
+      <h2 class="font-display font-extrabold text-3xl md:text-5xl tracking-tight mb-5">
+        <!-- TODO: Yasin Bey copy -->
+        Bir <span class="gradient-text-mint">fikir mi var,</span> bir sistem mi gerek?
+      </h2>
+      <p class="text-lg text-gray-300 leading-relaxed mb-8 max-w-2xl mx-auto">
+        <!-- TODO: Yasin Bey copy -->
+        Projenizi konuşalım veya AI dönüşüm haritanızı birlikte çıkaralım.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="#" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-gavia-mint hover:bg-gavia-mint-bright text-gavia-deep font-semibold transition-colors"><!-- TODO: form -->
+          Projenizi Anlatalım <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="#" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-gavia-border hover:border-gavia-mint text-white font-semibold transition-colors"><!-- TODO: form -->
+          AI Dönüşüm Analizi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 9. FOOTER ========== -->
+  <footer class="bg-gavia-dark border-t border-gavia-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+        <div>
+          <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto mb-5" />
+          <p class="text-sm text-gray-400 leading-relaxed mb-5">
+            <!-- TODO: Yasin Bey copy -->AI destekli özel yazılım ve dijital ürün stüdyosu.
+          </p>
+          <div class="flex gap-3">
+            <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="X" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="GitHub" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-white mb-5">Hizmetler</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Özel Yazılım</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Mobil Uygulama</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Sistem Entegrasyonu</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Bulut & Güvenlik</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Yapay Zekâ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-white mb-5">Ürünler</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Gavia CRM</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Gavia Flow</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Gavia Assistant</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Gavia Insight</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Tüm Ürünler</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-white mb-5">İletişim</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="mailto:info@gaviaworks.com" class="text-gray-400 hover:text-gavia-mint">info@gaviaworks.com</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Projenizi Anlatalım</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">AI Dönüşüm Analizi</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Kariyer</a></li>
+          </ul>
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-white mt-8 mb-3">Hukuki</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">KVKK Aydınlatma</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-gavia-mint">Çerez Politikası</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gavia-border mt-12 pt-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-gavia-muted">
+        <p>© 2026 Gavia Works. Tüm hakları saklıdır.</p>
+        <p>Made with care — Dada İstanbul.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>

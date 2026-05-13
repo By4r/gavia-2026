@@ -1,22 +1,12 @@
-# macOS
 .DS_Store
-**/.DS_Store
-
-# Editor
-.vscode/
-.idea/
-*.swp
-
-# Logs
-*.log
-
-# Node (Faz 3 için, şimdilik kullanılmıyor)
 node_modules/
-.next/
-dist/
+vendor/
 .env
-.env.local
-
-# Temporary
-*.tmp
-.cache/
+.env.*
+!.env.example
+storage/*.key
+*.log
+.idea/
+.vscode/
+*.swp
+*.bak
