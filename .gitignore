@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# Node (Faz 3 için, şimdilik kullanılmıyor)
+node_modules/
+.next/
+dist/
+.env
+.env.local
+
+# Temporary
+*.tmp
+.cache/
