@@ -1198,20 +1198,24 @@
   .cta::before {
     content: '';
     position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: min(1168px, calc(100% - 112px));
-    height: 75%;
+    inset: 0;
     background: radial-gradient(
-      ellipse 90% 75% at center bottom,
-      rgba(79, 191, 161, 0.55) 0%,
-      rgba(79, 191, 161, 0.18) 35%,
-      transparent 75%
+      ellipse 70% 55% at center 52%,
+      rgba(79, 191, 161, 0.30) 0%,
+      rgba(79, 191, 161, 0.10) 40%,
+      transparent 78%
     );
-    filter: blur(48px);
+    filter: blur(60px);
     z-index: -1;
     pointer-events: none;
+  }
+  .cta-actions {
+    position: relative;
+    z-index: 2;
+  }
+  .cta h2 {
+    position: relative;
+    z-index: 2;
   }
   .cta-label {
     font-family: var(--font-mono);
