@@ -8,6 +8,14 @@ Bu dosya Claude Code'un context'i resetlenip yeniden başlasa bile **projenin ne
 **Yürüten:** Beyar Güneş
 **Faz:** 1 (patron sunum prototipi — tek HTML dosyası)
 
+## Deploy
+
+- **GitHub repo**: https://github.com/By4r/gavia-2026 (public)
+- **Live URL**: https://by4r.github.io/gavia-2026/
+- **Pages source**: `main /docs`
+- **Deploy yöntemi**: `docs/` klasörü `prototypes/v1/`'in canlı kopyası. Edit yapıldığında `cp prototypes/v1/index.html docs/index.html` + commit + push gerekir.
+- **Visibility notu**: Public açıldı çünkü GitHub Pages free plan private destekler değil. Beyar private isterse Vercel/Netlify alternative kullanılır (Pro plan + private repo + Pages destekli).
+
 ---
 
 ## Hızlı durum (READ FIRST)
@@ -207,6 +215,7 @@ gavia-2026/
 8. **Konuşalım butonu header'da YOK** (sade nav kalır)
 9. **CTA "Bir fikrin mi var?" yayma YOK** (best practice)
 10. **Header yapısı**: floating pill YOK, Vercel-tarzı split YOK. **Full-width top bar + max-width 1280px inner container** (footer hizalı). Iterasyon 8'de bu karar kesinleşti. Tekrar pill'e dönmeyin.
+11. **"Küçük ekip" / "küçük ama" gibi kıymetsizleştiren ifadelerden KAÇIN.** Beyar 2026-05-13: hero subhead'i "küçük ama keskin bir ekip" → "keskin bir ekip" yapıldı. Tone: özgüvenli, kalibreli, küçüklüğü vurgulama.
 
 ---
 
