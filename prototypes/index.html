@@ -45,13 +45,13 @@
   <!-- ========== HEADER ========== -->
   <header data-header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 md:px-8">
-      <div class="flex items-center justify-between h-20">
+      <div class="relative flex items-center justify-between h-20">
 
         <a href="./index.html" class="flex items-center gap-2">
           <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto" />
         </a>
 
-        <nav class="hidden lg:flex items-center gap-1">
+        <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
 
           <!-- Hizmetler -->
           <div class="mega-trigger" data-mega-trigger>
@@ -209,12 +209,35 @@
           <a href="#" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors"><!-- TODO: alt sayfa -->İletişim</a>
         </nav>
 
-        <div class="hidden lg:flex items-center gap-4">
-          <!-- Dil seçici (default EN) -->
-          <div data-lang-switch class="flex items-center text-sm font-semibold tracking-wider">
-            <button type="button" data-lang="en" class="px-1.5 text-gavia-mint transition-colors" aria-current="true">EN</button>
-            <span class="text-gavia-border" aria-hidden="true">|</span>
-            <button type="button" data-lang="tr" class="px-1.5 text-gray-400 hover:text-gavia-mint transition-colors">TR</button>
+        <div class="hidden lg:flex items-center gap-3">
+          <!-- Dil seçici dropdown (default EN, 2-5 dil ölçeklenir) -->
+          <div class="relative" data-lang-switcher>
+            <button type="button"
+                    class="flex items-center gap-1 px-2 py-1.5 text-sm font-semibold text-gray-200 hover:text-gavia-mint transition-colors"
+                    aria-haspopup="listbox"
+                    aria-expanded="false"
+                    aria-label="Dil seç / Select language"
+                    data-lang-trigger>
+              <span data-lang-current>EN</span>
+              <i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i>
+            </button>
+            <ul role="listbox"
+                aria-label="Languages"
+                class="hidden absolute right-0 mt-2 min-w-[180px] rounded-lg border border-gavia-border bg-gavia-deep/95 backdrop-blur-md shadow-xl py-1 z-50"
+                data-lang-menu>
+              <li role="option" aria-selected="true" aria-current="true" tabindex="0"
+                  data-lang="en"
+                  class="flex items-center justify-between gap-3 px-3 py-2 text-sm text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
+                <span><span class="font-mono text-xs opacity-60 mr-2">EN</span>English</span>
+                <i class="fa-solid fa-check text-xs text-gavia-mint" data-lang-check></i>
+              </li>
+              <li role="option" aria-selected="false" tabindex="-1" data-lang="tr"
+                  class="flex items-center justify-between gap-3 px-3 py-2 text-sm text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
+                <span><span class="font-mono text-xs opacity-60 mr-2">TR</span>Türkçe</span>
+                <i class="fa-solid fa-check text-xs text-gavia-mint hidden" data-lang-check></i>
+              </li>
+              <!-- DE / AR / RU sonra eklenir: aynı <li> yapısı, JS dokunmasın -->
+            </ul>
           </div>
 
           <a href="#cta" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gavia-mint hover:bg-gavia-mint-bright text-gavia-deep text-sm font-semibold transition-colors">
@@ -240,11 +263,21 @@
             Projenizi Anlatalım <i class="fa-solid fa-arrow-right text-xs"></i>
           </a>
 
-          <!-- Dil seçici (mobile) -->
-          <div data-lang-switch class="mt-4 flex items-center justify-center gap-2 text-sm font-semibold tracking-wider border-t border-gavia-border pt-4">
-            <button type="button" data-lang="en" class="px-2 py-1 text-gavia-mint" aria-current="true">EN</button>
-            <span class="text-gavia-border" aria-hidden="true">|</span>
-            <button type="button" data-lang="tr" class="px-2 py-1 text-gray-400 hover:text-gavia-mint">TR</button>
+          <!-- Dil seçici (mobile — expanded list) -->
+          <div class="mt-4 border-t border-gavia-border pt-4" data-lang-switcher-mobile>
+            <p class="px-3 mb-2 text-xs uppercase tracking-wider text-gavia-muted">Dil / Language</p>
+            <ul role="listbox" aria-label="Languages" class="flex flex-col">
+              <li role="option" aria-selected="true" aria-current="true" data-lang="en"
+                  class="flex items-center justify-between px-3 py-2 text-sm text-gray-200 cursor-pointer hover:text-gavia-mint">
+                <span><span class="font-mono text-xs opacity-60 mr-2">EN</span>English</span>
+                <i class="fa-solid fa-check text-xs text-gavia-mint" data-lang-check></i>
+              </li>
+              <li role="option" aria-selected="false" data-lang="tr"
+                  class="flex items-center justify-between px-3 py-2 text-sm text-gray-200 cursor-pointer hover:text-gavia-mint">
+                <span><span class="font-mono text-xs opacity-60 mr-2">TR</span>Türkçe</span>
+                <i class="fa-solid fa-check text-xs text-gavia-mint hidden" data-lang-check></i>
+              </li>
+            </ul>
           </div>
         </nav>
       </div>

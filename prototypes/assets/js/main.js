@@ -40,22 +40,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Dil seçici — şimdilik sadece aktif state toggle (i18n entegrasyonu sonra)
-  document.querySelectorAll('[data-lang-switch]').forEach(group => {
-    const buttons = group.querySelectorAll('[data-lang]');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => {
-          b.classList.remove('text-gavia-mint');
-          b.classList.add('text-gray-400', 'hover:text-gavia-mint');
-          b.removeAttribute('aria-current');
-        });
-        btn.classList.add('text-gavia-mint');
-        btn.classList.remove('text-gray-400', 'hover:text-gavia-mint');
-        btn.setAttribute('aria-current', 'true');
+  // Dil seçici — dropdown (desktop) + expanded list (mobile)
+  const langSwitcher = document.querySelector('[data-lang-switcher]');
+  if (langSwitcher) {
+    const trigger = langSwitcher.querySelector('[data-lang-trigger]');
+    const menu = langSwitcher.querySelector('[data-lang-menu]');
+    const itemsOf = (root) => [...root.querySelectorAll('[role="option"]')];
+
+    const openMenu = () => {
+      menu.classList.remove('hidden');
+      trigger.setAttribute('aria-expanded', 'true');
+      const selected = itemsOf(menu).find(i => i.getAttribute('aria-selected') === 'true');
+      (selected || itemsOf(menu)[0]).focus();
+    };
+    const closeMenu = (returnFocus) => {
+      menu.classList.add('hidden');
+      trigger.setAttribute('aria-expanded', 'false');
+      if (returnFocus) trigger.focus();
+    };
+
+    trigger.addEventListener('click', () => {
+      menu.classList.contains('hidden') ? openMenu() : closeMenu(false);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!langSwitcher.contains(e.target) && !menu.classList.contains('hidden')) closeMenu(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (menu.classList.contains('hidden')) return;
+      const list = itemsOf(menu);
+      const idx = list.indexOf(document.activeElement);
+      if (e.key === 'Escape') { e.preventDefault(); closeMenu(true); }
+      if (e.key === 'ArrowDown') { e.preventDefault(); list[(idx + 1) % list.length].focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); list[(idx - 1 + list.length) % list.length].focus(); }
+      if (e.key === 'Home') { e.preventDefault(); list[0].focus(); }
+      if (e.key === 'End') { e.preventDefault(); list[list.length - 1].focus(); }
+    });
+
+    itemsOf(menu).forEach(item => {
+      item.addEventListener('click', () => selectLang(item.dataset.lang));
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectLang(item.dataset.lang); }
       });
     });
-  });
+
+    // Mobile expanded list — aynı selectLang çağırır
+    document.querySelectorAll('[data-lang-switcher-mobile] [role="option"]').forEach(item => {
+      item.addEventListener('click', () => selectLang(item.dataset.lang));
+    });
+
+    function selectLang(code) {
+      document.documentElement.lang = code;
+      const current = langSwitcher.querySelector('[data-lang-current]');
+      if (current) current.textContent = code.toUpperCase();
+
+      const syncList = (root) => {
+        itemsOf(root).forEach(i => {
+          const sel = i.dataset.lang === code;
+          i.setAttribute('aria-selected', String(sel));
+          sel ? i.setAttribute('aria-current', 'true') : i.removeAttribute('aria-current');
+          const check = i.querySelector('[data-lang-check]');
+          if (check) check.classList.toggle('hidden', !sel);
+        });
+      };
+      syncList(menu);
+      const mobileRoot = document.querySelector('[data-lang-switcher-mobile]');
+      if (mobileRoot) syncList(mobileRoot);
+
+      try { localStorage.setItem('gavia-lang', code); } catch {}
+      closeMenu(false);
+    }
+  }
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
