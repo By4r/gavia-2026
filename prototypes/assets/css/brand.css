@@ -64,6 +64,17 @@
   -webkit-backdrop-filter: blur(12px);
   background: rgba(2, 8, 55, 0.7);
 }
+.nav-blur::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gavia-mint), transparent);
+  pointer-events: none;
+}
 
 .badge-mint {
   display: inline-flex;

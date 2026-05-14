@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (header) {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
-        header.classList.add('nav-blur', 'border-b', 'border-gavia-border');
+        header.classList.add('nav-blur');
       } else {
-        header.classList.remove('nav-blur', 'border-b', 'border-gavia-border');
+        header.classList.remove('nav-blur');
       }
     }, { passive: true });
   }
