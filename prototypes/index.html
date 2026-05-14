@@ -918,7 +918,7 @@
   </section>
 
   <!-- ========== 8. FINAL CTA — Video BG ekli, copy/butonlar aynı ========== -->
-  <section id="cta" class="section-fade-top relative py-24 md:py-32 overflow-hidden bg-gavia-deep">
+  <section id="cta" class="section-fade-top relative min-h-screen flex items-center py-24 md:py-32 overflow-hidden bg-gavia-deep">
     <!-- Loop video BG -->
     <video
       class="absolute inset-0 w-full h-full object-cover opacity-55"
@@ -953,8 +953,11 @@
     </div>
   </section>
 
-  <!-- ========== 9. FOOTER ========== -->
-  <footer class="relative bg-[#020514] border-t border-gavia-mint/30 shadow-[0_-1px_0_rgba(63,213,173,0.08)_inset] overflow-hidden">
+  <!-- Footer reveal spacer (100vh) — iletişim yukarı kayınca footer açığa çıkacağı alan -->
+  <div class="footer-reveal-spacer"></div>
+
+  <!-- ========== 9. FOOTER (fixed bottom:0 z-0 — UI aynen, mint divider üst kenarda) ========== -->
+  <footer class="footer-fixed-bottom relative bg-[#020514] border-t border-gavia-mint/30 shadow-[0_-1px_0_rgba(63,213,173,0.08)_inset] overflow-hidden">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-gavia-mint to-transparent"></div>
 
     <div class="relative max-w-7xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20 md:pb-24">

@@ -168,6 +168,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Footer reveal: spacer height = footer height (kopma olmasın), hero gizleme
+  const revealSpacer = document.querySelector('.footer-reveal-spacer');
+  const heroStickyEl = document.querySelector('.hero-sticky');
+  const footerFixed = document.querySelector('.footer-fixed-bottom');
+  if (revealSpacer && footerFixed) {
+    const syncSpacer = () => { revealSpacer.style.height = footerFixed.offsetHeight + 'px'; };
+    syncSpacer();
+    window.addEventListener('resize', syncSpacer, { passive: true });
+  }
+  if (revealSpacer && heroStickyEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      heroStickyEl.classList.toggle('is-hidden', entry.isIntersecting);
+    }, { threshold: 0 }).observe(revealSpacer);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');

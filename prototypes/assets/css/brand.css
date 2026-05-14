@@ -149,7 +149,7 @@ body {
   position: relative !important;
   height: 100vh;
   min-height: 640px;
-  z-index: 0;
+  z-index: 1;
 }
 .hero-sticky {
   position: fixed !important;
@@ -174,6 +174,34 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero-zone { height: auto; }
   .hero-sticky { position: relative !important; height: auto; left: auto; right: auto; }
+}
+
+/* === Footer reveal (B kategori — iletişim üstte, footer arkada bekler) ===
+   Footer fixed bottom:0 z-0; arkada hep bekler. CTA section opak gavia-deep
+   z-2 (hero rule), normal scroll ile yukarı kayınca alttan footer açığa çıkar.
+   Hero rule'unun ~div { z-index:2 } kuralını override etmek için !important. */
+.footer-fixed-bottom {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0 !important;
+}
+.footer-reveal-spacer {
+  position: relative !important;
+  /* Footer'ın gerçek yüksekliği kadar — iletişim'in alt kenarı footer'ın
+     üst kenarına (divider'a) tam değsin, kopmasın. JS ile dinamik set edilir. */
+  height: 480px;
+  z-index: 0 !important;
+  background: transparent;
+  pointer-events: none;
+}
+/* JS toggle: reveal zone viewport'a girince hero gizlensin (z-conflict ile top'ta
+   görünür kalır, scroll'da örtmesin diye) */
+.hero-sticky.is-hidden { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .footer-fixed-bottom { position: relative !important; bottom: auto; left: auto; right: auto; }
+  .footer-reveal-spacer { display: none; }
 }
 
 .mega-trigger { position: relative; }
