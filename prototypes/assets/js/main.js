@@ -183,6 +183,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0 }).observe(revealSpacer);
   }
 
+  // Products scroll-lock (Thoughtworks-style): sticky pane + IntersectionObserver.
+  // Mobile (<768) ve prefers-reduced-motion'da observer çalışmaz, kartlar default
+  // görünür kalır (CSS fallback). Footer reveal observer'ı ayrı kapsam, çakışma yok.
+  const productsRoot = document.querySelector('[data-products-scroll]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile     = window.matchMedia('(max-width: 767px)').matches;
+  if (productsRoot && 'IntersectionObserver' in window && !reduceMotion && !isMobile) {
+    const steps  = productsRoot.querySelectorAll('[data-products-step]');
+    const slides = productsRoot.querySelectorAll('[data-products-slide]');
+    const progressBars = productsRoot.querySelectorAll('[data-products-progress] span');
+
+    const setActive = (idx) => {
+      steps.forEach((s, i)        => s.classList.toggle('is-active', i === idx));
+      slides.forEach((s, i)       => s.classList.toggle('is-active', i === idx));
+      progressBars.forEach((p, i) => p.classList.toggle('is-active', i === idx));
+    };
+
+    // rootMargin: viewport ortasında dar bir bant — kartın merkezi banda
+    // girdiğinde aktif olsun (Thoughtworks dump'taki -45/-45 değeri)
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = parseInt(entry.target.dataset.productsStep, 10);
+          if (!Number.isNaN(idx)) setActive(idx);
+        }
+      });
+    }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+
+    steps.forEach(step => io.observe(step));
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
