@@ -140,6 +140,42 @@ body {
 }
 
 /* === Mega Menu === */
+/* === Hero scroll-over reveal (Thoughtworks signature pattern) ===
+   Hero `position: fixed` ile viewport'a yapışık kalır (asla hareket etmez).
+   .hero-zone wrapper 100vh height ile body akışında SPACER rolü görür
+   (hero fixed olduğu için kendi alanını kaplamaz).
+   Sonraki opaque section'lar (z-index 2) yukarı scroll'da hero'nun üstüne kayar. */
+.hero-zone {
+  position: relative !important;
+  height: 100vh;
+  min-height: 640px;
+  z-index: 0;
+}
+.hero-sticky {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  min-height: 640px;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-zone ~ section,
+.hero-zone ~ footer,
+.hero-zone ~ main,
+.hero-zone ~ div {
+  position: relative;
+  z-index: 2;
+}
+/* Reduced motion: efekti devre dışı bırak */
+@media (prefers-reduced-motion: reduce) {
+  .hero-zone { height: auto; }
+  .hero-sticky { position: relative !important; height: auto; left: auto; right: auto; }
+}
+
 .mega-trigger { position: relative; }
 .mega-panel {
   position: fixed;
