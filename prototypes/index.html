@@ -209,9 +209,18 @@
           <a href="#" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors"><!-- TODO: alt sayfa -->İletişim</a>
         </nav>
 
-        <a href="#cta" class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gavia-mint hover:bg-gavia-mint-bright text-gavia-deep text-sm font-semibold transition-colors">
-          Projenizi Anlatalım <i class="fa-solid fa-arrow-right text-xs"></i>
-        </a>
+        <div class="hidden lg:flex items-center gap-4">
+          <!-- Dil seçici (default EN) -->
+          <div data-lang-switch class="flex items-center text-sm font-semibold tracking-wider">
+            <button type="button" data-lang="en" class="px-1.5 text-gavia-mint transition-colors" aria-current="true">EN</button>
+            <span class="text-gavia-border" aria-hidden="true">|</span>
+            <button type="button" data-lang="tr" class="px-1.5 text-gray-400 hover:text-gavia-mint transition-colors">TR</button>
+          </div>
+
+          <a href="#cta" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gavia-mint hover:bg-gavia-mint-bright text-gavia-deep text-sm font-semibold transition-colors">
+            Projenizi Anlatalım <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
 
         <button data-mobile-menu-btn class="lg:hidden p-2 text-gray-200 hover:text-gavia-mint" aria-label="Menü">
           <i class="fa-solid fa-bars text-xl"></i>
@@ -230,6 +239,13 @@
           <a href="#cta" class="mt-3 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gavia-mint text-gavia-deep font-semibold">
             Projenizi Anlatalım <i class="fa-solid fa-arrow-right text-xs"></i>
           </a>
+
+          <!-- Dil seçici (mobile) -->
+          <div data-lang-switch class="mt-4 flex items-center justify-center gap-2 text-sm font-semibold tracking-wider border-t border-gavia-border pt-4">
+            <button type="button" data-lang="en" class="px-2 py-1 text-gavia-mint" aria-current="true">EN</button>
+            <span class="text-gavia-border" aria-hidden="true">|</span>
+            <button type="button" data-lang="tr" class="px-2 py-1 text-gray-400 hover:text-gavia-mint">TR</button>
+          </div>
         </nav>
       </div>
     </div>

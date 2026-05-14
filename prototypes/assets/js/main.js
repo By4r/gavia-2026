@@ -40,6 +40,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Dil seçici — şimdilik sadece aktif state toggle (i18n entegrasyonu sonra)
+  document.querySelectorAll('[data-lang-switch]').forEach(group => {
+    const buttons = group.querySelectorAll('[data-lang]');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => {
+          b.classList.remove('text-gavia-mint');
+          b.classList.add('text-gray-400', 'hover:text-gavia-mint');
+          b.removeAttribute('aria-current');
+        });
+        btn.classList.add('text-gavia-mint');
+        btn.classList.remove('text-gray-400', 'hover:text-gavia-mint');
+        btn.setAttribute('aria-current', 'true');
+      });
+    });
+  });
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
