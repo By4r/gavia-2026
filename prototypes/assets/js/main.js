@@ -40,6 +40,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Mega menu billboard: option hover'da showcase görsel + title/desc swap
+  megaTriggers.forEach(trigger => {
+    const showcase = trigger.querySelector('[data-mega-showcase]');
+    if (!showcase) return;
+    const imgEl   = showcase.querySelector('[data-mega-image]');
+    const titleEl = showcase.querySelector('[data-mega-title]');
+    const descEl  = showcase.querySelector('[data-mega-desc]');
+    const bodyEl  = showcase.querySelector('.mega-showcase-body');
+    const links   = trigger.querySelectorAll('.mega-link[data-mega-image-src]');
+    if (!imgEl || !links.length) return;
+
+    // Fallback için tek seferlik onerror handler
+    if (imgEl.dataset.fallback) {
+      imgEl.addEventListener('error', function fb() {
+        imgEl.removeEventListener('error', fb);
+        imgEl.src = imgEl.dataset.fallback;
+      });
+    }
+
+    let current = imgEl.src;
+    let swapTimer = null;
+    const apply = (link) => {
+      const src   = link.dataset.megaImageSrc;
+      const fb    = link.dataset.megaImageFallback || '';
+      const title = link.dataset.megaTitle || '';
+      const desc  = link.dataset.megaDesc  || '';
+      if (!src || src === current) return;
+      current = src;
+
+      imgEl.classList.add('is-swapping');
+      if (bodyEl) bodyEl.classList.add('is-swapping');
+      clearTimeout(swapTimer);
+      swapTimer = setTimeout(() => {
+        imgEl.dataset.fallback = fb;
+        imgEl.src = src;
+        if (titleEl && title) titleEl.textContent = title;
+        if (descEl  && desc ) descEl.textContent  = desc;
+        // tek seferlik fallback rebind
+        if (fb) {
+          imgEl.onerror = () => { imgEl.onerror = null; imgEl.src = fb; };
+        }
+        // bir sonraki frame'de opacity geri gelsin
+        requestAnimationFrame(() => {
+          imgEl.classList.remove('is-swapping');
+          if (bodyEl) bodyEl.classList.remove('is-swapping');
+        });
+      }, 180);
+    };
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => apply(link));
+      link.addEventListener('focus',      () => apply(link));
+    });
+  });
+
   // Dil seçici — dropdown (desktop) + expanded list (mobile)
   const langSwitcher = document.querySelector('[data-lang-switcher]');
   if (langSwitcher) {
