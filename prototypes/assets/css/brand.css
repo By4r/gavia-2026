@@ -536,6 +536,22 @@ body {
   background: rgba(63, 213, 173, 0.08);
   transform: translateY(-2px);
 }
+/* Light-context override: CTA chips inside light sections need dark-on-light styling */
+.bg-gavia-light .focus-chip,
+.bg-white .focus-chip {
+  background: #ffffff;
+  border: 1px solid rgba(2, 8, 55, 0.12);
+  color: var(--gavia-deep);
+  box-shadow: 0 1px 2px rgba(2, 8, 55, 0.04);
+}
+.bg-gavia-light .focus-chip i,
+.bg-white .focus-chip i { color: var(--gavia-mint); }
+.bg-gavia-light .focus-chip:hover,
+.bg-white .focus-chip:hover {
+  border-color: var(--gavia-mint);
+  background: rgba(63, 213, 173, 0.06);
+  color: var(--gavia-deep);
+}
 
 /* === Stats Grid (Itransition "At a Glance") === */
 .stats-grid {
