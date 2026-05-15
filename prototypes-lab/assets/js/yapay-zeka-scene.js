@@ -174,11 +174,93 @@ function init() {
 
   build();
 
+  // T3 — scroll-driven stage targets (consumed by render loop)
+  // Stage table (per T3 plan §3):
+  //   00 hero  z=8,  rotY 0.0005, opacity 1.0
+  //   01       z=6,  rotY 0.001,  opacity 1.0
+  //   02       z=7   (orbit y),   rotY 0.0015, opacity pulse
+  //   03       z=4,  rotY 0.0008, opacity 1.0
+  //   04       z=10, rotY 0.0003, opacity 0.4
+  //   05       z=14, rotY 0,      opacity 0.15
+  const STAGE_TABLE = {
+    '00': { z: 8,  rot: 0.0005, opacity: 1.0,  orbit: 0 },
+    '01': { z: 6,  rot: 0.001,  opacity: 1.0,  orbit: 0 },
+    '02': { z: 7,  rot: 0.0015, opacity: 1.0,  orbit: 1 }, // orbit=1 → camera y orbit
+    '03': { z: 4,  rot: 0.0008, opacity: 1.0,  orbit: 0 },
+    '04': { z: 10, rot: 0.0003, opacity: 0.4,  orbit: 0 },
+    '05': { z: 14, rot: 0,      opacity: 0.15, orbit: 0 }
+  };
+  // Currently active target values (interpolated within and across stages)
+  const currentTargets = {
+    z: 8,
+    rot: 0.0005,
+    opacity: 1.0,
+    orbit: 0,
+    pulse: 0
+  };
+  function lerpStage(from, to, p) {
+    return {
+      z: from.z + (to.z - from.z) * p,
+      rot: from.rot + (to.rot - from.rot) * p,
+      opacity: from.opacity + (to.opacity - from.opacity) * p,
+      orbit: from.orbit + (to.orbit - from.orbit) * p
+    };
+  }
+  window.__yzScene = {
+    setStage(stage, progress) {
+      const key = String(stage);
+      const cur = STAGE_TABLE[key];
+      if (!cur) return;
+      // Find next stage as numeric+1, fall back to current if none.
+      const n = parseInt(key, 10);
+      const nextKey = String(n + 1).padStart(2, '0');
+      const nxt = STAGE_TABLE[nextKey] || cur;
+      const p = Math.max(0, Math.min(1, progress || 0));
+      const blended = lerpStage(cur, nxt, p);
+      currentTargets.z = blended.z;
+      currentTargets.rot = blended.rot;
+      currentTargets.opacity = blended.opacity;
+      currentTargets.orbit = blended.orbit;
+      // stage 02 pulse — slight breathing on opacity within stage
+      if (key === '02') {
+        currentTargets.pulse = 1;
+      } else {
+        currentTargets.pulse = 0;
+      }
+    }
+  };
+
   const start = performance.now();
   function tick() {
     const t = performance.now() - start;
-    scene.rotation.y += 0.0005;
+    // Smooth lerp camera.z toward target
+    camera.position.z += (currentTargets.z - camera.position.z) * 0.08;
+    // Orbit (stage 02): subtle vertical orbit around scene center
+    if (currentTargets.orbit > 0) {
+      const yTarget = Math.sin(t * 0.0004) * 1.5 * currentTargets.orbit;
+      camera.position.y += (yTarget - camera.position.y) * 0.05;
+      camera.lookAt(0, 0, 0);
+    } else {
+      camera.position.y += (0 - camera.position.y) * 0.05;
+    }
+    // Variable rotation speed
+    scene.rotation.y += currentTargets.rot;
     scene.rotation.x = Math.sin(t * 0.0003) * 0.05;
+    // Particle/line opacity lerp
+    let targetOpacity = currentTargets.opacity;
+    if (currentTargets.pulse > 0) {
+      targetOpacity = currentTargets.opacity * (0.85 + Math.sin(t * 0.002) * 0.15);
+    }
+    if (points && points.material) {
+      const m = points.material;
+      m.opacity = (m.opacity == null ? 1 : m.opacity) + (targetOpacity - (m.opacity == null ? 1 : m.opacity)) * 0.1;
+      m.transparent = true;
+    }
+    if (lines && lines.material) {
+      const lm = lines.material;
+      const lineTarget = targetOpacity * 0.35;
+      lm.opacity += (lineTarget - lm.opacity) * 0.1;
+    }
     renderer.render(scene, camera);
   }
 

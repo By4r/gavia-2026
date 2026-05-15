@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <!-- 3D scene placeholder (T2'de Three.js devralacak) -->
+  <!-- 3D scene (Three.js sahnesi devraldı — T2) -->
   <div id="scene-canvas" aria-hidden="true"></div>
 
   <!-- Nav -->
@@ -32,12 +32,12 @@
 
   <main>
 
-    <!-- Hero -->
-    <header class="section hero">
+    <!-- Hero //00 -->
+    <header class="hero" data-stage="00" id="section-00">
       <div class="shell">
         <div class="label">//00 Yapay Zeka</div>
         <div class="hero-title">
-          <h1>Yapay zekayı <strong>işin içine</strong> koyuyoruz.</h1>
+          <h1>Yapay zekayı <em>işin içine</em> koyuyoruz.</h1>
         </div>
       </div>
       <div class="shell hero-meta">
@@ -50,110 +50,129 @@
     </header>
 
     <!-- 01 Otomasyon -->
-    <section id="section-01" class="section">
-      <div class="shell">
-        <div class="label">//01 Otomasyon</div>
-        <div class="two-col">
-          <div class="two-col__left">
-            <h2>Süreçleri otomatikleştirmek değil; <em>yeniden tasarlamak</em>.</h2>
-          </div>
-          <div class="two-col__right">
-            <p class="lead">Manuel adımları ortadan kaldıran, sistemler arası akan ve insan onayını doğru yerde tutan otomasyonlar tasarlıyoruz.</p>
-            <ul>
-              <li><span class="num">01</span><span class="txt">Workflow keşfi ve süreç haritası</span></li>
-              <li><span class="num">02</span><span class="txt">Sistemler arası entegrasyon (ERP, CRM, e-posta, dosya)</span></li>
-              <li><span class="num">03</span><span class="txt">İnsan-onay ve istisna yönetimi</span></li>
-              <li><span class="num">04</span><span class="txt">İzlenebilirlik ve denetim kayıtları</span></li>
-            </ul>
+    <section class="chapter" data-stage="01" id="section-01">
+      <div class="chapter__pin">
+        <div class="shell chapter__fade">
+          <div class="chapter-grid">
+            <div class="chapter__media">
+              <div class="label">//01 Otomasyon</div>
+              <h2>Süreçleri otomatikleştirmek değil; <em>yeniden tasarlamak</em>.</h2>
+              <p class="lead">Manuel adımları ortadan kaldıran, sistemler arası akan ve insan onayını doğru yerde tutan otomasyonlar tasarlıyoruz.</p>
+              <ul>
+                <li><span class="num">01</span><span class="txt">Workflow keşfi ve süreç haritası</span></li>
+                <li><span class="num">02</span><span class="txt">Sistemler arası entegrasyon (ERP, CRM, e-posta, dosya)</span></li>
+                <li><span class="num">03</span><span class="txt">İnsan-onay ve istisna yönetimi</span></li>
+                <li><span class="num">04</span><span class="txt">İzlenebilirlik ve denetim kayıtları</span></li>
+              </ul>
+            </div>
+            <figure class="chapter__visual" aria-hidden="true">
+              <video src="assets/video/yz-01-otomasyon.mp4" autoplay loop muted playsinline preload="metadata" disablepictureinpicture></video>
+            </figure>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 02 AI Agent -->
-    <section id="section-02" class="section">
-      <div class="shell">
-        <div class="label">//02 AI Agent</div>
-        <div class="two-col">
-          <div class="two-col__left">
-            <h2>Konuşan değil, <em>karar veren</em> agent'lar.</h2>
-          </div>
-          <div class="two-col__right">
-            <p class="lead">Görevleri bölen, araçları çağıran, sonuçları doğrulayan ve gerektiğinde devreden insanı haberdar eden agent mimarileri kuruyoruz.</p>
-            <ul>
-              <li><span class="num">01</span><span class="txt">Çok-adımlı planlama ve tool calling</span></li>
-              <li><span class="num">02</span><span class="txt">Bağlam yönetimi ve uzun-vadeli hafıza</span></li>
-              <li><span class="num">03</span><span class="txt">Güvenli araç entegrasyonları (RBAC, audit)</span></li>
-              <li><span class="num">04</span><span class="txt">Operasyonel gözlem ve performans takibi</span></li>
-            </ul>
+    <section class="chapter" data-stage="02" id="section-02">
+      <div class="chapter__pin">
+        <div class="shell chapter__fade">
+          <div class="chapter-grid">
+            <div class="chapter__media">
+              <div class="label">//02 AI Agent</div>
+              <h2>Konuşan değil, <em>karar veren</em> agent'lar.</h2>
+              <p class="lead">Görevleri bölen, araçları çağıran, sonuçları doğrulayan ve gerektiğinde devreden insanı haberdar eden agent mimarileri kuruyoruz.</p>
+              <ul>
+                <li><span class="num">01</span><span class="txt">Çok-adımlı planlama ve tool calling</span></li>
+                <li><span class="num">02</span><span class="txt">Bağlam yönetimi ve uzun-vadeli hafıza</span></li>
+                <li><span class="num">03</span><span class="txt">Güvenli araç entegrasyonları (RBAC, audit)</span></li>
+                <li><span class="num">04</span><span class="txt">Operasyonel gözlem ve performans takibi</span></li>
+              </ul>
+            </div>
+            <figure class="chapter__visual" aria-hidden="true">
+              <video src="assets/video/yz-02-aiagent.mp4" autoplay loop muted playsinline preload="metadata" disablepictureinpicture></video>
+            </figure>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 03 Veri & Belge Zekası -->
-    <section id="section-03" class="section">
-      <div class="shell">
-        <div class="label">//03 Veri &amp; Belge Zekası</div>
-        <div class="two-col">
-          <div class="two-col__left">
-            <h2>Belgeleri okuyan, veriyi <em>anlamlandıran</em> sistemler.</h2>
-          </div>
-          <div class="two-col__right">
-            <p class="lead">RAG mimarisi, OCR + yapılandırılmış çıkarım ve şirket veri kaynaklarına bağlanan soru-cevap arayüzleri.</p>
-            <ul>
-              <li><span class="num">01</span><span class="txt">Belge ingest pipeline'ı (PDF, Word, taranmış)</span></li>
-              <li><span class="num">02</span><span class="txt">Vektör indeks + hibrit arama</span></li>
-              <li><span class="num">03</span><span class="txt">Kaynaklı yanıt ve alıntı zinciri</span></li>
-              <li><span class="num">04</span><span class="txt">Erişim politikaları ve yetki bazlı görünürlük</span></li>
-            </ul>
+    <section class="chapter" data-stage="03" id="section-03">
+      <div class="chapter__pin">
+        <div class="shell chapter__fade">
+          <div class="chapter-grid">
+            <div class="chapter__media">
+              <div class="label">//03 Veri &amp; Belge Zekası</div>
+              <h2>Belgeleri okuyan, veriyi <em>anlamlandıran</em> sistemler.</h2>
+              <p class="lead">RAG mimarisi, OCR + yapılandırılmış çıkarım ve şirket veri kaynaklarına bağlanan soru-cevap arayüzleri.</p>
+              <ul>
+                <li><span class="num">01</span><span class="txt">Belge ingest pipeline'ı (PDF, Word, taranmış)</span></li>
+                <li><span class="num">02</span><span class="txt">Vektör indeks + hibrit arama</span></li>
+                <li><span class="num">03</span><span class="txt">Kaynaklı yanıt ve alıntı zinciri</span></li>
+                <li><span class="num">04</span><span class="txt">Erişim politikaları ve yetki bazlı görünürlük</span></li>
+              </ul>
 
-            <details class="read-more">
-              <summary>Read more — teknik yaklaşım</summary>
-              <div class="read-more__body">
-                <p>Chunking stratejisini içerik tipine göre seçiyoruz: yapılandırılmış raporlar için semantic chunk, sözleşme metinleri için clause-aware bölümleme. Embedding modeli Türkçe ağırlıklı projelerde çok-dilli modellerle, finansal/teknik metinlerde domain-spesifik modellerle değişiyor. Yanıt katmanında her cümleyi kaynak belgeye geri bağlayan citation grafiği üretiyoruz — kullanıcı "bu cümle nereden geldi?" diye sorduğunda tek tıkla orijinal pasaja iniyor.</p>
-              </div>
-            </details>
+              <details class="more">
+                <summary>Read more — teknik yaklaşım</summary>
+                <div class="more__body">
+                  <p>Chunking stratejisini içerik tipine göre seçiyoruz: yapılandırılmış raporlar için semantic chunk, sözleşme metinleri için clause-aware bölümleme. Embedding modeli Türkçe ağırlıklı projelerde çok-dilli modellerle, finansal/teknik metinlerde domain-spesifik modellerle değişiyor. Yanıt katmanında her cümleyi kaynak belgeye geri bağlayan citation grafiği üretiyoruz — kullanıcı "bu cümle nereden geldi?" diye sorduğunda tek tıkla orijinal pasaja iniyor.</p>
+                </div>
+              </details>
+            </div>
+            <figure class="chapter__visual" aria-hidden="true">
+              <video src="assets/video/yz-03-veri.mp4" autoplay loop muted playsinline preload="metadata" disablepictureinpicture></video>
+            </figure>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 04 Etik AI & KVKK -->
-    <section id="section-04" class="section">
-      <div class="shell">
-        <div class="label">//04 Etik AI &amp; KVKK</div>
-        <div class="two-col">
-          <div class="two-col__left">
-            <h2>Sınırları <em>kod öncesi</em> çekiyoruz.</h2>
-          </div>
-          <div class="two-col__right">
-            <p class="lead">Veri minimizasyonu, anonimleştirme, kullanıcı onayı ve modelin nereye dokunmaması gerektiği — projeyi başlatırken konuşulan konular.</p>
-            <ul>
-              <li><span class="num">01</span><span class="txt">KVKK uyumlu veri akış tasarımı</span></li>
-              <li><span class="num">02</span><span class="txt">PII tespiti ve maskleme</span></li>
-              <li><span class="num">03</span><span class="txt">Model log'larında saklama politikası</span></li>
-              <li><span class="num">04</span><span class="txt">Açıklanabilirlik ve kullanıcı itirazı</span></li>
-            </ul>
+    <section class="chapter" data-stage="04" id="section-04">
+      <div class="chapter__pin">
+        <div class="shell chapter__fade">
+          <div class="chapter-grid">
+            <div class="chapter__media">
+              <div class="label">//04 Etik AI &amp; KVKK</div>
+              <h2>Sınırları <em>kod öncesi</em> çekiyoruz.</h2>
+              <p class="lead">Veri minimizasyonu, anonimleştirme, kullanıcı onayı ve modelin nereye dokunmaması gerektiği — projeyi başlatırken konuşulan konular.</p>
+              <ul>
+                <li><span class="num">01</span><span class="txt">KVKK uyumlu veri akış tasarımı</span></li>
+                <li><span class="num">02</span><span class="txt">PII tespiti ve maskleme</span></li>
+                <li><span class="num">03</span><span class="txt">Model log'larında saklama politikası</span></li>
+                <li><span class="num">04</span><span class="txt">Açıklanabilirlik ve kullanıcı itirazı</span></li>
+              </ul>
+            </div>
+            <figure class="chapter__visual" aria-hidden="true">
+              <video src="assets/video/yz-04-etik.mp4" autoplay loop muted playsinline preload="metadata" disablepictureinpicture></video>
+            </figure>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section cta">
-      <div class="shell">
-        <div class="label">//05 Konuşalım</div>
-        <h2>Yapay zekanın <em>doğru yerini</em> birlikte tanımlayalım.</h2>
-        <a href="iletisim.html" class="cta-link">
-          <span>İletişime geçin</span>
-          <span aria-hidden="true">→</span>
-        </a>
+    <!-- 05 CTA Konuşalım -->
+    <section class="chapter cta" data-stage="05" id="section-05">
+      <div class="shell chapter__fade">
+        <div class="chapter-grid">
+          <div class="chapter__media">
+            <div class="label">//05 Konuşalım</div>
+            <h2>Yapay zekanın <em>doğru yerini</em> birlikte tanımlayalım.</h2>
+            <a href="iletisim.html" class="cta-link">
+              <span>İletişime geçin</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <figure class="chapter__visual" aria-hidden="true">
+            <video src="assets/video/yz-05-cta.mp4" autoplay loop muted playsinline preload="metadata" disablepictureinpicture></video>
+          </figure>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer (basit) -->
+  <!-- Footer (minimal) -->
   <footer class="footer">
     <div class="shell footer-row">
       <div>© 2026 Gavia Works — Dada İstanbul</div>
@@ -176,13 +195,18 @@
         var on = btn.classList.toggle('is-on');
         btn.setAttribute('aria-pressed', on ? 'true' : 'false');
         if (label) label.textContent = on ? 'Sound on' : 'Sound off';
-        // T1: no-op. Audio T4 cila turunda Beyar onayıyla bağlanacak.
       });
     })();
   </script>
 
   <!-- T2: Three.js particle network scene -->
   <script type="module" src="assets/js/yapay-zeka-scene.js"></script>
+
+  <!-- T3: GSAP + ScrollTrigger + Lenis smooth scroll -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script type="module" src="assets/js/yapay-zeka-scroll.js"></script>
 
 </body>
 </html>
