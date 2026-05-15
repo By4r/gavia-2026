@@ -63,15 +63,15 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: clamp(56px, 8vw, 112px);
+  font-size: clamp(48px, 7vw, 96px);
   line-height: 0.95;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 h2 {
   font-size: clamp(40px, 5.5vw, 72px);
   line-height: 1.02;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 h2 em,
@@ -296,15 +296,37 @@ html.no-js .chapter__fade,
 }
 .scroll-cue:hover { color: var(--accent); }
 
+/* T4 — fade cue out once user leaves hero into chapters */
+body.in-chapter .scroll-cue {
+  opacity: 0;
+  pointer-events: none;
+}
+.scroll-cue {
+  transition: opacity 400ms var(--ease-out);
+}
+
+.scroll-cue {
+  --cue-progress: 0;
+}
 .scroll-cue .arrow {
   position: absolute;
   right: 6px;
   bottom: 0;
   width: 1px;
   height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  transform-origin: top;
+  overflow: hidden;
+}
+/* T4 — progress fill bar that grows with scroll within hero */
+.scroll-cue .arrow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: linear-gradient(to bottom, transparent 0%, var(--accent) 100%);
   transform-origin: top;
-  animation: cue-line 2.4s var(--ease-out) infinite;
+  transform: scaleY(calc(var(--cue-progress) * 1));
+  transition: opacity 200ms var(--ease-out);
 }
 .scroll-cue .arrow::after {
   content: '';

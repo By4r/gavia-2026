@@ -30,11 +30,12 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // --- Lenis smooth scroll ---
+    // --- Lenis smooth scroll (T4: cinematic slowdown via wheelMultiplier) ---
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true,
-      syncTouch: false
+      syncTouch: false,
+      wheelMultiplier: 0.9
     });
     function raf(time) {
       lenis.raf(time);
@@ -83,8 +84,10 @@
       );
     }
 
-    // Hero (stage 00): reset scene baseline; also drive body.in-chapter toggle
+    // Hero (stage 00): reset scene baseline + drive body.in-chapter toggle
+    // + drive --hero-cue-progress CSS var (0..1) for the scroll cue bar fill
     const hero = document.querySelector('[data-stage="00"]');
+    const cueBar = document.querySelector('.scroll-cue');
     if (hero) {
       ScrollTrigger.create({
         trigger: hero,
@@ -93,6 +96,7 @@
         scrub: true,
         onUpdate: (self) => {
           window.__yzScene?.setStage('00', self.progress);
+          if (cueBar) cueBar.style.setProperty('--cue-progress', self.progress.toFixed(3));
         },
         onLeave: () => document.body.classList.add('in-chapter'),
         onEnterBack: () => document.body.classList.remove('in-chapter')
@@ -141,14 +145,14 @@
         return;
       }
 
-      // Desktop: pinned chapter with fade-in then fade-out
+      // T4 — pinned chapter with text stagger reveal + aggressive parallax
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: chapter,
           pin: pin,
           start: 'top top',
-          end: '+=80%',
-          scrub: true,
+          end: '+=100%',
+          scrub: 0.4,
           onUpdate: (self) => {
             window.__yzScene?.setStage(stage, self.progress);
           }
@@ -156,41 +160,73 @@
       });
 
       if (fade) {
-        // Entry: 0..30% of pin → fade-up
+        // Entry: 0..20% → header (label + h2 + lead) fade-up
         tl.fromTo(
           fade,
           { autoAlpha: 0, y: 40 },
-          { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.3 },
+          { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.2 },
           0
-        );
-        // Hold middle
-        tl.to(fade, { autoAlpha: 1, duration: 0.4 }, 0.3);
-        // Exit: 70%..100% → fade to 0.3 so next takes over
-        tl.to(
-          fade,
-          { autoAlpha: 0.3, y: -10, ease: 'power2.in', duration: 0.3 },
-          0.7
         );
       }
 
-      // Light parallax on the chapter video figure (subtle scale + y)
+      // T4 — Text stage reveal: stagger li[01..04] + details/cta-link across pin
+      const items = chapter.querySelectorAll('.chapter__media li');
+      const tail = chapter.querySelector('.chapter__media details.more, .chapter__media .cta-link');
+      if (items.length) {
+        gsap.set(items, { autoAlpha: 0, y: 24 });
+        items.forEach((li, i) => {
+          // Spread items over 0.20..0.80 of pin progress; each ~0.15 wide.
+          const start = 0.20 + i * 0.15;
+          tl.to(
+            li,
+            { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.12 },
+            start
+          );
+        });
+      }
+      if (tail) {
+        gsap.set(tail, { autoAlpha: 0, y: 16 });
+        tl.to(tail, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.15 }, 0.82);
+      }
+
+      // Exit fade so next chapter takes over (cross-fade feel)
+      if (fade) {
+        tl.to(fade, { autoAlpha: 0.25, y: -16, ease: 'power2.in', duration: 0.15 }, 0.92);
+      }
+
+      // T4 — Aggressive parent parallax on the chapter visual.
+      // fantasy.co probe: parent translate ~240px y across pin. We do
+      // scale + y + slight x for a cinematic centering shift.
       const visual = chapter.querySelector('.chapter__visual');
       if (visual) {
         gsap.fromTo(
           visual,
-          { yPercent: 6, scale: 1.04 },
+          { scale: 0.92, yPercent: 10, opacity: 0.7 },
           {
-            yPercent: -6,
-            scale: 1,
-            ease: 'none',
+            scale: 1.0,
+            yPercent: 0,
+            opacity: 1,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: chapter,
               start: 'top bottom',
-              end: 'bottom top',
-              scrub: true
+              end: 'top center',
+              scrub: 0.4
             }
           }
         );
+        gsap.to(visual, {
+          scale: 1.05,
+          yPercent: -10,
+          opacity: 0.92,
+          ease: 'power2.in',
+          scrollTrigger: {
+            trigger: chapter,
+            start: 'center top',
+            end: 'bottom top',
+            scrub: 0.4
+          }
+        });
       }
     });
 

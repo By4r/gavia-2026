@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr" data-yz-version="v3">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yapay Zeka — Gavia Works (V3)</title>
+  <meta name="description" content="Yapay zekayı işin içine koyuyoruz. Particle cinematic + plazma section." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/yapay-zeka-v3.css" />
+</head>
+<body data-yz-version="v3">
+
+  <!-- Persistent BG video crossfade (V2 pattern, deepest layer).
+       All preload=auto + autoplay so buffers are warm before crossfade triggers. -->
+  <div class="site-background" aria-hidden="true">
+    <video class="site-bg__video is-active" data-stage="00" src="assets/video/yz-bg-hero.mp4"    autoplay loop muted playsinline preload="auto"></video>
+    <video class="site-bg__video"           data-stage="01" src="assets/video/yz-bg-flow.mp4"    autoplay loop muted playsinline preload="auto"></video>
+    <video class="site-bg__video"           data-stage="02" src="assets/video/yz-bg-network.mp4" autoplay loop muted playsinline preload="auto"></video>
+    <video class="site-bg__video"           data-stage="03" src="assets/video/yz-bg-flow.mp4"    autoplay loop muted playsinline preload="auto"></video>
+    <video class="site-bg__video"           data-stage="04" src="assets/video/yz-bg-hero.mp4"    autoplay loop muted playsinline preload="auto"></video>
+    <video class="site-bg__video"           data-stage="05" src="assets/video/yz-bg-hero.mp4"    autoplay loop muted playsinline preload="auto"></video>
+    <div class="site-background__overlay"></div>
+  </div>
+
+  <!-- 3D scene (Three.js, V3 mode: morph + bloom + transparent canvas) -->
+  <div id="scene-canvas" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="shell nav-row">
+      <a href="#" class="nav-brand">Gavia<span>.</span></a>
+      <div class="nav-actions">
+        <button type="button" class="sound-toggle" aria-pressed="false" aria-label="Ses aç/kapat">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="sound-toggle__label">Sound off</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- Hero //00 -->
+    <header class="hero" data-stage="00" id="section-00">
+      <div class="shell">
+        <div class="hero-inner">
+          <div class="label">//00 Yapay Zeka</div>
+          <div class="hero-title">
+            <h1>Yapay zekayı <em>işin içine</em> koyuyoruz.</h1>
+          </div>
+          <p class="hero-lead">Otomasyondan agent mimarisine, veri zekasından etik sınırlara — kurumsal yapay zekayı, çalışan modellere dönüştürüyoruz.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- 01 Otomasyon — PARÇALANMA -->
+    <section class="chapter" data-stage="01" id="section-01">
+      <div class="chapter__pin">
+        <div class="shell chapter__fade">
+          <div class="chapter-grid">
+            <div class="chapter__media">
+              <div class="label">//01 Otomasyon</div>
+              <h2>Süreçleri otomatikleştirmek değil; <em>yeniden tasarlamak</em>.</h2>
+              <p class="lead">Manuel adımları ortadan kaldıran, sistemler arası akan ve insan onayını doğru yerde tutan otomasyonlar tasarlıyoruz.</p>
+              <ul>
+                <li><span class="num">01</span><span class="txt">Workflow keşfi ve süreç haritası</span></li>
+                <li><span class="num">02</span><span class="txt">Sistemler arası entegrasyon (ERP, CRM, e-posta, dosya)</span></li>
+                <li><span class="num">03</span><span class="txt">İnsan-onay ve istisna yönetimi</span></li>
+                <li><span class="num">04</span><span class="txt">İzlenebilirlik ve denetim kayıtları</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 AI Agent — YAKINLAŞMA -->
+    <section class="chapter" data-stage="02" id="section-02">
+      <div class="chapter__pin">
+        <div class="shell chapter__fade">
+          <div class="chapter-grid">
+            <div class="chapter__media">
+              <div class="label">//02 AI Agent</div>
+              <h2>Konuşan değil, <em>karar veren</em> agent'lar.</h2>
+              <p class="lead">Görevleri bölen, araçları çağıran, sonuçları doğrulayan ve gerektiğinde devreden insanı haberdar eden agent mimarileri kuruyoruz.</p>
+              <ul>
+                <li><span class="num">01</span><span class="txt">Çok-adımlı planlama ve tool calling</span></li>
+                <li><span class="num">02</span><span class="txt">Bağlam yönetimi ve uzun-vadeli hafıza</span></li>
+                <li><span class="num">03</span><span class="txt">Güvenli araç entegrasyonları (RBAC, audit)</span></li>
+                <li><span class="num">04</span><span class="txt">Operasyonel gözlem ve performans takibi</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAZMA — Düşüncenin akışı (full-bleed video, long pin 300%) -->
+    <section class="plazma" data-stage="plazma" id="section-plazma" aria-hidden="false">
+      <div class="plazma__pin">
+        <div class="plazma__media">
+          <video class="plazma__video" src="assets/video/yz-bg-network.mp4"
+                 autoplay muted playsinline loop preload="auto"></video>
+        </div>
+        <div class="plazma__label">//PLAZMA — DÜŞÜNCENİN AKIŞI</div>
+      </div>
+    </section>
+
+    <!-- 03 Veri & Belge Zekası — DÖNÜŞÜM (lattice morph) -->
+    <section class="chapter" data-stage="03" id="section-03">
+      <div class="chapter__pin">
+        <div class="shell chapter__fade">
+          <div class="chapter-grid">
+            <div class="chapter__media">
+              <div class="label">//03 Veri &amp; Belge Zekası</div>
+              <h2>Belgeleri okuyan, veriyi <em>anlamlandıran</em> sistemler.</h2>
+              <p class="lead">RAG mimarisi, OCR + yapılandırılmış çıkarım ve şirket veri kaynaklarına bağlanan soru-cevap arayüzleri.</p>
+              <ul>
+                <li><span class="num">01</span><span class="txt">Belge ingest pipeline'ı (PDF, Word, taranmış)</span></li>
+                <li><span class="num">02</span><span class="txt">Vektör indeks + hibrit arama</span></li>
+                <li><span class="num">03</span><span class="txt">Kaynaklı yanıt ve alıntı zinciri</span></li>
+                <li><span class="num">04</span><span class="txt">Erişim politikaları ve yetki bazlı görünürlük</span></li>
+              </ul>
+
+              <details class="more">
+                <summary>Read more — teknik yaklaşım</summary>
+                <div class="more__body">
+                  <p>Chunking stratejisini içerik tipine göre seçiyoruz: yapılandırılmış raporlar için semantic chunk, sözleşme metinleri için clause-aware bölümleme. Embedding modeli Türkçe ağırlıklı projelerde çok-dilli modellerle, finansal/teknik metinlerde domain-spesifik modellerle değişiyor. Yanıt katmanında her cümleyi kaynak belgeye geri bağlayan citation grafiği üretiyoruz — kullanıcı "bu cümle nereden geldi?" diye sorduğunda tek tıkla orijinal pasaja iniyor.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Etik AI & KVKK — UZAKLAŞMA -->
+    <section class="chapter" data-stage="04" id="section-04">
+      <div class="chapter__pin">
+        <div class="shell chapter__fade">
+          <div class="chapter-grid">
+            <div class="chapter__media">
+              <div class="label">//04 Etik AI &amp; KVKK</div>
+              <h2>Sınırları <em>kod öncesi</em> çekiyoruz.</h2>
+              <p class="lead">Veri minimizasyonu, anonimleştirme, kullanıcı onayı ve modelin nereye dokunmaması gerektiği — projeyi başlatırken konuşulan konular.</p>
+              <ul>
+                <li><span class="num">01</span><span class="txt">KVKK uyumlu veri akış tasarımı</span></li>
+                <li><span class="num">02</span><span class="txt">PII tespiti ve maskleme</span></li>
+                <li><span class="num">03</span><span class="txt">Model log'larında saklama politikası</span></li>
+                <li><span class="num">04</span><span class="txt">Açıklanabilirlik ve kullanıcı itirazı</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 CTA Konuşalım (plazma overlay opacity 0.4) -->
+    <section class="chapter cta" data-stage="05" id="section-05">
+      <div class="cta__plazma-overlay" aria-hidden="true">
+        <video src="assets/video/yz-bg-network.mp4" autoplay muted playsinline loop preload="auto"></video>
+      </div>
+      <div class="shell chapter__fade">
+        <div class="chapter-grid">
+          <div class="chapter__media">
+            <div class="label">//05 Konuşalım</div>
+            <h2>Yapay zekanın <em>doğru yerini</em> birlikte tanımlayalım.</h2>
+            <a href="iletisim.html" class="btn-primary">
+              Projenizi Anlatalım
+              <svg class="btn-primary__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (minimal) -->
+  <footer class="footer">
+    <div class="shell footer-row">
+      <div>© 2026 Gavia Works — Dada İstanbul</div>
+      <div class="footer-links">
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="hizmetler/">Hizmetler</a>
+        <a href="iletisim.html">İletişim</a>
+        <a href="kvkk.html">KVKK</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Persistent scroll rail (7 segments incl. plazma) -->
+  <aside class="scroll-rail" aria-hidden="true">
+    <div class="scroll-rail__label">//00 YAPAY ZEKA</div>
+    <ol class="scroll-rail__segments">
+      <li data-stage="00" class="is-active"></li>
+      <li data-stage="01"></li>
+      <li data-stage="02"></li>
+      <li data-stage="plazma" class="is-plazma"></li>
+      <li data-stage="03"></li>
+      <li data-stage="04"></li>
+      <li data-stage="05"></li>
+    </ol>
+    <div class="scroll-rail__cue">SCROLL</div>
+  </aside>
+
+  <!-- Sound toggle (UI only) -->
+  <script>
+    (function () {
+      var btn = document.querySelector('.sound-toggle');
+      if (!btn) return;
+      var label = btn.querySelector('.sound-toggle__label');
+      btn.addEventListener('click', function () {
+        var on = btn.classList.toggle('is-on');
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (label) label.textContent = on ? 'Sound on' : 'Sound off';
+      });
+    })();
+  </script>
+
+  <!-- Three.js scene (shared, V3 enables morph + bloom) -->
+  <script type="module" src="assets/js/yapay-zeka-scene.js"></script>
+
+  <!-- GSAP + ScrollTrigger + Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script type="module" src="assets/js/yapay-zeka-scroll-v3.js"></script>
+
+</body>
+</html>
