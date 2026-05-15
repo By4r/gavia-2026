@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gavia Works — birlikte çalıştığımız markalar, kurumlar ve referanslarımız." />
+  <title>Referanslarımız — Gavia Works</title>
+
+  <link rel="icon" type="image/png" href="./assets/logo/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/brand.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gavia-deep': '#020837',
+            'gavia-night': '#141533',
+            'gavia-dark': '#0A0E27',
+            'gavia-mint': '#3FD5AD',
+            'gavia-mint-bright': '#4FE5BD',
+            'gavia-light': '#E9EEF1',
+            'gavia-muted': '#6B7280',
+            'gavia-border': '#1F2740',
+          },
+          fontFamily: {
+            display: ['Queulat', 'Manrope', 'system-ui', 'sans-serif'],
+            hero: ['QueulatAlt', 'Queulat', 'Manrope', 'system-ui', 'sans-serif'],
+            sans: ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Page-local: section'lar footer (z:0) üstünde opak otursun (hero pattern yok) -->
+  <style>
+    body { background-color: #020514; }
+    body > section, body > div.hero-zone { position: relative; z-index: 2; }
+
+    /* Image card (Kerem Bey: div + bg-image, NO img tag for square/card visuals) */
+    .gv-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 16px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--gavia-night);
+      border: 1px solid var(--gavia-border);
+    }
+    .gv-media-portrait { aspect-ratio: 3 / 4; }
+    .gv-media-square   { aspect-ratio: 1 / 1; }
+    .gv-media-wide     { aspect-ratio: 16 / 9; }
+
+    /* Numbered overline reused — visually like fantasy/itransition numbered system */
+    .gv-overline {
+      display: inline-flex; align-items: center; gap: .65rem;
+      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gavia-mint); font-weight: 600;
+    }
+    .gv-overline::before {
+      content: ""; display: inline-block; width: 28px; height: 1px;
+      background: var(--gavia-mint); opacity: .6;
+    }
+
+    /* Asterisk divider */
+    .gv-asterisk {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.25rem; color: var(--gavia-mint); font-size: 1.5rem;
+      letter-spacing: .8em; padding: 4rem 0;
+    }
+
+    
+
+    /* === Referans logo grid === */
+    .ref-logo-cell {
+      display: flex; align-items: center; justify-content: center;
+      padding: 28px 18px;
+      background: #fff;
+      border-right: 1px solid rgba(2, 8, 55, 0.06);
+      border-bottom: 1px solid rgba(2, 8, 55, 0.06);
+      transition: background .25s, transform .35s;
+    }
+    .ref-logo-cell img {
+      max-height: 42px; max-width: 100%; width: auto; height: auto;
+      object-fit: contain; opacity: .65;
+      filter: grayscale(100%);
+      transition: opacity .3s, filter .3s, transform .35s;
+    }
+    .ref-logo-cell:hover { background: rgba(63, 213, 173, 0.04); }
+    .ref-logo-cell:hover img { opacity: 1; filter: grayscale(0); transform: scale(1.04); }
+
+    /* === Testimonial === */
+    .testimonial {
+      position: relative;
+      padding: 32px 28px 28px;
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid rgba(2, 8, 55, 0.08);
+      box-shadow: 0 1px 0 rgba(2, 8, 55, 0.02);
+      transition: border-color .35s, box-shadow .35s, transform .45s;
+    }
+    .testimonial:hover {
+      border-color: rgba(63, 213, 173, 0.45);
+      box-shadow: 0 18px 36px -20px rgba(2, 8, 55, 0.18);
+      transform: translateY(-2px);
+    }
+    .testimonial::before {
+      content: "\201C"; /* opening curly quote */
+      position: absolute; top: 6px; left: 22px;
+      font-family: 'Queulat', 'Manrope', serif;
+      font-size: 70px; line-height: 1;
+      color: var(--gavia-mint); opacity: .35;
+    }
+    .testimonial-quote {
+      font-family: 'Queulat', 'Manrope', system-ui, sans-serif;
+      color: var(--gavia-deep);
+      font-size: 1.0625rem; line-height: 1.55;
+      font-weight: 500; letter-spacing: -.005em;
+      margin-bottom: 22px;
+    }
+    .testimonial-meta {
+      display: flex; align-items: center; gap: 14px;
+      padding-top: 18px; border-top: 1px solid rgba(2,8,55,.08);
+    }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%; overflow: hidden;
+      background: rgba(63,213,173,.12);
+      flex-shrink: 0;
+    }
+    .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testimonial-name {
+      font-family: 'Queulat', 'Manrope', system-ui, sans-serif;
+      font-weight: 700; color: var(--gavia-deep); font-size: .95rem; line-height: 1.2;
+    }
+    .testimonial-role {
+      font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gavia-mint); font-weight: 600; margin-top: 4px;
+    }
+
+    /* === Team card (editorial / premium) === */
+    .team-card { position: relative; }
+    .team-photo {
+      position: relative; width: 100%; aspect-ratio: 1/1;
+      border-radius: 18px; overflow: hidden;
+      background: linear-gradient(160deg, rgba(63,213,173,0.10), rgba(2,8,55,0.04));
+      box-shadow: 0 1px 0 rgba(2,8,55,0.04), 0 12px 28px -18px rgba(2,8,55,0.18);
+      transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s;
+    }
+    .team-photo img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      filter: saturate(.92) contrast(1.02);
+      transition: transform .8s cubic-bezier(.2,.7,.2,1), filter .5s;
+    }
+    .team-card:hover .team-photo {
+      box-shadow: 0 1px 0 rgba(63,213,173,0.4), 0 24px 44px -22px rgba(2,8,55,0.28);
+      transform: translateY(-3px);
+    }
+    .team-card:hover .team-photo img { transform: scale(1.04); filter: saturate(1) contrast(1.04); }
+    /* Mint accent ring on hover */
+    .team-photo::after {
+      content: ""; position: absolute; inset: 0; border-radius: 18px;
+      box-shadow: inset 0 0 0 1px rgba(2,8,55,0.06);
+      transition: box-shadow .4s;
+      pointer-events: none;
+    }
+    .team-card:hover .team-photo::after { box-shadow: inset 0 0 0 1px rgba(63,213,173,0.45); }
+    /* Bottom gradient for text readability over photos */
+    .team-photo::before {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%;
+      background: linear-gradient(to top, rgba(2,8,55,.55), transparent);
+      opacity: 0; transition: opacity .4s;
+      pointer-events: none;
+    }
+    .team-card:hover .team-photo::before { opacity: 1; }
+
+    /* Floating social on hover */
+    .team-social {
+      position: absolute; top: 10px; right: 10px;
+      width: 32px; height: 32px; border-radius: 10px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.94); color: var(--gavia-deep);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 14px -8px rgba(2,8,55,.25);
+      opacity: 0; transform: translateY(-4px);
+      transition: opacity .35s, transform .35s, background .25s, color .25s;
+    }
+    .team-card:hover .team-social { opacity: 1; transform: translateY(0); }
+    .team-social:hover { background: var(--gavia-mint); color: var(--gavia-deep); }
+
+    /* Meta below photo */
+    .team-meta { padding-top: 16px; }
+    .team-name {
+      font-family: 'Queulat', 'Manrope', system-ui, sans-serif;
+      font-weight: 800; color: var(--gavia-deep);
+      font-size: 1.0625rem; letter-spacing: -.01em; line-height: 1.25;
+    }
+    .team-role {
+      margin-top: 4px;
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gavia-mint); font-weight: 600;
+    }
+    .team-divider {
+      width: 24px; height: 1px; margin-top: 10px;
+      background: rgba(2,8,55,.12); transition: width .4s, background .4s;
+    }
+    .team-card:hover .team-divider { width: 48px; background: var(--gavia-mint); }
+  </style>
+</head>
+<body class="bg-gavia-light text-gavia-deep antialiased gv-light-page">
+  <header data-header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="flex items-center justify-between h-20 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6">
+
+        <a href="./index.html" class="flex items-center gap-2 lg:justify-self-start">
+          <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto" />
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-1 lg:justify-self-center whitespace-nowrap">
+
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Hizmetler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="./hizmetler/ozel-yazilim.html" class="mega-link">
+                    <span class="mega-link-icon"><i class="fa-solid fa-code"></i></span>
+                    <span><span class="block font-semibold text-white">Özel Yazılım Sistemleri</span><span class="block text-sm text-gray-400 mt-0.5">CRM, ERP, portal, panel, e-ticaret.</span></span>
+                  </a>
+                  <a href="./hizmetler/mobil-uygulama.html" class="mega-link">
+                    <span class="mega-link-icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                    <span><span class="block font-semibold text-white">Mobil Uygulama</span><span class="block text-sm text-gray-400 mt-0.5">iOS, Android, Flutter, React Native.</span></span>
+                  </a>
+                  <a href="./hizmetler/sistem-entegrasyonu.html" class="mega-link">
+                    <span class="mega-link-icon"><i class="fa-solid fa-network-wired"></i></span>
+                    <span><span class="block font-semibold text-white">Sistem Entegrasyonu</span><span class="block text-sm text-gray-400 mt-0.5">CRM/ERP, ödeme, kargo, pazaryeri.</span></span>
+                  </a>
+                  <a href="./hizmetler/bulut-guvenlik.html" class="mega-link">
+                    <span class="mega-link-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <span><span class="block font-semibold text-white">Bulut & Güvenlik</span><span class="block text-sm text-gray-400 mt-0.5">Bulut mimarisi, KVKK, DevSecOps.</span></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <a href="./yapay-zeka.html" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors">Yapay Zekâ</a>
+
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Ürünler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <div class="lg:col-span-3">
+                  <p class="text-xs uppercase tracking-wider text-gavia-muted mb-3">Ana Vitrin</p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-5">
+                    <a href="./urunler/crm.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-users"></i></span><span><span class="block font-semibold text-white">Gavia CRM</span><span class="block text-sm text-gray-400 mt-0.5">Satış, müşteri, teklif.</span></span></a>
+                    <a href="./urunler/flow.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-diagram-project"></i></span><span><span class="block font-semibold text-white">Gavia Flow</span><span class="block text-sm text-gray-400 mt-0.5">İş akışı, onay, otomasyon.</span></span></a>
+                    <a href="./urunler/assistant.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span><span class="block font-semibold text-white">Gavia Assistant</span><span class="block text-sm text-gray-400 mt-0.5">AI destekli asistan.</span></span></a>
+                    <a href="./urunler/insight.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-chart-line"></i></span><span><span class="block font-semibold text-white">Gavia Insight</span><span class="block text-sm text-gray-400 mt-0.5">Veri analitiği, tahminleme.</span></span></a>
+                  </div>
+                                  <div class="border-t border-gavia-border/40 pt-3 mt-1">
+                    <a href="calismalar.html" class="inline-flex items-center gap-2 text-sm font-medium text-gavia-mint hover:text-gavia-mint-bright transition-colors">
+                      <i class="fa-solid fa-briefcase text-xs"></i>
+                      <span>Tüm proje portföyü</span>
+                      <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                  </div>
+</div>
+              </div>
+            </div>
+          </div>
+
+          <a href="./surdurulebilirlik.html" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors">Sürdürülebilirlik</a>
+
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Gavia <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="./hakkimizda.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-about/900/600"
+                     data-mega-title="Hakkımızda"
+                     data-mega-desc="Gavia kimdir, neyi neden yapar."><span class="mega-link-icon"><i class="fa-solid fa-circle-info"></i></span><span><span class="block font-semibold text-white">Hakkımızda</span><span class="block text-sm text-gray-400 mt-0.5">Gavia kimdir, ne yapar.</span></span></a>
+                  <a href="./yaklasim.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-approach/900/600"
+                     data-mega-title="Yaklaşım"
+                     data-mega-desc="Analiz → Tasarım → Yazılım → AI."><span class="mega-link-icon"><i class="fa-solid fa-compass"></i></span><span><span class="block font-semibold text-white">Yaklaşım</span><span class="block text-sm text-gray-400 mt-0.5">Analiz → Tasarım → Yazılım → AI.</span></span></a>
+                  <a href="./ekip.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-team/900/600"
+                     data-mega-title="Ekip"
+                     data-mega-desc="Stüdyo arkasındaki insanlar."><span class="mega-link-icon"><i class="fa-solid fa-people-group"></i></span><span><span class="block font-semibold text-white">Ekip</span><span class="block text-sm text-gray-400 mt-0.5">Stüdyo arkasındaki insanlar.</span></span></a>
+                  <a href="./kariyer.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-career/900/600"
+                     data-mega-title="Kariyer"
+                     data-mega-desc="Açık pozisyonlar ve staj fırsatları."><span class="mega-link-icon"><i class="fa-solid fa-briefcase"></i></span><span><span class="block font-semibold text-white">Kariyer</span><span class="block text-sm text-gray-400 mt-0.5">Açık pozisyonlar ve staj.</span></span></a>
+                  <a href="./referanslar.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-refs/900/600"
+                     data-mega-title="Referanslar"
+                     data-mega-desc="Birlikte çalıştığımız markalar."><span class="mega-link-icon"><i class="fa-solid fa-medal"></i></span><span><span class="block font-semibold text-white">Referanslar</span><span class="block text-sm text-gray-400 mt-0.5">Birlikte çalıştığımız markalar.</span></span></a>
+                </div>
+                <a href="./hakkimizda.html" class="mega-showcase mega-showcase-billboard" data-mega-showcase>
+                  <div class="mega-showcase-media">
+                    <img data-mega-image
+                         src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=70"
+                         data-fallback="https://picsum.photos/seed/gavia-about/900/600"
+                         alt="" />
+                  </div>
+                  <div class="mega-showcase-body">
+<h4 data-mega-title class="font-display font-bold text-white text-base mb-1">Hakkımızda</h4>
+                    <p data-mega-desc class="text-sm text-gray-300 mb-3">Gavia kimdir, neyi neden yapar.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <a href="./iletisim.html" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors">İletişim</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="./iletisim.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gavia-mint hover:bg-gavia-mint-bright text-gavia-deep text-sm font-semibold transition-colors">
+            Projenizi Anlatalım <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+
+        <button data-mobile-menu-btn class="lg:hidden p-2 text-gray-200 hover:text-gavia-mint" aria-label="Menü">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <div data-mobile-menu class="hidden lg:hidden pb-6">
+        <nav class="flex flex-col gap-1 border-t border-gavia-border pt-4">
+          <a href="./hizmetler/ozel-yazilim.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Hizmetler</a>
+          <a href="./yapay-zeka.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Yapay Zekâ</a>
+          <a href="./urunler/crm.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Ürünler</a>
+          <a href="./calismalar.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Çalışmalar</a>
+          <a href="./surdurulebilirlik.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Sürdürülebilirlik</a>
+          <a href="./hakkimizda.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Gavia</a>
+          <a href="./iletisim.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">İletişim</a>
+          <a href="./iletisim.html" class="mt-3 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gavia-mint text-gavia-deep font-semibold">
+            Projenizi Anlatalım <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <section class="relative pt-36 md:pt-44 pb-20 md:pb-24 overflow-hidden min-h-[480px] flex items-center bg-gavia-deep"
+           style="background-image: linear-gradient(120deg, rgba(2,8,55,0.92) 0%, rgba(2,8,55,0.78) 45%, rgba(2,8,55,0.55) 80%, rgba(2,8,55,0.45) 100%), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=2400&q=80'); background-size: cover; background-position: center;">
+    <div class="absolute top-1/3 -left-32 w-[520px] h-[520px] bg-gavia-mint/10 rounded-full blur-[160px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[420px] h-[420px] bg-gavia-mint/8 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="relative w-full max-w-6xl mx-auto px-6 md:px-8">
+      <nav class="flex items-center gap-2 text-xs text-gray-300/80 mb-6" aria-label="Breadcrumb">
+        <a href="./index.html" class="hover:text-gavia-mint transition-colors">Ana Sayfa</a>
+        <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
+        <span class="text-gavia-mint">Referanslarımız</span>
+      </nav>
+      <div class="gv-overline mb-5"><span class="font-mono text-gavia-mint/80">01</span> <span>Referanslar</span></div>
+      <h1 class="font-display font-extrabold text-white text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.05] drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]">
+        Bize <em class="not-italic relative inline-block"><span class="italic text-gavia-mint">güvenen markalar</span></em>.
+      </h1>
+      <p class="mt-5 text-base md:text-lg text-gray-200 max-w-2xl leading-relaxed drop-shadow-[0_1px_12px_rgba(0,0,0,0.4)]"><!-- TODO: Yasin Bey copy --> Kurumsal, kamu, eğitim ve start-up ekosisteminden uzun süreli ortaklıklar.</p>
+      <div class="flex flex-wrap gap-3 mt-7">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-medium">
+          <i class="fa-solid fa-handshake text-gavia-mint"></i>30+ kurumsal müşteri
+        </span>
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-medium">
+          <i class="fa-solid fa-rotate text-gavia-mint"></i>%95 yenileme oranı
+        </span>
+      </div>
+    </div>
+  </section>
+  <section class="bg-white py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
+        <div>
+          <div class="gv-overline mb-4"><span class="font-mono text-gavia-mint/80">02</span> <span>Müşteriler</span></div>
+          <h2 class="font-display font-extrabold text-gavia-deep text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.1] max-w-2xl">
+            Birlikte iş yaptığımız <em class="not-italic text-gavia-mint italic">kurumlar</em>.
+          </h2>
+        </div>
+        <p class="text-sm md:text-base text-gavia-deep/70 max-w-xs md:max-w-sm leading-relaxed">
+          <!-- TODO: Yasin Bey copy --> Tek seferlik teslim değil; uzun süreli, ölçülebilir ortaklıklar kurarız.
+        </p>
+      </div>
+
+      <div class="ref-logo-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-0 border border-gavia-deep/10 rounded-2xl overflow-hidden">
+        <div class="ref-logo-cell"><img src="./assets/img/clients/01.png" alt="Türksat" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/02.png" alt="Eurasia Airshow" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/03.png" alt="Yeniçağa Kaymakamlığı" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/04.webp" alt="4 High Tech Port" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/05.png" alt="Antalya Bilim Üniversitesi" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/06.png" alt="Dr Saka" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/07.png" alt="Expo Turkey" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/08.png" alt="Müşteri" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/09.png" alt="Müşteri" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/10.webp" alt="Müşteri" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/11.png" alt="Müşteri" loading="lazy" /></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/12.webp" alt="Müşteri" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gavia-light py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-6 md:px-8">
+      <div class="gv-overline mb-10"><span class="font-mono text-gavia-mint/80">03</span> <span>Müşterilerimiz Diyor ki</span></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+        <figure class="testimonial">
+          <blockquote class="testimonial-quote">
+            "Gavia ile çalışmak yazılım ortağı değil, iş zekâsı ortağı edinmek gibi. Süreçlerimizi yeniden tasarladık."
+          </blockquote>
+          <figcaption class="testimonial-meta">
+            <div class="testimonial-avatar">
+              <img src="https://i.pravatar.cc/120?img=15" alt="Müşteri 1" loading="lazy" />
+            </div>
+            <div>
+              <div class="testimonial-name">TODO Ad Soyad</div>
+              <div class="testimonial-role">CTO · Kurumsal Müşteri</div>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="testimonial">
+          <blockquote class="testimonial-quote">
+            "Brief'ten yayına kadar tek bir e-postayla yönetilebilen bir ekip. Dayanıklı kod, ölçülebilir sonuç."
+          </blockquote>
+          <figcaption class="testimonial-meta">
+            <div class="testimonial-avatar">
+              <img src="https://i.pravatar.cc/120?img=23" alt="Müşteri 2" loading="lazy" />
+            </div>
+            <div>
+              <div class="testimonial-name">TODO Ad Soyad</div>
+              <div class="testimonial-role">Genel Müdür · Eğitim</div>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="testimonial">
+          <blockquote class="testimonial-quote">
+            "AI hype'ından uzak, somut fayda üreten bir yaklaşım. Üç aylık entegrasyonda raporlama süremiz yarıya indi."
+          </blockquote>
+          <figcaption class="testimonial-meta">
+            <div class="testimonial-avatar">
+              <img src="https://i.pravatar.cc/120?img=33" alt="Müşteri 3" loading="lazy" />
+            </div>
+            <div>
+              <div class="testimonial-name">TODO Ad Soyad</div>
+              <div class="testimonial-role">Operasyon Direktörü · Sanayi</div>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="testimonial">
+          <blockquote class="testimonial-quote">
+            "Hız ve kalite genelde takas edilir; Gavia ekibi bu denklemi bozdu. Uzun ortaklığa dönüştü."
+          </blockquote>
+          <figcaption class="testimonial-meta">
+            <div class="testimonial-avatar">
+              <img src="https://i.pravatar.cc/120?img=47" alt="Müşteri 4" loading="lazy" />
+            </div>
+            <div>
+              <div class="testimonial-name">TODO Ad Soyad</div>
+              <div class="testimonial-role">Kurucu · Start-up</div>
+            </div>
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section-fade-top bg-gavia-light py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 text-center">
+      <span class="gv-overline mb-5">Devam</span>
+      <h3 class="font-display font-extrabold text-3xl md:text-5xl text-gavia-deep tracking-tight mb-4">
+        Bu listeye katılmak istersiniz.
+      </h3>
+      <p class="text-base md:text-lg text-gavia-deep/70 max-w-2xl mx-auto mb-10">
+        <!-- TODO: Yasin Bey copy --> Tek seferlik proje yerine uzun süreli yazılım ortağı arıyorsanız konuşalım.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="./calismalar.html" class="focus-chip">
+          <i class="fa-solid fa-briefcase"></i>
+          <span>Çalışmalar</span>
+          <i class="fa-solid fa-arrow-right text-xs opacity-60"></i>
+        </a>
+        <a href="./urunler/crm.html" class="focus-chip">
+          <i class="fa-solid fa-cubes"></i>
+          <span>Ürünler</span>
+          <i class="fa-solid fa-arrow-right text-xs opacity-60"></i>
+        </a>
+        <a href="./iletisim.html" class="focus-chip">
+          <i class="fa-solid fa-envelope"></i>
+          <span>İletişim</span>
+          <i class="fa-solid fa-arrow-right text-xs opacity-60"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- Footer reveal spacer -->
+  <div class="footer-reveal-spacer"></div>
+
+  <footer class="footer-fixed-bottom relative bg-[#020514] border-t border-gavia-mint/30 shadow-[0_-1px_0_rgba(63,213,173,0.08)_inset] overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-gavia-mint to-transparent"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20 md:pb-24">
+      <div class="max-w-xl">
+        <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto mb-6" />
+        <p class="text-sm text-gray-400 leading-relaxed mb-6 max-w-sm">
+          <!-- TODO: Yasin Bey copy -->AI destekli özel yazılım ve dijital ürün stüdyosu.
+        </p>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="X" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="GitHub" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="border-t border-gavia-border mt-16 pt-8 flex flex-col md:flex-row justify-between gap-3 text-xs text-gavia-muted">
+        <a href="mailto:info@gaviaworks.com" class="text-sm text-gray-400 hover:text-gavia-mint transition-colors">info@gaviaworks.com</a>
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          <a href="./kvkk.html" class="hover:text-gavia-mint transition-colors">KVKK Aydınlatma</a>
+          <span class="opacity-30">·</span>
+          <a href="./cerez-politikasi.html" class="hover:text-gavia-mint transition-colors">Çerez Politikası</a>
+          <span class="opacity-30">·</span>
+          <a href="./gizlilik-politikasi.html" class="hover:text-gavia-mint transition-colors">Gizlilik Politikası</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>

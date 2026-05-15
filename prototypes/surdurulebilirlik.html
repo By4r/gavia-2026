@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gavia Works — Sürdürülebilir teknoloji: dijital verimlilik, ESG raporlama, yeşil yazılım mimarisi ve AI for sustainability." />
+  <title>Sürdürülebilirlik — Gavia Works</title>
+
+  <link rel="icon" type="image/png" href="./assets/logo/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/brand.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gavia-deep': '#020837',
+            'gavia-night': '#141533',
+            'gavia-dark': '#0A0E27',
+            'gavia-mint': '#3FD5AD',
+            'gavia-mint-bright': '#4FE5BD',
+            'gavia-light': '#E9EEF1',
+            'gavia-muted': '#6B7280',
+            'gavia-border': '#1F2740',
+          },
+          fontFamily: {
+            display: ['Queulat', 'Manrope', 'system-ui', 'sans-serif'],
+            hero: ['QueulatAlt', 'Queulat', 'Manrope', 'system-ui', 'sans-serif'],
+            sans: ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Page-local: section'lar footer (z:0) üstünde opak otursun (hero pattern yok) -->
+  <style>
+    body { background-color: #020514; }
+    body > section { position: relative; z-index: 2; }
+
+    /* === v6: Header readability fix on light hero ===
+       Default header has text-gray-200 (dark zemin için). Light hero üstünde okunmuyor.
+       Page-local override: nav metni gavia-deep, hover mint. Header'a yumuşak white blur zemin.
+       Hero scroll edilince eski (dark) tona dönmesi için scroll trigger eklenebilir; şimdilik
+       sayfa boyunca light header çünkü tüm bg light dominant. */
+    /* Light-page override: section-fade-top dark gradient'i light zemine
+       uymuyor — gizle, yerine ince mint divider. footer paint-order için
+       sınıfın kendisi korunuyor (sadece ::before kapatılır). */
+    body.surd-light-page .section-fade-top::before { display: none !important; }
+    body.surd-light-page .surd-nav-forward {
+      border-top: 1px solid rgba(63, 213, 173, 0.22);
+      background: linear-gradient(to bottom, #F2F5F8 0%, var(--gavia-light) 100%);
+    }
+
+    body.surd-light-page header[data-header] {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(2, 8, 55, 0.06);
+    }
+    body.surd-light-page header[data-header] nav a,
+    body.surd-light-page header[data-header] nav button {
+      color: var(--gavia-deep);
+    }
+    body.surd-light-page header[data-header] nav a.text-gavia-mint {
+      color: var(--gavia-mint);
+    }
+    body.surd-light-page header[data-header] nav a:hover,
+    body.surd-light-page header[data-header] nav button:hover {
+      color: var(--gavia-mint);
+    }
+    body.surd-light-page header[data-header] [data-mobile-menu-btn],
+    body.surd-light-page header[data-header] [data-lang-trigger] {
+      color: var(--gavia-deep);
+    }
+    body.surd-light-page header[data-header] [data-lang-trigger]:hover {
+      color: var(--gavia-mint);
+    }
+    /* mega-panel zaten dark (kendi içinde) — koru */
+    body.surd-light-page header[data-header] .mega-panel { color: #fff; }
+    /* Logo light-page: inline SVG wordmark (Queulat font + mint kare nokta).
+       Raster filter/mask denemeleri patladığı için SVG yaklaşımı — text rengi
+       kontrol edilebilir, dot ayrı rect olarak mint kalır. */
+    body.surd-light-page header[data-header] .surd-logo-svg {
+      display: block;
+      height: 32px;
+      width: auto;
+    }
+
+    /* Image-text pair görsel kutusu (Kerem Bey pattern — div + bg-image) */
+    .surd-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 16px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--gavia-night);
+      border: 1px solid var(--gavia-border);
+    }
+    .surd-media-square {
+      aspect-ratio: 1 / 1;
+    }
+    .surd-media-portrait {
+      aspect-ratio: 4 / 5;
+    }
+    .surd-media-wide {
+      aspect-ratio: 16 / 10;
+    }
+    .surd-media::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(2, 8, 55, 0.35) 100%);
+      pointer-events: none;
+    }
+    .surd-media-light::after {
+      background: linear-gradient(180deg, transparent 60%, rgba(233, 238, 241, 0.20) 100%);
+    }
+
+    /* === Hero görsel — kart değil, full-bleed (rounded/shadow/border yok) === */
+    .surd-hero-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background-size: cover;
+      background-position: center;
+    }
+    @media (min-width: 1024px) {
+      .surd-hero-img-flush {
+        aspect-ratio: auto;
+        height: 640px;
+      }
+    }
+
+    /* === Live dot pulse === */
+    .live-dot {
+      position: relative;
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gavia-mint);
+      box-shadow: 0 0 0 0 rgba(63,213,173,0.7);
+      animation: live-pulse 1.8s cubic-bezier(0.66, 0, 0, 1) infinite;
+      vertical-align: middle;
+    }
+    .live-dot::after {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: rgba(63,213,173,0.55);
+      animation: live-pulse-ring 1.8s cubic-bezier(0.66, 0, 0, 1) infinite;
+      z-index: -1;
+    }
+    @keyframes live-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(63,213,173,0.6); }
+      70%  { box-shadow: 0 0 0 10px rgba(63,213,173,0); }
+      100% { box-shadow: 0 0 0 0 rgba(63,213,173,0); }
+    }
+    @keyframes live-pulse-ring {
+      0%   { transform: scale(0.6); opacity: 0.85; }
+      70%  { transform: scale(2.2); opacity: 0; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* ============================================================
+       === Yaklaşım v2 — Itransition Industries pattern ===========
+       Full-bleed BG, 5 col, click → BG swap + detail expand
+       ============================================================ */
+    .surd-approach-v2 {
+      position: relative;
+      color: #fff;
+      isolation: isolate;
+      background-color: #0A0E27;
+    }
+    .surd-approach-v2 .surd-bg-stack {
+      position: absolute; inset: 0;
+      z-index: 0;
+    }
+    .surd-approach-v2 .surd-bg {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .surd-approach-v2 .surd-bg.is-active { opacity: 1; }
+    .surd-approach-v2 .surd-bg-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(2,8,55,0.55) 0%, rgba(2,8,55,0.38) 28%, rgba(2,8,55,0.42) 70%, rgba(2,8,55,0.62) 100%);
+      pointer-events: none;
+    }
+    .surd-approach-v2 .surd-overline-row {
+      margin-bottom: 1.25rem;
+    }
+    .surd-approach-v2 .surd-overline-tag {
+      display: inline-block;
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); font-weight: 600;
+      padding-left: 2.25rem; position: relative;
+    }
+    .surd-approach-v2 .surd-overline-tag::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      width: 1.75rem; height: 1px; background: var(--gavia-mint);
+    }
+    .surd-bigtitle {
+      color: #fff;
+      font-size: clamp(32px, 3.6vw, 56px);
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.02em;
+      max-width: 22ch;
+      font-weight: 600;
+      text-shadow: 0 2px 16px rgba(2,8,55,0.55), 0 1px 3px rgba(2,8,55,0.45);
+    }
+    .surd-bigtitle em {
+      font-style: italic;
+      color: var(--gavia-mint);
+      font-weight: 700;
+    }
+    .surd-cols {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: stretch;
+      min-height: 360px;
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+    .surd-col {
+      position: relative;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem 1.5rem 1.25rem;
+      text-align: left;
+      background: transparent;
+      border: none;
+      border-right: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      cursor: pointer;
+      transition: background 360ms ease;
+    }
+    .surd-col:last-child { border-right: none; }
+    .surd-col::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(2,8,55,0) 0%, rgba(2,8,55,0.55) 100%);
+      opacity: 0;
+      transition: opacity 360ms ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .surd-col > * { position: relative; z-index: 1; }
+    .surd-col:hover::before { opacity: 0.6; }
+    .surd-col.is-active::before {
+      opacity: 1;
+      background: linear-gradient(180deg, rgba(2,8,55,0.35) 0%, rgba(2,8,55,0.88) 60%, rgba(2,8,55,0.95) 100%);
+    }
+    .surd-col-title {
+      font-family: 'Queulat', 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: clamp(20px, 1.8vw, 28px);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(2,8,55,0.6), 0 1px 2px rgba(2,8,55,0.5);
+    }
+    .surd-col-detail {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 500ms cubic-bezier(0.22,1,0.36,1),
+                  opacity 360ms ease 100ms,
+                  margin 500ms cubic-bezier(0.22,1,0.36,1);
+      margin-top: 0;
+    }
+    .surd-col-detail p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.86);
+      margin: 0 0 1rem;
+    }
+    .surd-col-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--gavia-mint);
+    }
+    .surd-col-link i { font-size: 11px; }
+    .surd-col.is-active .surd-col-detail {
+      max-height: 220px;
+      opacity: 1;
+      margin-top: 1rem;
+    }
+    .surd-col.is-active .surd-col-title {
+      color: var(--gavia-mint);
+    }
+    @media (max-width: 1023px) {
+      .surd-cols { grid-template-columns: 1fr; min-height: 0; }
+      .surd-col {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.18);
+        padding: 1.5rem 0;
+      }
+      .surd-col.is-active .surd-col-detail { max-height: 320px; }
+    }
+
+    /* Vaka kartı blur tease — LIGHT VARIANT (v5 kurumsal dönüşüm) */
+    .case-tease {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(2, 8, 55, 0.10);
+      background: #FFFFFF;
+      box-shadow: 0 8px 30px rgba(2, 8, 55, 0.06);
+    }
+    .case-tease-media {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-position: center;
+      filter: blur(6px) saturate(0.85);
+      transform: scale(1.06);
+      opacity: 0.6;
+    }
+    .case-tease-veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(233, 238, 241, 0.78) 0%, rgba(255, 255, 255, 0.92) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .case-tease-lock {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: rgba(63, 213, 173, 0.10);
+      border: 1px solid rgba(63, 213, 173, 0.30);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--gavia-mint);
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    /* Check item */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+    }
+    .check-item i {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 6px;
+      background: rgba(63, 213, 173, 0.12);
+      color: var(--gavia-mint);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    /* Stat ribbon ayraçlar */
+    .stat-ribbon-cell {
+      position: relative;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .stat-ribbon-cell + .stat-ribbon-cell::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 20%;
+        bottom: 20%;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .stat-ribbon-cell-light + .stat-ribbon-cell-light::before {
+        background: rgba(2, 8, 55, 0.08);
+      }
+    }
+
+    /* Eyebrow */
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gavia-mint);
+    }
+    .eyebrow-dark {
+      color: var(--gavia-deep);
+      opacity: 0.55;
+    }
+
+    /* === Numbered section overline (Fantasy parity — 01/02/03) === */
+    .surd-num-overline {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gavia-mint);
+      margin-bottom: 22px;
+    }
+    .surd-num-overline::before {
+      content: '';
+      width: 36px;
+      height: 1px;
+      background: rgba(63, 213, 173, 0.55);
+    }
+    .surd-num-overline-dark {
+      color: rgba(2, 8, 55, 0.55);
+    }
+    .surd-num-overline-dark::before {
+      background: rgba(2, 8, 55, 0.35);
+    }
+
+    /* === Hero outline number "01 — SÜRDÜRÜLEBİLİRLİK" === */
+    .surd-hero-stamp {
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      transform-origin: right center;
+      font-family: 'Queulat', 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: clamp(72px, 9vw, 132px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(2, 8, 55, 0.15);
+      pointer-events: none;
+      white-space: nowrap;
+      opacity: 0.9;
+    }
+    @media (max-width: 1023px) {
+      .surd-hero-stamp { display: none; }
+    }
+
+    /* === Word-by-word text reveal === */
+    [data-text-reveal] .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    [data-text-reveal].is-revealed .word {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-text-reveal] .word { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* === Stat counter (uses .stat-ribbon-cell numbers) === */
+    [data-counter] {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* === Vaka blur-on-hover ===
+       Default = blurred placeholder (lock'lu). Hover'da blur kalkar, lock fade out. */
+    .case-tease { transition: border-color 0.4s ease; }
+    .case-tease:hover { border-color: rgba(63, 213, 173, 0.45); }
+    .case-tease-media {
+      transition: filter 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.7s ease-out;
+    }
+    .case-tease:hover .case-tease-media {
+      filter: blur(0px) saturate(1.1);
+      transform: scale(1.02);
+      opacity: 0.92;
+    }
+    .case-tease-veil {
+      transition: background 0.6s ease;
+    }
+    .case-tease:hover .case-tease-veil {
+      background: linear-gradient(180deg, rgba(233, 238, 241, 0.15) 0%, rgba(255, 255, 255, 0.40) 100%);
+    }
+    .case-tease-lock,
+    .case-tease-veil > .badge-mint {
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .case-tease:hover .case-tease-lock {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.9);
+    }
+
+    /* === Approach — Tabbed interface (v4 rewrite)
+       Eski sticky scroll-pane bug'lı çalışıyordu (sol pane içeriği viewport içinde görünmüyordu,
+       slide opacity geçişi anlaşılır değildi). Tab pattern net UX: 5 numbered tab üstte,
+       altta crossfade ile içerik + büyük görsel. Click + ok-tuşları + auto-rotate.
+    */
+    .surd-approach-section { position: relative; }
+    .surd-approach-glow {
+      position: absolute;
+      top: 20%;
+      left: 30%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(63, 213, 173, 0.10) 0%, transparent 65%);
+      pointer-events: none;
+      filter: blur(40px);
+    }
+
+    /* Big outline number behind the title (decorative) */
+    .surd-approach-num {
+      font-family: 'Queulat', 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: clamp(96px, 11vw, 168px);
+      line-height: 0.85;
+      letter-spacing: -0.05em;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(63, 213, 173, 0.55);
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    /* === Tab bar — v6 VERTICAL (Thoughtworks signature, lg+) / horizontal mobile === */
+    .surd-tab-bar {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(2, 8, 55, 0.10);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .surd-tab-bar::-webkit-scrollbar { display: none; }
+    .surd-tab {
+      flex: 1 0 auto;
+      min-width: 180px;
+      padding: 18px 22px 20px;
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      color: rgba(2, 8, 55, 0.55);
+      text-align: left;
+      cursor: pointer;
+      transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    /* Vertical layout on lg+ — Thoughtworks signature */
+    @media (min-width: 1024px) {
+      .surd-tab-bar {
+        flex-direction: column;
+        border-bottom: 0;
+        border-left: 1px solid rgba(2, 8, 55, 0.10);
+        overflow: visible;
+      }
+      .surd-tab {
+        flex: 0 0 auto;
+        min-width: 0;
+        width: 100%;
+        padding: 22px 26px 22px 28px;
+        border-bottom: 0;
+        border-left: 3px solid transparent;
+        margin-left: -1px; /* overlap container border so active border-left sits flush */
+      }
+      .surd-tab.is-active {
+        border-bottom-color: transparent !important;
+        border-left-color: var(--gavia-mint);
+        background: linear-gradient(90deg, rgba(63,213,173,0.10) 0%, rgba(63,213,173,0.02) 100%);
+      }
+      .surd-tab-progress {
+        left: -3px !important;
+        bottom: auto !important;
+        top: 0 !important;
+        height: 0 !important;
+        width: 3px !important;
+        background: var(--gavia-mint);
+        box-shadow: 0 0 12px rgba(63,213,173,0.55);
+        transition: height 0s linear !important;
+      }
+      .surd-tab.is-active.is-playing .surd-tab-progress {
+        height: 100% !important;
+        width: 3px !important;
+        transition: height var(--surd-tab-duration, 6s) linear !important;
+      }
+    }
+    .surd-tab:hover {
+      color: var(--gavia-deep);
+      background: rgba(63,213,173,0.05);
+    }
+    .surd-tab-num {
+      font-family: 'Queulat', 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(63,213,173,0.85);
+    }
+    .surd-tab-label {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+    .surd-tab.is-active {
+      color: var(--gavia-deep);
+      border-bottom-color: var(--gavia-mint);
+      background: linear-gradient(180deg, rgba(63,213,173,0.08) 0%, transparent 100%);
+    }
+    .surd-tab.is-active .surd-tab-num { color: var(--gavia-mint); }
+    .surd-tab.is-active .surd-tab-label { font-weight: 700; }
+
+    /* Auto-rotate progress bar inside active tab */
+    .surd-tab-progress {
+      position: absolute;
+      left: 0; bottom: -2px;
+      height: 2px;
+      width: 0%;
+      background: var(--gavia-mint);
+      box-shadow: 0 0 12px rgba(63,213,173,0.6);
+      transition: width 0s linear;
+      pointer-events: none;
+    }
+    .surd-tab.is-active.is-playing .surd-tab-progress {
+      width: 100%;
+      transition: width var(--surd-tab-duration, 6s) linear;
+    }
+
+    /* === Panel area === */
+    .surd-panel-stage {
+      position: relative;
+      min-height: 540px;
+    }
+    @media (min-width: 1024px) {
+      .surd-panel-stage { min-height: 580px; }
+    }
+    .surd-panel {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.45s ease, transform 0.45s ease, visibility 0s linear 0.45s;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-content: start;
+    }
+    @media (min-width: 1024px) {
+      .surd-panel {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+        gap: 3.5rem;
+        align-items: center;
+      }
+    }
+    .surd-panel.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity 0.55s ease, transform 0.55s ease, visibility 0s linear 0s;
+      z-index: 2;
+    }
+
+    .surd-panel-copy { display: flex; flex-direction: column; }
+    .surd-panel-copy h3 {
+      font-family: 'Queulat', 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: clamp(26px, 2.4vw, 34px);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--gavia-deep);
+      margin-bottom: 18px;
+    }
+    .surd-panel-copy p {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(2, 8, 55, 0.70);
+      margin-bottom: 20px;
+      max-width: 36rem;
+    }
+    .surd-panel-copy ul { list-style: none; padding: 0; margin: 0; }
+    .surd-panel-copy ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      color: rgba(2, 8, 55, 0.85);
+      font-size: 15px;
+      line-height: 1.5;
+      border-bottom: 1px solid rgba(2, 8, 55, 0.06);
+    }
+    .surd-panel-copy ul li:last-child { border-bottom: 0; }
+    .surd-panel-copy ul li i {
+      color: var(--gavia-mint);
+      margin-top: 4px;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    /* === Media tile === */
+    .surd-approach-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 24px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--gavia-night);
+      border: 1px solid var(--gavia-border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+    @media (min-width: 1024px) {
+      .surd-approach-media { aspect-ratio: 4 / 5; max-height: 580px; }
+    }
+    .surd-approach-media::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(2, 8, 55, 0.55) 100%);
+      pointer-events: none;
+    }
+    .surd-approach-media-tag {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(2, 8, 55, 0.78);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(63, 213, 173, 0.35);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gavia-mint);
+    }
+
+    /* === Mobile fallback === */
+    @media (max-width: 767px) {
+      .surd-tab { min-width: 150px; padding: 14px 16px 16px; }
+      .surd-tab-label { font-size: 14px; }
+      .surd-approach-num { font-size: 80px; }
+      .surd-panel-stage { min-height: 0; }
+      /* On mobile each panel stacks; we still keep one-at-a-time but no abs positioning */
+      .surd-panel {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: none;
+        gap: 1.5rem;
+        transition: none;
+      }
+      .surd-panel.is-active { display: grid; position: relative; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .surd-panel { transition: none; transform: none; }
+      .surd-tab.is-active.is-playing .surd-tab-progress { transition: none; width: 100%; }
+    }
+
+    /* === v6: Vertical-tab grid wrapper (Thoughtworks signature) === */
+    .surd-approach-grid { display: block; }
+    @media (min-width: 1024px) {
+      .surd-approach-grid {
+        display: grid;
+        grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+        gap: 56px;
+        align-items: start;
+      }
+      .surd-approach-grid .surd-panel-stage { min-height: 540px; }
+    }
+
+    /* === v6: Case study card — Thoughtworks "client stories" pattern (photo-top + category badge) === */
+    .case-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid rgba(2, 8, 55, 0.08);
+      box-shadow: 0 4px 18px rgba(2, 8, 55, 0.04);
+      transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .case-card:hover {
+      box-shadow: 0 18px 40px rgba(2, 8, 55, 0.10);
+      border-color: rgba(63, 213, 173, 0.30);
+      transform: translateY(-3px);
+    }
+    .case-card-media {
+      aspect-ratio: 16 / 10;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--gavia-light);
+      position: relative;
+      overflow: hidden;
+    }
+    .case-card-media::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(2,8,55,0.10) 100%);
+      transition: opacity 0.45s ease;
+    }
+    .case-card:hover .case-card-media {
+      /* photo subtle zoom — Thoughtworks pattern */
+    }
+    .case-card-media-img {
+      width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .case-card:hover .case-card-media-img { transform: scale(1.04); }
+    .case-card-body {
+      padding: 22px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 10px;
+    }
+    .case-card-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(63, 213, 173, 0.10);
+      border: 1px solid rgba(63, 213, 173, 0.30);
+      color: var(--gavia-mint);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      align-self: flex-start;
+    }
+    .case-card-title {
+      font-family: 'Queulat', 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 19px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--gavia-deep);
+    }
+    .case-card-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(2, 8, 55, 0.65);
+      flex: 1;
+    }
+    .case-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gavia-deep);
+      margin-top: 4px;
+      border-bottom: 1px solid transparent;
+      align-self: flex-start;
+      padding-bottom: 2px;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .case-card:hover .case-card-link {
+      color: var(--gavia-mint);
+      border-bottom-color: rgba(63, 213, 173, 0.55);
+    }
+
+    /* === v6: Insights / Resources cards === */
+    .insight-card {
+      background: #ffffff;
+      border: 1px solid rgba(2, 8, 55, 0.08);
+      border-radius: 14px;
+      padding: 26px 26px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .insight-card:hover {
+      border-color: rgba(63, 213, 173, 0.40);
+      box-shadow: 0 14px 32px rgba(2, 8, 55, 0.08);
+      transform: translateY(-2px);
+    }
+    .insight-card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gavia-mint);
+    }
+    .insight-card-tag::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: rgba(63, 213, 173, 0.55);
+    }
+    .insight-card-title {
+      font-family: 'Queulat', 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--gavia-deep);
+    }
+    .insight-card-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(2, 8, 55, 0.65);
+    }
+    .insight-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gavia-deep);
+      align-self: flex-start;
+      margin-top: 6px;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .insight-card:hover .insight-card-link {
+      color: var(--gavia-mint);
+      border-bottom-color: rgba(63, 213, 173, 0.55);
+    }
+
+    /* === v6: Nav-forward (final section) minimal polish === */
+    .surd-nav-forward {
+      /* container — keep tight, single row of 3 chips, gentle bottom-feel toward footer */
+    }
+    .surd-nav-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid rgba(2, 8, 55, 0.10);
+      color: var(--gavia-deep);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(2, 8, 55, 0.04);
+      transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .surd-nav-chip:hover {
+      border-color: rgba(63, 213, 173, 0.45);
+      color: var(--gavia-mint);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(2, 8, 55, 0.08);
+    }
+    .surd-nav-chip i { font-size: 11px; transition: transform 0.3s ease; }
+    .surd-nav-chip:hover i { transform: translateX(3px); }
+  </style>
+</head>
+<body class="bg-gavia-light text-gavia-deep antialiased gv-light-page">
+
+  <!-- ========== HEADER (index.html birebir kopya — sadece href güncel) ========== -->
+  <header data-header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="flex items-center justify-between h-20 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6">
+
+        <a href="./index.html" class="flex items-center gap-2 lg:justify-self-start" aria-label="Gavia Works">
+          <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto" />
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-1 lg:justify-self-center whitespace-nowrap">
+
+          <!-- Hizmetler -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Hizmetler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="./hizmetler/ozel-yazilim.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-code/900/600"
+                     data-mega-title="Özel Yazılım Sistemleri"
+                     data-mega-desc="CRM, ERP, portal, panel, e-ticaret — uçtan uca.">
+                    <span class="mega-link-icon"><i class="fa-solid fa-code"></i></span>
+                    <span><span class="block font-semibold text-white">Özel Yazılım Sistemleri</span><span class="block text-sm text-gray-400 mt-0.5">CRM, ERP, portal, panel, e-ticaret.</span></span>
+                  </a>
+                  <a href="./hizmetler/mobil-uygulama.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-mobile/900/600"
+                     data-mega-title="Mobil Uygulama"
+                     data-mega-desc="iOS, Android, Flutter, React Native.">
+                    <span class="mega-link-icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                    <span><span class="block font-semibold text-white">Mobil Uygulama</span><span class="block text-sm text-gray-400 mt-0.5">iOS, Android, Flutter, React Native.</span></span>
+                  </a>
+                  <a href="./hizmetler/sistem-entegrasyonu.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-integration/900/600"
+                     data-mega-title="Sistem Entegrasyonu"
+                     data-mega-desc="CRM/ERP, ödeme, kargo, pazaryeri orkestrasyonu.">
+                    <span class="mega-link-icon"><i class="fa-solid fa-network-wired"></i></span>
+                    <span><span class="block font-semibold text-white">Sistem Entegrasyonu</span><span class="block text-sm text-gray-400 mt-0.5">CRM/ERP, ödeme, kargo, pazaryeri.</span></span>
+                  </a>
+                  <a href="./hizmetler/bulut-guvenlik.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-cloud/900/600"
+                     data-mega-title="Bulut & Güvenlik"
+                     data-mega-desc="Bulut mimarisi, KVKK uyumu, DevSecOps.">
+                    <span class="mega-link-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <span><span class="block font-semibold text-white">Bulut & Güvenlik</span><span class="block text-sm text-gray-400 mt-0.5">Bulut mimarisi, KVKK, DevSecOps.</span></span>
+                  </a>
+                </div>
+                <a href="./hizmetler/ozel-yazilim.html" class="mega-showcase mega-showcase-billboard" data-mega-showcase>
+                  <div class="mega-showcase-media">
+                    <img data-mega-image
+                         src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=70"
+                         data-fallback="https://picsum.photos/seed/gavia-code/900/600"
+                         alt="" />
+                  </div>
+                  <div class="mega-showcase-body">
+                    <h4 data-mega-title class="font-display font-bold text-white text-base mb-1">Özel Yazılım Sistemleri</h4>
+                    <p data-mega-desc class="text-sm text-gray-300 mb-3">CRM, ERP, portal, panel, e-ticaret — uçtan uca.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <a href="./calismalar.html" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors">Çalışmalar</a>
+
+          <a href="./yapay-zeka.html" class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors">Yapay Zekâ</a>
+
+          <!-- Ürünler -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-medium text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Ürünler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <div class="lg:col-span-3">
+                  <p class="text-xs uppercase tracking-wider text-gavia-muted mb-3">Ana Vitrin</p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-5">
+                    <a href="./urunler/crm.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-users"></i></span><span><span class="block font-semibold text-white">Gavia CRM</span><span class="block text-sm text-gray-400 mt-0.5">Satış, müşteri, teklif.</span></span></a>
+                    <a href="./urunler/flow.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-diagram-project"></i></span><span><span class="block font-semibold text-white">Gavia Flow</span><span class="block text-sm text-gray-400 mt-0.5">İş akışı, onay, otomasyon.</span></span></a>
+                    <a href="./urunler/assistant.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span><span class="block font-semibold text-white">Gavia Assistant</span><span class="block text-sm text-gray-400 mt-0.5">AI destekli asistan.</span></span></a>
+                    <a href="./urunler/insight.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-chart-line"></i></span><span><span class="block font-semibold text-white">Gavia Insight</span><span class="block text-sm text-gray-400 mt-0.5">Veri analitiği, tahminleme.</span></span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /display:none old tab/panel pattern (preserved for reference) -->
+
+    </div>
+  </section>
+
+  <!-- ========== 5. VAKA ÖRNEKLERİ (v6 Thoughtworks client-stories pattern — white photo-top kartlar, category badge) ========== -->
+  <section class="relative bg-gavia-light py-20 md:py-28 overflow-hidden">
+<div class="relative max-w-7xl mx-auto px-6 md:px-8">
+
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 md:mb-16">
+        <div class="max-w-2xl">
+          <span class="surd-num-overline">04 / Vaka çalışmaları</span>
+          <h2 class="font-display font-extrabold text-3xl md:text-5xl leading-tight tracking-tight text-gavia-deep mt-3 mb-4">
+            <!-- TODO: Yasin Bey copy -->
+            Sürdürülebilirlik <span class="text-gavia-mint">sahaya</span> indiğinde.
+          </h2>
+          <p class="text-base md:text-lg text-gavia-deep/70 leading-relaxed">
+            <!-- TODO: Yasin Bey copy -->
+            ESG raporlamadan enerji tahminlemeye, üç yeni proje hattının teslim,
+            metrik ve mimari özetleri çok yakında.
+          </p>
+        </div>
+        <a href="#" class="inline-flex items-center gap-2 text-gavia-deep font-semibold border-b border-gavia-deep/40 hover:border-gavia-mint hover:text-gavia-mint pb-1 transition-colors self-start lg:self-end">
+          Tüm vakaları gör <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+
+        <!-- Vaka 1 -->
+        <article class="case-card">
+          <!-- TODO: Yasin Bey vaka görseli -->
+          <div class="case-card-media">
+            <div class="case-card-media-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=75');"></div>
+          </div>
+          <div class="case-card-body">
+            <span class="case-card-cat">
+              <i class="fa-solid fa-chart-pie text-[9px]"></i>ESG &amp; Raporlama
+            </span>
+            <h3 class="case-card-title">ESG Raporlama Otomasyonu</h3>
+            <p class="case-card-desc">
+              <!-- TODO: Yasin Bey copy -->
+              Üretim grubu için Scope 1-2-3 emisyon takibi ve denetim hazır
+              dashboard altyapısı.
+            </p>
+            <a href="#" class="case-card-link">Detay yakında <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+          </div>
+        </article>
+
+        <!-- Vaka 2 -->
+        <article class="case-card">
+          <!-- TODO: Yasin Bey vaka görseli -->
+          <div class="case-card-media">
+            <div class="case-card-media-img" style="background-image: url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=75');"></div>
+          </div>
+          <div class="case-card-body">
+            <span class="case-card-cat">
+              <i class="fa-solid fa-bolt text-[9px]"></i>AI &amp; Enerji
+            </span>
+            <h3 class="case-card-title">Enerji Talep Tahminleme</h3>
+            <p class="case-card-desc">
+              <!-- TODO: Yasin Bey copy -->
+              YEK üreticisi için saatlik üretim/talep eşleştirmesi ve depolama
+              tetikleme algoritmaları.
+            </p>
+            <a href="#" class="case-card-link">Detay yakında <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+          </div>
+        </article>
+
+        <!-- Vaka 3 -->
+        <article class="case-card">
+          <!-- TODO: Yasin Bey vaka görseli -->
+          <div class="case-card-media">
+            <div class="case-card-media-img" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=75');"></div>
+          </div>
+          <div class="case-card-body">
+            <span class="case-card-cat">
+              <i class="fa-solid fa-file-circle-check text-[9px]"></i>Dijital Verimlilik
+            </span>
+            <h3 class="case-card-title">Kâğıtsız Onay Hattı</h3>
+            <p class="case-card-desc">
+              <!-- TODO: Yasin Bey copy -->
+              Holding genelinde harcama ve satın alma onaylarının e-imza ile
+              uçtan uca dijitalleşmesi.
+            </p>
+            <a href="#" class="case-card-link">Detay yakında <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== 6. INSIGHTS / KAYNAKLAR (v6 yeni — Thoughtworks "resources" pattern: playbook + framework + guide) ========== -->
+  <section class="bg-white py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 md:mb-14">
+        <div class="max-w-2xl">
+          <span class="surd-num-overline">05 / Kaynaklar</span>
+          <h2 class="font-display font-extrabold text-3xl md:text-5xl leading-tight tracking-tight text-gavia-deep mt-3 mb-4">
+            <!-- TODO: Yasin Bey copy -->
+            İndirilebilir <span class="text-gavia-mint">playbook</span> ve framework'ler.
+          </h2>
+          <p class="text-base md:text-lg text-gavia-deep/70 leading-relaxed">
+            <!-- TODO: Yasin Bey copy -->
+            Sürdürülebilir yazılım pratiklerini ekibinize taşımak için pratik
+            rehberler, kontrol listeleri ve referans mimariler.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 md:gap-7">
+
+        <!-- Insight 1 -->
+        <article class="insight-card">
+          <span class="insight-card-tag">PLAYBOOK · PDF</span>
+          <h3 class="insight-card-title">Yeşil Yazılım Playbook</h3>
+          <p class="insight-card-desc">
+            <!-- TODO: Yasin Bey copy -->
+            Mimari karar, deploy bölgesi, asset bütçesi — karbon-farkında
+            geliştirme için pratik kontrol listesi.
+          </p>
+          <a href="#" class="insight-card-link">
+            <i class="fa-solid fa-arrow-down text-[10px]"></i>PDF indir
+          </a>
+        </article>
+
+        <!-- Insight 2 -->
+        <article class="insight-card">
+          <span class="insight-card-tag">FRAMEWORK · NOTION</span>
+          <h3 class="insight-card-title">ESG Veri Modeli Şablonu</h3>
+          <p class="insight-card-desc">
+            <!-- TODO: Yasin Bey copy -->
+            CSRD ve GRI uyumlu veri tabloları, kanıt zinciri ve denetim hazır
+            rapor iskeleti.
+          </p>
+          <a href="#" class="insight-card-link">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>Şablonu aç
+          </a>
+        </article>
+
+        <!-- Insight 3 -->
+        <article class="insight-card">
+          <span class="insight-card-tag">REHBER · WEB</span>
+          <h3 class="insight-card-title">Karbon Muhasebesi Rehberi</h3>
+          <p class="insight-card-desc">
+            <!-- TODO: Yasin Bey copy -->
+            Scope 1-2-3 emisyon hesaplama yöntemleri, yazılım altyapısının
+            karbon haritalanması.
+          </p>
+          <a href="#" class="insight-card-link">
+            <i class="fa-solid fa-book-open text-[10px]"></i>Rehberi oku
+          </a>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== 6. NAV-FORWARD (v5 — iletişim CTA KALDIRILDI, yapay-zeka section 06 pattern)
+        Beyar feedback: "Bu sürdürülebilirlik sayfasının sonunda iletişime ihtiyaç yok hacı."
+        İletişim sadece ana sayfada / iletisim.html'de. Burası diğer sayfalara nav-forward eder.
+        section-fade-top class korunur — footer paint-order zinciri (L11) için kritik. ========== -->
+  <section id="cta" class="section-fade-top surd-nav-forward relative py-16 md:py-20 overflow-hidden bg-gavia-light">
+    <!-- subtle mint glow (light variant — minimal) -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[520px] h-[320px] bg-gavia-mint/8 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="relative max-w-3xl mx-auto px-6 md:px-8 text-center">
+      <span class="surd-num-overline justify-center" style="display:inline-flex;">06 / Devam</span>
+      <h3 class="font-display font-extrabold text-2xl md:text-[34px] tracking-tight mt-3 mb-8 text-gavia-deep leading-tight">
+        <!-- TODO: Yasin Bey copy -->
+        Hikâyenin geri kalanı — <span class="text-gavia-mint">AI</span>, ürünler, hizmetler.
+      </h3>
+
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a href="./yapay-zeka.html" class="surd-nav-chip">
+          Yapay Zekâ <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="./hizmetler/ozel-yazilim.html" class="surd-nav-chip">
+          Hizmetler <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="./urunler/crm.html" class="surd-nav-chip">
+          Ürünler <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer reveal spacer -->
+  <div class="footer-reveal-spacer"></div>
+
+  <!-- ========== FOOTER (index.html birebir, hrefler güncel) ========== -->
+  <footer class="footer-fixed-bottom relative bg-[#020514] border-t border-gavia-mint/30 shadow-[0_-1px_0_rgba(63,213,173,0.08)_inset] overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-gavia-mint to-transparent"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20 md:pb-24">
+      <div class="max-w-xl">
+        <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto mb-6" />
+        <p class="text-sm text-gray-400 leading-relaxed mb-6 max-w-sm">
+          <!-- TODO: Yasin Bey copy -->AI destekli özel yazılım ve dijital ürün stüdyosu.
+        </p>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="X" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="GitHub" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="border-t border-gavia-border mt-16 pt-8 flex flex-col md:flex-row justify-between gap-3 text-xs text-gavia-muted">
+        <a href="mailto:info@gaviaworks.com" class="text-sm text-gray-400 hover:text-gavia-mint transition-colors">info@gaviaworks.com</a>
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          <a href="./kvkk.html" class="hover:text-gavia-mint transition-colors">KVKK Aydınlatma</a>
+          <span class="opacity-30">·</span>
+          <a href="./cerez-politikasi.html" class="hover:text-gavia-mint transition-colors">Çerez Politikası</a>
+          <span class="opacity-30">·</span>
+          <a href="./gizlilik-politikasi.html" class="hover:text-gavia-mint transition-colors">Gizlilik Politikası</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/main.js"></script>
+
+  <!-- ========== Page-local: text-reveal + counter + approach sticky observer ========== -->
+  <script>
+    /* === Yaklaşım v2 — Itransition Industries col click → BG swap === */
+    (function () {
+      var root = document.querySelector('[data-surd-approach-v2]');
+      if (!root) return;
+      var cols = root.querySelectorAll('[data-surd-col]');
+      var bgs  = root.querySelectorAll('[data-surd-bg]');
+      function setActive(idx) {
+        cols.forEach(function (c, i) {
+          c.classList.toggle('is-active', i === idx);
+          c.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        });
+        bgs.forEach(function (b, i) { b.classList.toggle('is-active', i === idx); });
+      }
+      cols.forEach(function (c, i) {
+        c.addEventListener('click', function () { setActive(i); });
+        c.addEventListener('mouseenter', function () { setActive(i); });
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      'use strict';
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- 1. Word-by-word text reveal (h1/h2 [data-text-reveal]) ---------- */
+      function splitWords(el) {
+        if (el.dataset.split === '1') return;
+        // <em> ve normal text node'ları gez, her kelimeyi span.word'a sar; <br> ve inline elementleri korur
+        function wrap(node) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            var frag = document.createDocumentFragment();
+            var parts = node.nodeValue.split(/(\s+)/);
+            parts.forEach(function (p) {
+              if (!p) return;
+              if (/^\s+$/.test(p)) {
+                frag.appendChild(document.createTextNode(p));
+              } else {
+                var s = document.createElement('span');
+                s.className = 'word';
+                s.textContent = p;
+                frag.appendChild(s);
+              }
+            });
+            node.parentNode.replaceChild(frag, node);
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            // <em>, <span> içine de in.
+            Array.from(node.childNodes).forEach(wrap);
+          }
+        }
+        Array.from(el.childNodes).forEach(wrap);
+        el.dataset.split = '1';
+        // stagger delay
+        var words = el.querySelectorAll('.word');
+        words.forEach(function (w, i) {
+          w.style.transitionDelay = (i * 55) + 'ms';
+        });
+      }
+
+      var reveals = document.querySelectorAll('[data-text-reveal]');
+      reveals.forEach(splitWords);
+
+      if (reduce) {
+        reveals.forEach(function (el) { el.classList.add('is-revealed'); });
+      } else if ('IntersectionObserver' in window) {
+        var revIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-revealed');
+              revIO.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.25 });
+        reveals.forEach(function (el) { revIO.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('is-revealed'); });
+      }
+
+      /* ---------- 2. Stat counter (0 → target, ease-out cubic, 1400ms) ---------- */
+      function animateCounter(el) {
+        if (el.dataset.counted === '1') return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.counterTarget || '0');
+        var prefix = el.dataset.counterPrefix || '';
+        var suffix = el.dataset.counterSuffix || '';
+        var duration = 1400;
+        if (reduce) { el.textContent = prefix + target + suffix; return; }
+        var start = null;
+        function ease(t) { return 1 - Math.pow(1 - t, 3); }
+        function frame(ts) {
+          if (start === null) start = ts;
+          var p = Math.min(1, (ts - start) / duration);
+          var val = Math.round(ease(p) * target);
+          el.textContent = prefix + val + suffix;
+          if (p < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+      var counters = document.querySelectorAll('[data-counter]');
+      if ('IntersectionObserver' in window) {
+        var countIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              animateCounter(e.target);
+              countIO.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.35 });
+        counters.forEach(function (el) { countIO.observe(el); });
+      } else {
+        counters.forEach(animateCounter);
+      }
+
+      /* ---------- 3. Approach — Tabbed interface (v4 rewrite, page-local) ----------
+         5 tab + 5 panel. Click + ←/→ keyboard + auto-rotate (6s, pause on hover/focus,
+         start when section enters viewport, stop after full cycle once or on interaction). */
+      var approachTabs = document.querySelector('[data-surd-approach]');
+      if (approachTabs) {
+        var tabs = Array.prototype.slice.call(approachTabs.querySelectorAll('[data-surd-tab]'));
+        var panels = Array.prototype.slice.call(approachTabs.querySelectorAll('[data-surd-panel]'));
+        var rotateMs = 6000;
+        var current = 0;
+        var rotateTimer = null;
+        var userInteracted = false;
+        var inView = false;
+
+        function setActive(i, opts) {
+          opts = opts || {};
+          if (i < 0) i = tabs.length - 1;
+          if (i >= tabs.length) i = 0;
+          current = i;
+          tabs.forEach(function (t, idx) {
+            var on = idx === i;
+            t.classList.toggle('is-active', on);
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+            t.setAttribute('tabindex', on ? '0' : '-1');
+            // Restart progress animation: kill .is-playing then re-add next frame
+            t.classList.remove('is-playing');
+          });
+          panels.forEach(function (p, idx) {
+            var on = idx === i;
+            p.classList.toggle('is-active', on);
+            if (on) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
+          });
+          if (opts.focus) {
+            tabs[i].focus();
+          }
+          // Restart play indicator on active tab if auto-rotate is running
+          if (rotateTimer && !reduce) {
+            requestAnimationFrame(function () {
+              tabs[i].classList.add('is-playing');
+            });
+          }
+        }
+
+        function startRotate() {
+          if (reduce || userInteracted || rotateTimer) return;
+          // Mark active tab as playing immediately
+          requestAnimationFrame(function () {
+            tabs[current].classList.add('is-playing');
+          });
+          rotateTimer = setInterval(function () {
+            setActive((current + 1) % tabs.length);
+          }, rotateMs);
+        }
+
+        function stopRotate() {
+          if (rotateTimer) {
+            clearInterval(rotateTimer);
+            rotateTimer = null;
+          }
+          tabs.forEach(function (t) { t.classList.remove('is-playing'); });
+        }
+
+        // Click handlers
+        tabs.forEach(function (t) {
+          t.addEventListener('click', function () {
+            userInteracted = true;
+            stopRotate();
+            var idx = parseInt(t.getAttribute('data-surd-tab'), 10);
+            if (!isNaN(idx)) setActive(idx);
+          });
+        });
+
+        // Keyboard handler (←/→/Home/End on focused tab)
+        approachTabs.querySelector('[data-surd-tab-bar]').addEventListener('keydown', function (e) {
+          var key = e.key;
+          if (key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== 'Home' && key !== 'End') return;
+          e.preventDefault();
+          userInteracted = true;
+          stopRotate();
+          var next = current;
+          if (key === 'ArrowLeft') next = current - 1;
+          else if (key === 'ArrowRight') next = current + 1;
+          else if (key === 'Home') next = 0;
+          else if (key === 'End') next = tabs.length - 1;
+          setActive(next, { focus: true });
+        });
+
+        // Pause on hover/focus-within
+        approachTabs.addEventListener('mouseenter', function () {
+          if (rotateTimer) {
+            // pause the visual indicator by removing playing class
+            tabs.forEach(function (t) { t.classList.remove('is-playing'); });
+            clearInterval(rotateTimer);
+            rotateTimer = null;
+            // Mark as paused (but not user-interacted) so it resumes on leave
+            approachTabs.dataset.paused = '1';
+          }
+        });
+        approachTabs.addEventListener('mouseleave', function () {
+          if (approachTabs.dataset.paused === '1' && !userInteracted && inView) {
+            delete approachTabs.dataset.paused;
+            startRotate();
+          }
+        });
+
+        // Start rotate only when section enters viewport (don't waste cycles when off-screen)
+        if ('IntersectionObserver' in window) {
+          var rotateIO = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              inView = e.isIntersecting;
+              if (e.isIntersecting && !userInteracted) {
+                startRotate();
+              } else if (!e.isIntersecting) {
+                stopRotate();
+              }
+            });
+          }, { threshold: 0.25 });
+          rotateIO.observe(approachTabs);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

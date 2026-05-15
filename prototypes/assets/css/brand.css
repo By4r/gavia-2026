@@ -68,11 +68,10 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 160px;
+  left: 0;
+  right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gavia-mint), transparent);
+  background: linear-gradient(90deg, transparent, rgba(63, 213, 173, 0.18), transparent);
   pointer-events: none;
 }
 
@@ -728,7 +727,10 @@ body {
 }
 
 /* === Section fade transitions === */
-.section-fade-top { position: relative; }
+/* z-index: 2 → footer-fixed-bottom (z:0) üstüne opak olarak otursun.
+   Hero pattern olmayan sayfalarda (.hero-zone yok) sibling rule firelanmadığı için
+   buraya taşındı — eskiden inline style="z-index:2" idi (yapay-zeka, surdurulebilirlik). */
+.section-fade-top { position: relative; z-index: 2; }
 .section-fade-top::before {
   content: '';
   position: absolute;
@@ -944,3 +946,13 @@ body {
   .mega-trigger[aria-expanded="true"] .mega-panel { display: block; }
   .mega-trigger:hover .mega-panel { opacity: 1; visibility: visible; }
 }
+
+/* === Light page helper (no header swap) =================================
+   Pages that want light theme body sections but want to keep the default
+   index-style header (light text over dark hero). Section hero remains dark
+   for header readability; below sections may be bg-gavia-light / bg-white.
+   This class disables the dark `.section-fade-top::before` gradient which
+   would otherwise bleed dark color into light siblings. */
+body.gv-light-page .section-fade-top::before { display: none !important; }
+body.gv-light-page { background-color: var(--gavia-light); color: var(--gavia-deep); }
+
