@@ -201,8 +201,96 @@
       border: 1px solid rgba(2, 8, 55, 0.08);
       aspect-ratio: 16 / 7;
       background: #fff;
+      transition: opacity .35s ease;
     }
+    .gv-map.is-fading { opacity: 0.45; }
     @media (max-width: 768px) { .gv-map { aspect-ratio: 16 / 10; } }
+
+    /* === Office tabs — editorial bar (Ofislerimiz) === */
+    .gv-office-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(2, 8, 55, 0.10);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .gv-office-tabs::-webkit-scrollbar { display: none; }
+    .gv-office-tab {
+      position: relative;
+      padding: 1rem 0 1.15rem;
+      margin-right: 2.5rem;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      text-align: left;
+      color: rgba(2, 8, 55, 0.55);
+      transition: color .25s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .gv-office-tab:last-child { margin-right: 0; }
+    .gv-office-tab:hover { color: var(--gavia-deep); }
+    .gv-office-tab::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -1px;
+      height: 2px;
+      width: 0;
+      background: var(--gavia-mint);
+      transition: width .45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gv-office-tab.is-active { color: var(--gavia-deep); }
+    .gv-office-tab.is-active::after { width: 100%; }
+    .gv-office-tab-sub {
+      display: block;
+      font-size: 0.66rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: rgba(2, 8, 55, 0.40);
+      margin-bottom: 0.4rem;
+      transition: color .25s ease;
+    }
+    .gv-office-tab.is-active .gv-office-tab-sub { color: var(--gavia-mint); }
+    .gv-office-tab-label {
+      display: block;
+      font-family: 'Queulat', 'Manrope', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .gv-office-address {
+      max-width: 720px;
+      margin: 1.5rem 0 2rem;
+    }
+    .gv-office-address-street {
+      display: block;
+      font-family: 'Queulat', 'Manrope', system-ui, sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      letter-spacing: -0.005em;
+      color: var(--gavia-mint);
+    }
+    @media (max-width: 640px) {
+      .gv-office-tab { margin-right: 1.5rem; padding: 0.75rem 0 0.9rem; }
+      .gv-office-tab-label { font-size: 0.95rem; }
+    }
+
+    /* === Direct panel: social row === */
+    .gv-social-row {
+      padding-top: 1.5rem;
+      margin-top: 0.25rem;
+    }
+    .gv-social-row-label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: rgba(233, 238, 241, 0.55);
+      margin-bottom: 0.85rem;
+    }
+    .gv-social-icons { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 
     /* Quiet meta strip */
     .gv-meta-strip {
@@ -486,35 +574,23 @@
               <div class="flex flex-wrap gap-2">
                 <label class="gv-topic">
                   <input type="radio" name="topic" value="proje" checked />
-                  <span class="gv-topic-dot"></span><span>Yeni proje</span>
-                </label>
-                <label class="gv-topic">
-                  <input type="radio" name="topic" value="urun" />
-                  <span class="gv-topic-dot"></span><span>Ürün demo</span>
-                </label>
-                <label class="gv-topic">
-                  <input type="radio" name="topic" value="isortakligi" />
-                  <span class="gv-topic-dot"></span><span>İş ortaklığı</span>
+                  <span class="gv-topic-dot"></span><span>Yeni Proje</span>
                 </label>
                 <label class="gv-topic">
                   <input type="radio" name="topic" value="kariyer" />
                   <span class="gv-topic-dot"></span><span>Kariyer</span>
                 </label>
-                <label class="gv-topic">
-                  <input type="radio" name="topic" value="basin" />
-                  <span class="gv-topic-dot"></span><span>Basın</span>
-                </label>
               </div>
             </div>
 
-            <!-- Row 1: Ad + (Şirket | Pozisyon | Yayın) ============================ -->
+            <!-- Row 1: Ad + (Şirket | Pozisyon) =================================== -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" data-topics="*">
               <div>
                 <label class="gv-field-label" for="f-name">Ad Soyad</label>
                 <input id="f-name" name="name" type="text" class="gv-field" placeholder="Ahmet Yılmaz" required />
               </div>
-              <!-- Şirket — proje / urun / isortakligi -->
-              <div data-topics="proje urun isortakligi">
+              <!-- Şirket — proje -->
+              <div data-topics="proje">
                 <label class="gv-field-label" for="f-company">Şirket</label>
                 <input id="f-company" name="company" type="text" class="gv-field" placeholder="Şirket adı" />
               </div>
@@ -531,11 +607,6 @@
                   <option>Staj Programı</option>
                   <option>Açık başvuru</option>
                 </select>
-              </div>
-              <!-- Yayın / Medya — basin -->
-              <div data-topics="basin" hidden>
-                <label class="gv-field-label" for="f-outlet">Yayın / Medya Kuruluşu</label>
-                <input id="f-outlet" name="outlet" type="text" class="gv-field" placeholder="Örn. Webrazzi" disabled />
               </div>
             </div>
 
@@ -577,51 +648,6 @@
               </div>
             </div>
 
-            <!-- Ürün demo: Ürün + Kullanıcı sayısı -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" data-topics="urun" hidden>
-              <div>
-                <label class="gv-field-label" for="f-product">İlgilendiğiniz Ürün</label>
-                <select id="f-product" name="product" class="gv-field cursor-pointer" disabled>
-                  <option value="">Seçiniz</option>
-                  <option>Gavia CRM</option>
-                  <option>Gavia Flow</option>
-                  <option>Gavia Assistant</option>
-                  <option>Gavia Insight</option>
-                  <option>Birden fazla / Karar vermedim</option>
-                </select>
-              </div>
-              <div>
-                <label class="gv-field-label" for="f-users">Tahmini Kullanıcı Sayısı</label>
-                <select id="f-users" name="users" class="gv-field cursor-pointer" disabled>
-                  <option value="">Seçiniz</option>
-                  <option>1 – 10</option>
-                  <option>10 – 50</option>
-                  <option>50 – 200</option>
-                  <option>200 – 1000</option>
-                  <option>1000+</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- İş ortaklığı: Pozisyon + Ortaklık tipi -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" data-topics="isortakligi" hidden>
-              <div>
-                <label class="gv-field-label" for="f-role">Pozisyonunuz</label>
-                <input id="f-role" name="role" type="text" class="gv-field" placeholder="Örn. İş Geliştirme Direktörü" disabled />
-              </div>
-              <div>
-                <label class="gv-field-label" for="f-partnership">Ortaklık Tipi</label>
-                <select id="f-partnership" name="partnership" class="gv-field cursor-pointer" disabled>
-                  <option value="">Seçiniz</option>
-                  <option>Çözüm ortağı</option>
-                  <option>Reseller / Bayi</option>
-                  <option>Teknoloji ortağı</option>
-                  <option>Sektörel iş birliği</option>
-                  <option>Diğer</option>
-                </select>
-              </div>
-            </div>
-
             <!-- Kariyer: LinkedIn/Portfolyo + Deneyim -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" data-topics="kariyer" hidden>
               <div>
@@ -638,18 +664,6 @@
                   <option>5 – 10 yıl</option>
                   <option>10+ yıl</option>
                 </select>
-              </div>
-            </div>
-
-            <!-- Basın: Yayın tarihi (deadline) — tek alan, sol kolon -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" data-topics="basin" hidden>
-              <div>
-                <label class="gv-field-label" for="f-deadline">Yayın / Yanıt Tarihi</label>
-                <input id="f-deadline" name="deadline" type="date" class="gv-field" disabled />
-              </div>
-              <div>
-                <label class="gv-field-label" for="f-topic-press">Konu Başlığı</label>
-                <input id="f-topic-press" name="press_topic" type="text" class="gv-field" placeholder="Örn. AI yatırımları röportajı" disabled />
               </div>
             </div>
 
@@ -725,28 +739,13 @@
                   <i class="fa-solid fa-arrow-up-right-from-square gv-channel-arrow text-xs"></i>
                 </a>
 
-                <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="gv-channel">
-                  <span class="gv-channel-icon"><i class="fa-brands fa-linkedin-in"></i></span>
-                  <span>
-                    <span class="block text-xs uppercase tracking-[0.14em] text-gray-400 mb-0.5">LinkedIn</span>
-                    <span class="block font-display font-semibold text-white text-base">/gavia-works</span>
-                  </span>
-                  <i class="fa-solid fa-arrow-up-right-from-square gv-channel-arrow text-xs"></i>
-                </a>
-
-                <div class="gv-meta-strip">
-                  <div>
-                    <strong>İstanbul Ofisi</strong>
-                    <!-- TODO: Yasin Bey gerçek adres -->
-                    Maslak, Sarıyer<br/>34485 İstanbul
-                  </div>
-                  <div>
-                    <strong>Çalışma Saatleri</strong>
-                    Pzt – Cum<br/>09:30 – 18:30
-                  </div>
-                  <div>
-                    <strong>Yanıt Hedefi</strong>
-                    1 iş günü<br/>içinde geri dönüş
+                <div class="gv-social-row">
+                  <span class="gv-social-row-label">Sosyal</span>
+                  <div class="gv-social-icons">
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
                   </div>
                 </div>
 
@@ -760,26 +759,90 @@
     </div>
   </section>
 
-  <!-- ========== 3. KONUM / HARITA ========== -->
+  <!-- ========== 3. OFİSLERİMİZ (2-tab map) ========== -->
   <section class="bg-white py-20 md:py-28 border-t border-gavia-deep/10">
     <div class="max-w-7xl mx-auto px-6 md:px-8">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
         <div class="max-w-xl">
-          <div class="gv-overline mb-5"><span class="font-mono text-gavia-mint/80">04</span> <span>Konum</span></div>
-          <h2 class="font-display font-extrabold text-gavia-deep text-3xl md:text-4xl tracking-tight leading-tight">Maslak, İstanbul.</h2>
+          <div class="gv-overline"><span class="font-mono text-gavia-mint/80">04</span> <span>Ofislerimiz</span></div>
         </div>
-        <a href="https://www.openstreetmap.org/?mlat=41.025&mlon=28.995#map=14/41.025/28.995" target="_blank" rel="noopener"
+        <a data-office-direction href="https://www.openstreetmap.org/?mlat=41.025&mlon=28.995#map=14/41.025/28.995" target="_blank" rel="noopener"
            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gavia-deep/15 text-sm font-semibold text-gavia-deep hover:border-gavia-mint hover:text-gavia-mint transition-colors self-start md:self-end">
           <i class="fa-solid fa-diamond-turn-right text-xs"></i> Yol tarifi al
         </a>
       </div>
+
+      <div class="gv-office-tabs" role="tablist">
+        <button type="button" class="gv-office-tab is-active" data-office="maslak" role="tab" aria-selected="true">
+          <span class="gv-office-tab-sub">Genel Merkez</span>
+          <span class="gv-office-tab-label">İstanbul · Maslak</span>
+        </button>
+        <button type="button" class="gv-office-tab" data-office="levent" role="tab" aria-selected="false">
+          <span class="gv-office-tab-sub">Şube Ofis</span>
+          <span class="gv-office-tab-label">İstanbul · Levent</span>
+        </button>
+      </div>
+
+      <div class="gv-office-address">
+        <span class="gv-office-address-street" data-office-street>Maslak Mah. Büyükdere Cad. No: 245, Sarıyer 34485 İstanbul</span>
+      </div>
+
       <div class="gv-map">
         <!-- TODO: Yasin Bey gerçek Google Maps embed src -->
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=28.97%2C41.01%2C29.02%2C41.04&amp;layer=mapnik"
+        <iframe data-office-map src="https://www.openstreetmap.org/export/embed.html?bbox=28.97%2C41.01%2C29.02%2C41.04&amp;layer=mapnik"
                 width="100%" height="100%" frameborder="0" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Gavia Works ofis konumu"></iframe>
       </div>
     </div>
   </section>
+
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll('.gv-office-tab');
+      if (!tabs.length) return;
+      var mapFrame = document.querySelector('[data-office-map]');
+      var mapWrap  = mapFrame ? mapFrame.parentElement : null;
+      var dirBtn   = document.querySelector('[data-office-direction]');
+      var streetEl = document.querySelector('[data-office-street]');
+
+      var offices = {
+        maslak: {
+          street:  'Maslak Mah. Büyükdere Cad. No: 245, Sarıyer 34485 İstanbul',
+          mapSrc:  'https://www.openstreetmap.org/export/embed.html?bbox=28.97%2C41.01%2C29.02%2C41.04&layer=mapnik',
+          dirHref: 'https://www.openstreetmap.org/?mlat=41.025&mlon=28.995#map=14/41.025/28.995'
+        },
+        levent: {
+          street:  'Levent Mah. Çayır Çimen Sok. No: 12, Beşiktaş 34330 İstanbul',
+          mapSrc:  'https://www.openstreetmap.org/export/embed.html?bbox=29.00%2C41.07%2C29.03%2C41.10&layer=mapnik',
+          dirHref: 'https://www.openstreetmap.org/?mlat=41.085&mlon=29.015#map=14/41.085/29.015'
+        }
+      };
+
+      function activate(key) {
+        var data = offices[key];
+        if (!data) return;
+        tabs.forEach(function (t) {
+          var on = t.dataset.office === key;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        if (streetEl) streetEl.textContent = data.street;
+        if (dirBtn)   dirBtn.href = data.dirHref;
+        if (mapFrame && mapWrap) {
+          mapWrap.classList.add('is-fading');
+          setTimeout(function () {
+            mapFrame.src = data.mapSrc;
+            requestAnimationFrame(function () {
+              mapWrap.classList.remove('is-fading');
+            });
+          }, 220);
+        }
+      }
+
+      tabs.forEach(function (t) {
+        t.addEventListener('click', function () { activate(t.dataset.office); });
+      });
+    })();
+  </script>
 
   <!-- ========== 4. CTA ========== -->
   <section class="section-fade-top bg-gavia-light py-20 md:py-28">
@@ -857,11 +920,8 @@
       const msgField = form.querySelector('[data-message-placeholder]');
 
       const copy = {
-        proje:       { label: 'Projeniz Hakkında Kısa Bir Not',  ph: 'Çözmek istediğiniz problem, mevcut sistem, beklediğiniz sonuç...' },
-        urun:        { label: 'İhtiyacınızı Kısaca Anlatın',     ph: 'Şu an hangi araçları kullanıyorsunuz, demoyu neyle değerlendireceksiniz...' },
-        isortakligi: { label: 'Ortaklık Önerinizi Anlatın',      ph: 'Şirketinizi, müşteri kitlenizi ve birlikte nasıl çalışabileceğimizi anlatın...' },
-        kariyer:     { label: 'Kendinizden Kısaca Bahsedin',     ph: 'Hangi alanda çalışıyorsunuz, neden Gavia, hedeflediğiniz pozisyon...' },
-        basin:       { label: 'Konunuzu / Sorularınızı Yazın',   ph: 'Röportaj veya yorum konusu, sorularınız, yayın bilgisi...' },
+        proje:   { label: 'Projeniz Hakkında Kısa Bir Not', ph: 'Çözmek istediğiniz problem, mevcut sistem, beklediğiniz sonuç...' },
+        kariyer: { label: 'Kendinizden Kısaca Bahsedin',    ph: 'Hangi alanda çalışıyorsunuz, neden Gavia, hedeflediğiniz pozisyon...' },
       };
 
       function apply(topic) {
