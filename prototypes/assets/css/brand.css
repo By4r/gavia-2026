@@ -174,6 +174,19 @@ body {
   .hero-zone { height: auto; }
   .hero-sticky { position: relative !important; height: auto; left: auto; right: auto; }
 }
+/* Mobile + tablet: hero-sticky pattern güvenilmez (iOS 100vh, scroll glitch,
+   footer arkadan görünmüyor). Normal flow'a düşür → hero normal section gibi. */
+@media (max-width: 1023px) {
+  .hero-zone { height: auto !important; min-height: 0 !important; }
+  .hero-sticky {
+    position: relative !important;
+    height: auto !important;
+    min-height: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+  }
+}
 
 /* === Footer reveal (B kategori — iletişim üstte, footer arkada bekler) ===
    Footer fixed bottom:0 z-0; arkada hep bekler. CTA section opak gavia-deep
