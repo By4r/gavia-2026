@@ -894,5 +894,37 @@
   </footer>
 
   <script src="./assets/js/main.js"></script>
+
+  <!-- Sayfa geçişi yumuşatma — Yapay Zekâ link tıklaması için fade-out -->
+  <style>
+    body { transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1); }
+    body.is-leaving { opacity: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      body, body.is-leaving { transition: none; opacity: 1; }
+    }
+  </style>
+  <script>
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Hangi link'leri intercept ediyoruz: yapay-zeka.html'e gidenler
+      var SELECTOR = 'a[href$="yapay-zeka.html"], a[href$="./yapay-zeka.html"]';
+      document.addEventListener('click', function (e) {
+        if (reduced) return;
+        var a = e.target.closest && e.target.closest(SELECTOR);
+        if (!a) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // yeni sekme bypass
+        var href = a.getAttribute('href');
+        if (!href) return;
+        e.preventDefault();
+        document.body.classList.add('is-leaving');
+        setTimeout(function () { window.location.href = href; }, 280);
+      }, false);
+
+      // bfcache geri navigasyonunda is-leaving class temizle
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) document.body.classList.remove('is-leaving');
+      });
+    })();
+  </script>
 </body>
 </html>
