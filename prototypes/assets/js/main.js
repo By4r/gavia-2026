@@ -322,4 +322,147 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Case-study gallery lightbox — click .gallery-item to enlarge, with prev/next + keyboard nav.
+  (function buildGalleryLightbox() {
+    const items = document.querySelectorAll('.gallery-item');
+    if (!items.length) return;
+
+    const css = document.createElement('style');
+    css.textContent = `
+      .gallery-item { cursor: zoom-in; }
+      .gv-lightbox {
+        position: fixed; inset: 0; z-index: 100;
+        background: rgba(2,8,55,0.94);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; pointer-events: none;
+        transition: opacity .28s ease;
+        padding: 5vh 6vw;
+      }
+      .gv-lightbox.is-open { opacity: 1; pointer-events: auto; }
+      .gv-lightbox-stage {
+        position: relative;
+        width: min(1400px, 90vw);
+        height: min(82vh, 820px);
+        border-radius: 14px;
+        overflow: hidden;
+        background: rgba(255,255,255,0.04);
+        box-shadow: 0 40px 100px -40px rgba(0,0,0,0.6);
+      }
+      .gv-lightbox-image {
+        width: 100%; height: 100%;
+        background-size: contain; background-position: center; background-repeat: no-repeat;
+        transition: opacity .25s ease;
+      }
+      .gv-lightbox-close, .gv-lightbox-arrow {
+        position: absolute;
+        width: 46px; height: 46px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.16);
+        color: #fff;
+        display: inline-flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        transition: background .25s, border-color .25s, transform .25s;
+        font-size: 18px;
+      }
+      .gv-lightbox-close:hover, .gv-lightbox-arrow:hover {
+        background: rgba(63,213,173,0.18);
+        border-color: rgba(63,213,173,0.45);
+      }
+      .gv-lightbox-close {
+        top: max(24px, 3vh); right: max(24px, 3vw); z-index: 2;
+      }
+      .gv-lightbox-arrow {
+        top: 50%; transform: translateY(-50%);
+      }
+      .gv-lightbox-arrow:hover { transform: translateY(-50%) scale(1.05); }
+      .gv-lightbox-arrow.prev { left: max(20px, 2vw); }
+      .gv-lightbox-arrow.next { right: max(20px, 2vw); }
+      .gv-lightbox-counter {
+        position: absolute;
+        bottom: max(24px, 3vh); left: 50%; transform: translateX(-50%);
+        color: rgba(255,255,255,0.7);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 12px; letter-spacing: .08em;
+      }
+      @media (max-width: 640px) {
+        .gv-lightbox { padding: 4vh 4vw; }
+        .gv-lightbox-arrow { width: 40px; height: 40px; }
+      }
+    `;
+    document.head.appendChild(css);
+
+    const overlay = document.createElement('div');
+    overlay.className = 'gv-lightbox';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Görsel önizleme');
+    overlay.innerHTML = `
+      <button class="gv-lightbox-close" type="button" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button>
+      <button class="gv-lightbox-arrow prev" type="button" aria-label="Önceki görsel"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="gv-lightbox-stage">
+        <div class="gv-lightbox-image"></div>
+      </div>
+      <button class="gv-lightbox-arrow next" type="button" aria-label="Sonraki görsel"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="gv-lightbox-counter"></div>
+    `;
+    document.body.appendChild(overlay);
+
+    const imageEl = overlay.querySelector('.gv-lightbox-image');
+    const counterEl = overlay.querySelector('.gv-lightbox-counter');
+    const closeBtn = overlay.querySelector('.gv-lightbox-close');
+    const prevBtn = overlay.querySelector('.gv-lightbox-arrow.prev');
+    const nextBtn = overlay.querySelector('.gv-lightbox-arrow.next');
+
+    const urls = Array.from(items).map(item => {
+      const style = item.getAttribute('style') || '';
+      const m = style.match(/url\(['"]?([^'")]+)['"]?\)/);
+      return m ? m[1] : '';
+    }).filter(Boolean);
+
+    if (!urls.length) return;
+
+    let currentIndex = 0;
+
+    const renderAt = (i) => {
+      currentIndex = ((i % urls.length) + urls.length) % urls.length;
+      imageEl.style.backgroundImage = `url('${urls[currentIndex]}')`;
+      counterEl.textContent = `${currentIndex + 1} / ${urls.length}`;
+    };
+
+    const open = (i) => {
+      renderAt(i);
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    };
+    const close = () => {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    };
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => open(i));
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(i);
+        }
+      });
+    });
+    closeBtn.addEventListener('click', close);
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); renderAt(currentIndex - 1); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); renderAt(currentIndex + 1); });
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') renderAt(currentIndex - 1);
+      else if (e.key === 'ArrowRight') renderAt(currentIndex + 1);
+    });
+  })();
 });

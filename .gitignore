@@ -10,3 +10,12 @@ storage/*.key
 .vscode/
 *.swp
 *.bak
+
+# Local dev artefacts — screenshots, MCP cache
+.playwright-mcp/
+/*.jpg
+/*.jpeg
+/*.png
+!prototypes/**/*.jpg
+!prototypes/**/*.jpeg
+!prototypes/**/*.png

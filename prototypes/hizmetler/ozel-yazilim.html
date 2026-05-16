@@ -78,6 +78,44 @@
       gap: 1.25rem; color: var(--gavia-mint); font-size: 1.5rem;
       letter-spacing: .8em; padding: 4rem 0;
     }
+    /* === Feature soft card (matches case-study kpi-soft proportions) === */
+    .feature-soft {
+      padding: 1.75rem 1.5rem 1.5rem;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(63,213,173,0.22);
+      transition: border-color .35s, transform .35s, box-shadow .35s;
+    }
+    .feature-soft:hover {
+      border-color: rgba(63,213,173,0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -20px rgba(2,8,55,0.18);
+    }
+    .feature-soft h3 { font-size: 1.02rem; }
+    .feature-soft p  { font-size: .85rem; line-height: 1.55; }
+    .feature-soft .feature-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(63,213,173,0.12); color: var(--gavia-mint);
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    /* Section divider — separates two adjacent same-bg sections */
+    .section-divider {
+      display: flex; align-items: center; justify-content: center;
+      max-width: 360px; margin: 0 auto 0;
+    }
+    .section-divider .line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(2,8,55,0.18));
+    }
+    .section-divider .line + .line {
+      background: linear-gradient(to left, transparent, rgba(2,8,55,0.18));
+    }
+    .section-divider .dot {
+      width: 6px; height: 6px; margin: 0 14px;
+      background: var(--gavia-mint); border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(63,213,173,0.18);
+    }
   </style>
 </head>
 <body class="bg-gavia-light text-gavia-deep antialiased gv-light-page">
@@ -350,6 +388,24 @@
       </div>
     </div>
   </section>
+  <!-- ========== HERO ALTI / GENEL BAKIŞ ========== -->
+  <section class="bg-gavia-light py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      <div class="lg:col-span-5">
+        <div class="gv-overline mb-5"><span>Özet</span></div>
+        <h2 class="font-display font-bold text-gavia-deep text-2xl md:text-[2rem] tracking-tight leading-[1.2] mb-5">
+          Süreçleriniz ne kadar farklıysa, yazılım o kadar size özel olmalı.
+        </h2>
+        <p class="text-base md:text-[17px] text-gavia-deep/75 leading-[1.7]">
+          Kalıp ürünlerin yerine; ekibinizin iş akışını birebir taklit eden, ölçeklenebilir sistemler kuruyoruz. CRM'den ERP'ye, müşteri portalından bayi paneline; teknik borçtan uzak, AI destekli, sürdürülebilir bir yazılım katmanı.
+        </p>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="gv-media gv-media-wide" style="background-image:url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=2000&q=75'); aspect-ratio: 4 / 3;"></div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ========== 02 / NELER YAPIYORUZ — feature grid ========== -->
   <section id="hizmetlerimiz" class="bg-white py-20 md:py-28 border-t border-gavia-deep/10">
@@ -362,44 +418,44 @@
         </h2>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-        <div class="p-7 rounded-2xl border border-gavia-deep/10 bg-gavia-light hover:bg-white hover:border-gavia-mint/60 transition-colors group">
-          <div class="w-11 h-11 rounded-xl bg-gavia-mint/15 text-gavia-mint inline-flex items-center justify-center mb-5"><i class="fa-solid fa-laptop-code"></i></div>
-          <h3 class="font-display font-bold text-gavia-deep text-lg mb-2 group-hover:text-gavia-mint transition-colors">Kurumsal web sistemleri</h3>
+        <div class="feature-soft group">
+          <div class="feature-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3 class="font-display font-bold text-gavia-deep text-base mb-1.5 group-hover:text-gavia-mint transition-colors">Kurumsal web sistemleri</h3>
           <p class="text-sm text-gavia-deep/70 leading-relaxed">
             <!-- TODO: Beyar copy --> CRM, ERP, içerik yönetimi, raporlama panelleri — rol ve süreç bazlı uçtan uca.
           </p>
         </div>
-        <div class="p-7 rounded-2xl border border-gavia-deep/10 bg-gavia-light hover:bg-white hover:border-gavia-mint/60 transition-colors group">
-          <div class="w-11 h-11 rounded-xl bg-gavia-mint/15 text-gavia-mint inline-flex items-center justify-center mb-5"><i class="fa-solid fa-cart-shopping"></i></div>
-          <h3 class="font-display font-bold text-gavia-deep text-lg mb-2 group-hover:text-gavia-mint transition-colors">E-ticaret platformları</h3>
+        <div class="feature-soft group">
+          <div class="feature-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <h3 class="font-display font-bold text-gavia-deep text-base mb-1.5 group-hover:text-gavia-mint transition-colors">E-ticaret platformları</h3>
           <p class="text-sm text-gavia-deep/70 leading-relaxed">
             <!-- TODO: Beyar copy --> Pazaryeri, B2B sipariş, abonelik, kupon, çoklu para birimi; ödeme & kargo entegrasyonlu.
           </p>
         </div>
-        <div class="p-7 rounded-2xl border border-gavia-deep/10 bg-gavia-light hover:bg-white hover:border-gavia-mint/60 transition-colors group">
-          <div class="w-11 h-11 rounded-xl bg-gavia-mint/15 text-gavia-mint inline-flex items-center justify-center mb-5"><i class="fa-solid fa-table-columns"></i></div>
-          <h3 class="font-display font-bold text-gavia-deep text-lg mb-2 group-hover:text-gavia-mint transition-colors">Yönetim panelleri</h3>
+        <div class="feature-soft group">
+          <div class="feature-icon"><i class="fa-solid fa-table-columns"></i></div>
+          <h3 class="font-display font-bold text-gavia-deep text-base mb-1.5 group-hover:text-gavia-mint transition-colors">Yönetim panelleri</h3>
           <p class="text-sm text-gavia-deep/70 leading-relaxed">
             <!-- TODO: Beyar copy --> Veri ağırlıklı admin panelleri; çoklu rol, audit log, KVKK uyumlu yetkilendirme.
           </p>
         </div>
-        <div class="p-7 rounded-2xl border border-gavia-deep/10 bg-gavia-light hover:bg-white hover:border-gavia-mint/60 transition-colors group">
-          <div class="w-11 h-11 rounded-xl bg-gavia-mint/15 text-gavia-mint inline-flex items-center justify-center mb-5"><i class="fa-solid fa-users-gear"></i></div>
-          <h3 class="font-display font-bold text-gavia-deep text-lg mb-2 group-hover:text-gavia-mint transition-colors">Müşteri ve bayi portalları</h3>
+        <div class="feature-soft group">
+          <div class="feature-icon"><i class="fa-solid fa-users-gear"></i></div>
+          <h3 class="font-display font-bold text-gavia-deep text-base mb-1.5 group-hover:text-gavia-mint transition-colors">Müşteri ve bayi portalları</h3>
           <p class="text-sm text-gavia-deep/70 leading-relaxed">
             <!-- TODO: Beyar copy --> Sipariş, talep, fatura ve servis geçmişi; self-service deneyim odaklı portallar.
           </p>
         </div>
-        <div class="p-7 rounded-2xl border border-gavia-deep/10 bg-gavia-light hover:bg-white hover:border-gavia-mint/60 transition-colors group">
-          <div class="w-11 h-11 rounded-xl bg-gavia-mint/15 text-gavia-mint inline-flex items-center justify-center mb-5"><i class="fa-solid fa-arrows-rotate"></i></div>
-          <h3 class="font-display font-bold text-gavia-deep text-lg mb-2 group-hover:text-gavia-mint transition-colors">Modernizasyon & migrasyon</h3>
+        <div class="feature-soft group">
+          <div class="feature-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+          <h3 class="font-display font-bold text-gavia-deep text-base mb-1.5 group-hover:text-gavia-mint transition-colors">Modernizasyon & migrasyon</h3>
           <p class="text-sm text-gavia-deep/70 leading-relaxed">
             <!-- TODO: Beyar copy --> Eski sistemlerden modern mimariye taşıma; sıfır kesintiyle veri ve süreç göçü.
           </p>
         </div>
-        <div class="p-7 rounded-2xl border border-gavia-deep/10 bg-gavia-light hover:bg-white hover:border-gavia-mint/60 transition-colors group">
-          <div class="w-11 h-11 rounded-xl bg-gavia-mint/15 text-gavia-mint inline-flex items-center justify-center mb-5"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-          <h3 class="font-display font-bold text-gavia-deep text-lg mb-2 group-hover:text-gavia-mint transition-colors">AI destekli iş akışları</h3>
+        <div class="feature-soft group">
+          <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3 class="font-display font-bold text-gavia-deep text-base mb-1.5 group-hover:text-gavia-mint transition-colors">AI destekli iş akışları</h3>
           <p class="text-sm text-gavia-deep/70 leading-relaxed">
             <!-- TODO: Beyar copy --> Belge zekası, akıllı sınıflandırma, asistanlı veri girişi; gerçek üretim senaryolarında AI.
           </p>
@@ -408,9 +464,6 @@
     </div>
   </section>
 
-  <section class="bg-white">
-    <div class="gv-asterisk">* * *</div>
-  </section>
 
   <!-- ========== 03 / SÜREÇ — split ========== -->
   <section class="bg-gavia-light py-20 md:py-24">
@@ -456,16 +509,23 @@
         </ol>
       </div>
       <div class="lg:col-span-7">
-        <div class="gv-media gv-media-wide" style="background-image:url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=70'); aspect-ratio: 16 / 10;">
+        <div class="gv-media gv-media-wide" style="background-image:url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=70'); aspect-ratio: 4 / 3;">
           <!-- TODO: Yasin Bey süreç görseli — ekip / kanban / sprint board -->
         </div>
       </div>
     </div>
   </section>
 
+
   <!-- ========== CTA — devam ========== -->
   <section class="section-fade-top bg-gavia-light py-20 md:py-28">
-    <div class="max-w-5xl mx-auto px-6 md:px-8 text-center">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+      <div class="section-divider" aria-hidden="true">
+        <span class="line"></span>
+        <span class="dot"></span>
+        <span class="line"></span>
+      </div>
+      <div class="mt-14 md:mt-16 text-center">
       <span class="gv-overline mb-5">Devam</span>
       <h3 class="font-display font-extrabold text-3xl md:text-5xl text-gavia-deep tracking-tight mb-4">
         Hikâye burada bitmiyor.
@@ -489,6 +549,7 @@
           <span>İletişim</span>
           <i class="fa-solid fa-arrow-right text-xs opacity-60"></i>
         </a>
+      </div>
       </div>
     </div>
   </section>
