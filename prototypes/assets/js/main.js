@@ -31,6 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
         a.textContent = sl.dataset.megaTitle || sl.querySelector('.font-semibold')?.textContent.trim() || sl.textContent.trim();
         details.appendChild(a);
       });
+      // Ürünler accordion'ına Çalışmalar ekle (patron isteği — calismalar
+      // ana mobile tab'ı yerine ürünler dropdown'ı içinde alt seçenek)
+      if (label === 'Ürünler') {
+        const cal = document.createElement('a');
+        cal.href = './calismalar.html';
+        cal.textContent = 'Çalışmalar';
+        details.appendChild(cal);
+      }
       mobileLink.replaceWith(details);
     });
   })();

@@ -1123,9 +1123,11 @@ nav.breadcrumb,
   row-gap: 0.25rem;
 }
 
-/* Footer-fixed fallback for short screens (laptop landscape, küçük tablet) —
-   JS sync başarısız olursa veya viewport çok kısa ise position:relative düşsün */
-@media (max-height: 800px) {
+/* Footer-fixed fallback for short screens + tüm mobile/tablet.
+   Mobilde fixed pattern + hero-sticky toggle güvenilmez (iOS Safari 100vh
+   tuzağı, GitHub Pages cache, IntersectionObserver mobil tetiklenme farkı).
+   <1024px'de tamamen normal flow'a düşür — footer ortaya çıkmaya garanti. */
+@media (max-width: 1023px), (max-height: 800px) {
   .footer-fixed-bottom {
     position: relative !important;
     bottom: auto;
