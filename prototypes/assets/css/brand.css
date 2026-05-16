@@ -559,7 +559,10 @@ body {
   grid-template-columns: repeat(2, 1fr);
   gap: 0;
 }
-@media (min-width: 768px) {
+@media (min-width: 640px) {
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
   .stats-grid { grid-template-columns: repeat(5, 1fr); }
 }
 .stat-item {
@@ -568,13 +571,15 @@ body {
   border-right: 1px solid var(--gavia-border);
   border-bottom: 1px solid var(--gavia-border);
 }
-@media (min-width: 768px) {
-  .stat-item { border-bottom: none; }
-  .stat-item:last-child { border-right: none; }
-}
 .stat-item:nth-child(2n) { border-right: none; }
-@media (min-width: 768px) {
+@media (min-width: 640px) {
+  .stat-item { border-right: 1px solid var(--gavia-border); }
   .stat-item:nth-child(2n) { border-right: 1px solid var(--gavia-border); }
+  .stat-item:nth-child(3n) { border-right: none; }
+}
+@media (min-width: 1024px) {
+  .stat-item { border-bottom: none; }
+  .stat-item:nth-child(3n) { border-right: 1px solid var(--gavia-border); }
   .stat-item:last-child { border-right: none; }
 }
 .stat-number {
@@ -720,6 +725,9 @@ body {
   border-radius: 12px;
   padding: 18px 24px;
   transition: all 0.25s ease-out;
+}
+@media (max-width: 640px) {
+  .logo-card { width: 140px; height: 72px; padding: 12px 16px; }
 }
 .logo-card:hover {
   border-color: var(--gavia-mint);
@@ -971,4 +979,188 @@ body {
    would otherwise bleed dark color into light siblings. */
 body.gv-light-page .section-fade-top::before { display: none !important; }
 body.gv-light-page { background-color: var(--gavia-light); color: var(--gavia-deep); }
+
+/* === Mobile menu — opak overlay (fixes patron SS bug, 2026-05-16) =========
+   Header transparent + .nav-blur sadece scrollY>50'de geliyordu; menü açıkken
+   sayfa tepedeyse linkler hero video üzerinde sızıyordu. Mobile menü artık
+   header altında absolute-positioned, kendi opak background'ı ile. */
+header[data-header] [data-mobile-menu] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 80px; /* header h-20 */
+  background: var(--gavia-deep);
+  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.5);
+  max-height: calc(100dvh - 80px);
+  overflow-y: auto;
+  padding: 1rem 1.5rem 1.5rem;
+  z-index: 49;
+  -webkit-overflow-scrolling: touch;
+}
+header[data-header] [data-mobile-menu].hidden { display: none; }
+/* Mobile menü nav'ın HTML'deki border-t/pt-4 — mobile overlay'de gereksiz çizgi yapıyor */
+header[data-header] [data-mobile-menu] > nav {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Mobile menü mega-accordion — JS desktop mega-trigger'lardan üretir */
+header[data-header] [data-mobile-menu] details.mobile-mega {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+header[data-header] [data-mobile-menu] details.mobile-mega:first-child { border-top: 0; }
+header[data-header] [data-mobile-menu] details.mobile-mega > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.875rem 1rem;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #e5e7eb;
+  font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
+}
+header[data-header] [data-mobile-menu] details.mobile-mega > summary::-webkit-details-marker { display: none; }
+header[data-header] [data-mobile-menu] details.mobile-mega > summary::after {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+  margin-right: 0.25rem;
+  margin-bottom: 0.15rem;
+}
+header[data-header] [data-mobile-menu] details.mobile-mega[open] > summary::after {
+  transform: rotate(-135deg);
+  margin-bottom: -0.1rem;
+}
+header[data-header] [data-mobile-menu] details.mobile-mega > a {
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 1rem 0.625rem 2rem;
+  color: rgba(229, 231, 235, 0.7);
+  font-size: 0.92rem;
+  min-height: 44px;
+  border-left: 2px solid transparent;
+  margin-left: 0.5rem;
+}
+header[data-header] [data-mobile-menu] details.mobile-mega > a:hover,
+header[data-header] [data-mobile-menu] details.mobile-mega > a:active {
+  color: var(--gavia-mint);
+  border-left-color: var(--gavia-mint);
+}
+@media (min-width: 1024px) {
+  header[data-header] [data-mobile-menu] { display: none !important; }
+}
+/* Mega-panel mobile/tablet: JS intent zaten accordion (aria-expanded toggle),
+   ama CSS hala position:fixed overlay'di — mobile menü açıkken altına geliyordu.
+   Mobile/tablette inline accordion gibi açılsın. */
+@media (max-width: 1023px) {
+  header[data-header] .mega-panel {
+    position: static !important;
+    width: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    padding: 0.25rem 0 0.75rem 1rem !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: none;
+  }
+  header[data-header] .mega-trigger[aria-expanded="true"] .mega-panel { display: block; }
+  header[data-header] .mega-inner { gap: 0.5rem !important; grid-template-columns: 1fr !important; }
+  header[data-header] .mega-inner > div { grid-template-columns: 1fr !important; }
+  header[data-header] .mega-showcase-billboard { display: none !important; }
+  header[data-header] .mega-link {
+    padding: 0.625rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+}
+
+/* Scrollbar gutter — defansif. JS ek olarak padding-right ile compense eder. */
+html { scrollbar-gutter: stable; }
+
+/* Body scroll lock — JS sets this; padding-right scrollbar width ile sync. */
+body.is-mobile-menu-open { overflow: hidden; }
+/* Menü açıkken header'ı da opak yap (nav-blur ile aynı görsel) */
+body.is-mobile-menu-open header[data-header] {
+  background: var(--gavia-deep);
+}
+
+/* === FAZ 2 cross-cutting responsive fixes (2026-05-16) ===================
+   HTML pattern'larına dokunmadan tüm 20+ sayfaya yansıyacak generic kurallar */
+
+/* WCAG 44px touch target — hamburger + mobile nav linkleri
+   Sadece <lg breakpoint'te uygulanır; desktop'ta Tailwind lg:hidden'ı bozmaz */
+@media (max-width: 1023px) {
+  header[data-header] [data-mobile-menu-btn] {
+    padding: 0.625rem;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+  header[data-header] [data-mobile-menu] nav a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+  header[data-header] [data-mobile-menu] nav a:hover { color: var(--gavia-mint); }
+}
+
+/* Breadcrumb — wrap on narrow viewports (ürün/servis sayfaları) */
+nav[aria-label="Breadcrumb"],
+nav.breadcrumb,
+[data-breadcrumb] {
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+}
+
+/* Footer-fixed fallback for short screens (laptop landscape, küçük tablet) —
+   JS sync başarısız olursa veya viewport çok kısa ise position:relative düşsün */
+@media (max-height: 800px) {
+  .footer-fixed-bottom {
+    position: relative !important;
+    bottom: auto;
+    left: auto;
+    right: auto;
+  }
+  .footer-reveal-spacer { display: none; }
+  .hero-sticky.is-hidden { visibility: visible; }
+}
+
+/* Section padding daha sıkı mobile'da (audit 🟡 — scroll fatigue) */
+@media (max-width: 639px) {
+  .gv-section-tight { padding-block: 3rem; }
+}
+
+/* Overline/asterisk responsive shrink */
+@media (max-width: 640px) {
+  .gv-overline { font-size: 0.65rem !important; }
+  .gv-asterisk {
+    font-size: 1.2rem !important;
+    letter-spacing: 0.6em !important;
+  }
+}
+
+/* Mega-trigger focus visibility (a11y) */
+header[data-header] [data-mega-toggle]:focus-visible,
+header[data-header] [data-mobile-menu-btn]:focus-visible {
+  outline: 2px solid var(--gavia-mint);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hero zone — decorative blob'lar viewport dışına taşmasın (index.html C1).
+   Section level'da clip kullanmıyoruz çünkü sticky/scroll-snap pattern'larını
+   bozar. Sadece hero ve dekorasyon kapsayıcılarına clip uygula. */
+.hero-zone, .hero-sticky { overflow-x: clip; }
+
 

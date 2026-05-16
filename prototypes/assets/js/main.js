@@ -2,17 +2,87 @@
 document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuBtn = document.querySelector('[data-mobile-menu-btn]');
   const mobileMenu = document.querySelector('[data-mobile-menu]');
+
+  // Mobile menüye desktop mega-trigger'ların sub-link'lerini accordion olarak
+  // inject et — flat anchor link yerine "Hizmetler ▾ → Özel Yazılım, Mobil..."
+  // expandable yapı. native <details>/<summary> kullanır, ekstra JS gerektirmez.
+  (function buildMobileMega() {
+    if (!mobileMenu) return;
+    const mobileNav = mobileMenu.querySelector('nav');
+    if (!mobileNav) return;
+    document.querySelectorAll('header[data-header] nav.hidden.lg\\:flex [data-mega-trigger]').forEach(trigger => {
+      const toggleBtn = trigger.querySelector('[data-mega-toggle]');
+      if (!toggleBtn) return;
+      const label = (toggleBtn.firstChild?.textContent || toggleBtn.textContent || '').trim();
+      if (!label) return;
+      const mobileLink = [...mobileNav.querySelectorAll(':scope > a')].find(a => a.textContent.trim() === label);
+      if (!mobileLink) return;
+      const subLinks = trigger.querySelectorAll('.mega-link');
+      if (!subLinks.length) return;
+
+      const details = document.createElement('details');
+      details.className = 'mobile-mega';
+      const summary = document.createElement('summary');
+      summary.textContent = label;
+      details.appendChild(summary);
+      subLinks.forEach(sl => {
+        const a = document.createElement('a');
+        a.href = sl.getAttribute('href') || '#';
+        a.textContent = sl.dataset.megaTitle || sl.querySelector('.font-semibold')?.textContent.trim() || sl.textContent.trim();
+        details.appendChild(a);
+      });
+      mobileLink.replaceWith(details);
+    });
+  })();
+  const syncMenuLock = () => {
+    const open = mobileMenu && !mobileMenu.classList.contains('hidden');
+    if (open) {
+      // Scrollbar yer alanını compense et — overflow:hidden açılınca scrollbar
+      // kaybolur ve içerik 15px sağa kayar. Padding-right ile aynı genişlikte
+      // boşluk bırakırız, viewport sabit kalır.
+      const sbw = window.innerWidth - document.documentElement.clientWidth;
+      if (sbw > 0) document.body.style.paddingRight = sbw + 'px';
+    } else {
+      document.body.style.paddingRight = '';
+    }
+    document.body.classList.toggle('is-mobile-menu-open', !!open);
+    if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
   if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
     mobileMenuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+      // Menü kapanırken açık mega trigger'ları da kapat
+      if (mobileMenu.classList.contains('hidden')) {
+        document.querySelectorAll('[data-mega-trigger]').forEach(t => t.setAttribute('aria-expanded', 'false'));
+      }
+      syncMenuLock();
     });
   }
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
       mobileMenu.classList.add('hidden');
+      document.querySelectorAll('[data-mega-trigger]').forEach(t => t.setAttribute('aria-expanded', 'false'));
+      syncMenuLock();
     }
   });
+
+  // Mobile menüdeki tüm link'lere click → menü kapansın (anchor olmasa bile)
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll('a[href]').forEach(link => {
+      link.addEventListener('click', () => {
+        // Mega trigger içindeki link ise menüyü kapatma (alt seçenekleri açıyor olabilir)
+        // Ama gerçek bir gezinme link'i ise kapansın.
+        const href = link.getAttribute('href');
+        if (href && href !== '#') {
+          mobileMenu.classList.add('hidden');
+          document.querySelectorAll('[data-mega-trigger]').forEach(t => t.setAttribute('aria-expanded', 'false'));
+          syncMenuLock();
+        }
+      });
+    });
+  }
 
   const header = document.querySelector('[data-header]');
   if (header) {
@@ -236,7 +306,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (mobileMenu) mobileMenu.classList.add('hidden');
+        if (mobileMenu) {
+          mobileMenu.classList.add('hidden');
+          document.querySelectorAll('[data-mega-trigger]').forEach(t => t.setAttribute('aria-expanded', 'false'));
+          syncMenuLock();
+        }
       }
     });
   });
