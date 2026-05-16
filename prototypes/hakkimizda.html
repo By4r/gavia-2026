@@ -79,87 +79,161 @@
       letter-spacing: .8em; padding: 4rem 0;
     }
 
-    /* === Timeline (editorial) === */
-    .tl-row {
-      display: grid;
-      grid-template-columns: minmax(140px, 200px) 1fr auto;
-      gap: 2.5rem;
-      align-items: baseline;
-      padding: 2.25rem 0;
-      border-top: 1px solid rgba(2, 8, 55, 0.10);
+    /* === Timeline — vertical mechanical counter (drum-roll) === */
+    .tl-counter {
       position: relative;
-      transition: padding-left .35s ease;
+      --tl-visible: 3;
+      --tl-cells: 4;
+      --tl-row-h: 120px;
+      --tl-idx: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2.5rem;
+      align-items: stretch;
     }
-    .tl-row:last-child { border-bottom: 1px solid rgba(2, 8, 55, 0.10); }
-    .tl-row::before {
+    .tl-counter-viewport {
+      position: relative;
+      height: calc(var(--tl-row-h) * var(--tl-visible));
+      overflow: hidden;
+      border-top: 1px solid rgba(2, 8, 55, 0.10);
+      border-bottom: 1px solid rgba(2, 8, 55, 0.10);
+      cursor: grab;
+      user-select: none;
+    }
+    .tl-counter-viewport.is-dragging { cursor: grabbing; }
+    /* Vignette top/bottom — soft fade like a drum window */
+    .tl-counter-viewport::before,
+    .tl-counter-viewport::after {
       content: "";
+      position: absolute; left: 0; right: 0;
+      height: var(--tl-row-h);
+      pointer-events: none; z-index: 2;
+    }
+    .tl-counter-viewport::before {
+      top: 0;
+      background: linear-gradient(180deg, var(--gavia-light) 0%, rgba(233, 238, 241, 0) 100%);
+    }
+    .tl-counter-viewport::after {
+      bottom: 0;
+      background: linear-gradient(0deg, var(--gavia-light) 0%, rgba(233, 238, 241, 0) 100%);
+    }
+    /* Active center band — thin mint guide on the middle row */
+    .tl-counter-frame {
       position: absolute;
-      left: 0; top: -3px;
-      width: 6px; height: 6px; border-radius: 50%;
-      background: rgba(2, 8, 55, 0.20);
-      transition: background .35s ease, transform .35s ease, box-shadow .35s ease;
+      left: 0; right: 0;
+      top: var(--tl-row-h);
+      height: var(--tl-row-h);
+      pointer-events: none; z-index: 1;
+      border-top: 1px solid rgba(63, 213, 173, 0.45);
+      border-bottom: 1px solid rgba(63, 213, 173, 0.45);
     }
-    .tl-row:hover { padding-left: 14px; }
-    .tl-row:hover::before {
-      background: var(--gavia-mint);
-      transform: scale(1.4);
-      box-shadow: 0 0 0 6px rgba(63, 213, 173, 0.15);
+    .tl-counter-track {
+      display: grid;
+      grid-auto-rows: var(--tl-row-h);
+      transform: translate3d(0, calc(var(--tl-idx) * var(--tl-row-h) * -1), 0);
+      transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
     }
-    .tl-year {
+    .tl-cell {
+      display: grid;
+      grid-template-columns: minmax(120px, 180px) 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 0 1.75rem;
+      border-bottom: 1px solid rgba(2, 8, 55, 0.06);
+      opacity: 0.4;
+      transition: opacity .45s ease;
+    }
+    .tl-cell:last-child { border-bottom: 0; }
+    .tl-cell.is-active { opacity: 1; }
+    .tl-cell.is-center .tl-cell-year { color: var(--gavia-mint); }
+    /* Ghost rows — visual padding so first/last cells can also sit at center */
+    .tl-cell.is-ghost {
+      visibility: hidden;
+      border-bottom: 0;
+    }
+    .tl-cell-year {
       font-family: 'Queulat', 'Manrope', system-ui, sans-serif;
       font-weight: 800;
-      font-size: clamp(2.75rem, 6vw, 4.5rem);
+      font-size: clamp(2.25rem, 4vw, 3.25rem);
       letter-spacing: -0.04em;
       line-height: 1;
       color: var(--gavia-deep);
       font-variant-numeric: tabular-nums;
-      transition: color .35s ease;
+      transition: color .45s ease;
     }
-    .tl-row:hover .tl-year { color: var(--gavia-mint); }
-    .tl-body { max-width: 540px; }
-    .tl-tag {
+    .tl-cell-body { min-width: 0; }
+    .tl-cell-tag {
       display: inline-block;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gavia-mint);
       font-weight: 600;
-      margin-bottom: 0.65rem;
+      margin-bottom: 0.35rem;
     }
-    .tl-title {
+    .tl-cell-title {
       font-family: 'Queulat', 'Manrope', system-ui, sans-serif;
       font-weight: 700;
-      font-size: 1.5rem;
-      line-height: 1.2;
+      font-size: 1.15rem;
+      line-height: 1.25;
       color: var(--gavia-deep);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.3rem;
       letter-spacing: -0.01em;
     }
-    .tl-desc {
-      color: rgba(2, 8, 55, 0.7);
-      font-size: 0.95rem;
-      line-height: 1.6;
+    .tl-cell-desc {
+      color: rgba(2, 8, 55, 0.65);
+      font-size: 0.88rem;
+      line-height: 1.5;
     }
-    .tl-arrow {
+    /* Counter nav (vertical) */
+    .tl-counter-nav {
+      display: flex; flex-direction: column; gap: 0.6rem;
       align-self: center;
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      border: 1px solid rgba(2, 8, 55, 0.12);
-      display: inline-flex; align-items: center; justify-content: center;
-      color: rgba(2, 8, 55, 0.4);
-      opacity: 0; transform: translateX(-4px);
-      transition: opacity .35s ease, transform .35s ease, color .35s ease, border-color .35s ease;
+      justify-content: center;
     }
-    .tl-row:hover .tl-arrow {
-      opacity: 1; transform: translateX(0);
-      color: var(--gavia-mint);
+    .tl-nav-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(2, 8, 55, 0.18);
+      background: transparent;
+      color: var(--gavia-deep);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: border-color .25s ease, color .25s ease, background .25s ease, opacity .25s ease;
+    }
+    .tl-nav-btn:hover:not(:disabled) {
       border-color: var(--gavia-mint);
+      color: var(--gavia-mint);
+    }
+    .tl-nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+    .tl-counter-meta {
+      grid-column: 1 / -1;
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 1.25rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(2, 8, 55, 0.55);
+      font-variant-numeric: tabular-nums;
+    }
+    .tl-counter-bar {
+      flex: 1; height: 1px; background: rgba(2, 8, 55, 0.12);
+      position: relative; overflow: hidden;
+    }
+    .tl-counter-bar::after {
+      content: "";
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: var(--tl-progress-pct, 0%);
+      background: var(--gavia-mint);
+      transition: width 700ms cubic-bezier(0.22, 1, 0.36, 1);
     }
     @media (max-width: 768px) {
-      .tl-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.75rem 0; }
-      .tl-row .tl-arrow { display: none; }
-      .tl-year { font-size: 2.5rem; }
-      .tl-row::before { display: none; }
+      .tl-counter { --tl-row-h: 100px; gap: 1.5rem; }
+      .tl-cell { grid-template-columns: 90px 1fr; gap: 1.25rem; padding: 0 1.25rem; }
+      .tl-cell-year { font-size: 1.75rem; }
+      .tl-cell-title { font-size: 1rem; }
+      .tl-cell-desc { font-size: 0.82rem; }
     }
   </style>
 </head>
@@ -521,10 +595,10 @@
     </div>
   </section>
 
-  <!-- ========== 4. ZAMAN ÇİZGİSİ (timeline) ========== -->
+  <!-- ========== 4. ZAMAN ÇİZGİSİ (timeline — mechanical counter 3-window) ========== -->
   <section class="bg-gavia-light py-20 md:py-28 min-h-[640px] lg:min-h-[720px] flex items-center">
     <div class="max-w-6xl mx-auto px-6 md:px-8 w-full">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12">
         <div>
           <div class="gv-overline mb-4"><span class="font-mono text-gavia-mint/80">04</span> <span>Zaman çizgisi</span></div>
           <h2 class="font-display font-extrabold text-gavia-deep text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.1] max-w-2xl">
@@ -536,49 +610,226 @@
         </p>
       </div>
 
-      <div class="tl-list">
-        <div class="tl-row">
-          <div class="tl-year">2015</div>
-          <div class="tl-body">
-            <div class="tl-tag">Kuruluş</div>
-            <h3 class="tl-title">Stüdyonun kuruluşu</h3>
-            <p class="tl-desc"><!-- TODO --> Küçük bir ekiple özel yazılım projelerine başladık. İlk müşteri brief'i ile uçtan uca teslim yaklaşımımız şekillendi.</p>
+      <div class="tl-counter" data-tl-counter>
+        <div class="tl-counter-viewport" data-tl-viewport>
+          <div class="tl-counter-frame" aria-hidden="true"></div>
+          <div class="tl-counter-track" data-tl-track>
+            <div class="tl-cell">
+              <div class="tl-cell-year">2015</div>
+              <div class="tl-cell-body">
+                <div class="tl-cell-tag">Kuruluş</div>
+                <h3 class="tl-cell-title">Stüdyonun kuruluşu</h3>
+                <p class="tl-cell-desc"><!-- TODO --> Küçük bir ekiple özel yazılım projelerine başladık.</p>
+              </div>
+            </div>
+            <div class="tl-cell">
+              <div class="tl-cell-year">2017</div>
+              <div class="tl-cell-body">
+                <div class="tl-cell-tag">Ekip</div>
+                <h3 class="tl-cell-title">İlk büyük genişleme</h3>
+                <p class="tl-cell-desc"><!-- TODO --> Üç kişilik çekirdek kadrodan yedi kişilik tasarım–mühendislik takımına.</p>
+              </div>
+            </div>
+            <div class="tl-cell">
+              <div class="tl-cell-year">2018</div>
+              <div class="tl-cell-body">
+                <div class="tl-cell-tag">Ürünleştirme</div>
+                <h3 class="tl-cell-title">İlk dijital ürün</h3>
+                <p class="tl-cell-desc"><!-- TODO --> Tek seferlik projeden tekrarlanabilir çözüme geçiş.</p>
+              </div>
+            </div>
+            <div class="tl-cell">
+              <div class="tl-cell-year">2020</div>
+              <div class="tl-cell-body">
+                <div class="tl-cell-tag">Dönüşüm</div>
+                <h3 class="tl-cell-title">Dağıtık ekip modeli</h3>
+                <p class="tl-cell-desc"><!-- TODO --> Uzaktan-ilk kültüre geçiş; doküman ve süreç disiplini standartlaştı.</p>
+              </div>
+            </div>
+            <div class="tl-cell">
+              <div class="tl-cell-year">2021</div>
+              <div class="tl-cell-body">
+                <div class="tl-cell-tag">AI Entegrasyonu</div>
+                <h3 class="tl-cell-title">AI yolculuğu başladı</h3>
+                <p class="tl-cell-desc"><!-- TODO --> Halüsinasyon kontrolü ve insan onayı standartlaştı.</p>
+              </div>
+            </div>
+            <div class="tl-cell">
+              <div class="tl-cell-year">2023</div>
+              <div class="tl-cell-body">
+                <div class="tl-cell-tag">Lansman</div>
+                <h3 class="tl-cell-title">İlk SaaS ürünü</h3>
+                <p class="tl-cell-desc"><!-- TODO --> Müşteri brief'lerinden damıttığımız ortak ihtiyaç üzerine ilk hazır ürün.</p>
+              </div>
+            </div>
+            <div class="tl-cell">
+              <div class="tl-cell-year">2026</div>
+              <div class="tl-cell-body">
+                <div class="tl-cell-tag">Ürün Ailesi</div>
+                <h3 class="tl-cell-title">Dört ürünlü vitrin</h3>
+                <p class="tl-cell-desc"><!-- TODO --> CRM, Flow, Assistant, Insight ile kurumsal aile.</p>
+              </div>
+            </div>
           </div>
-          <span class="tl-arrow"><i class="fa-solid fa-arrow-right text-xs"></i></span>
         </div>
-
-        <div class="tl-row">
-          <div class="tl-year">2018</div>
-          <div class="tl-body">
-            <div class="tl-tag">Ürünleştirme</div>
-            <h3 class="tl-title">İlk dijital ürün</h3>
-            <p class="tl-desc"><!-- TODO --> Müşteri ihtiyaçlarından doğan ilk ürünleştirme adımı; tek seferlik projeden tekrarlanabilir çözüme.</p>
-          </div>
-          <span class="tl-arrow"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+        <div class="tl-counter-nav">
+          <button type="button" class="tl-nav-btn" data-tl-dir="-1" aria-label="Önceki dönem"><i class="fa-solid fa-arrow-up text-sm"></i></button>
+          <button type="button" class="tl-nav-btn" data-tl-dir="1" aria-label="Sonraki dönem"><i class="fa-solid fa-arrow-down text-sm"></i></button>
         </div>
-
-        <div class="tl-row">
-          <div class="tl-year">2021</div>
-          <div class="tl-body">
-            <div class="tl-tag">AI Entegrasyonu</div>
-            <h3 class="tl-title">AI yolculuğunun başlangıcı</h3>
-            <p class="tl-desc"><!-- TODO --> Süreçlerimize ve müşteri ürünlerine AI'yi etkin olduğu yerde entegre ettik. Halüsinasyon kontrolü ve insan onayı standartlaştı.</p>
-          </div>
-          <span class="tl-arrow"><i class="fa-solid fa-arrow-right text-xs"></i></span>
-        </div>
-
-        <div class="tl-row">
-          <div class="tl-year">2026</div>
-          <div class="tl-body">
-            <div class="tl-tag">Ürün Ailesi</div>
-            <h3 class="tl-title">Dört ürünlü vitrin</h3>
-            <p class="tl-desc"><!-- TODO --> Gavia CRM, Flow, Assistant, Insight ile kurumsal müşteriler için hazır ürün ailesi.</p>
-          </div>
-          <span class="tl-arrow"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+        <div class="tl-counter-meta">
+          <span data-tl-window>2015 — 2021</span>
+          <div class="tl-counter-bar"></div>
+          <span data-tl-progress>1 / 2</span>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    (function () {
+      'use strict';
+      var root = document.querySelector('[data-tl-counter]');
+      if (!root) return;
+      var viewport = root.querySelector('[data-tl-viewport]');
+      var track = root.querySelector('[data-tl-track]');
+      var realCells = track ? Array.prototype.slice.call(track.querySelectorAll('.tl-cell:not(.is-ghost)')) : [];
+      var prevBtn = document.querySelector('.tl-nav-btn[data-tl-dir="-1"]');
+      var nextBtn = document.querySelector('.tl-nav-btn[data-tl-dir="1"]');
+      var winLabel = root.querySelector('[data-tl-window]');
+      var progLabel = root.querySelector('[data-tl-progress]');
+      if (!track || realCells.length === 0) return;
+
+      function getVisible() {
+        var v = getComputedStyle(root).getPropertyValue('--tl-visible').trim();
+        var n = parseInt(v, 10);
+        return isNaN(n) || n < 1 ? 1 : n;
+      }
+
+      function makeGhost() {
+        var g = document.createElement('div');
+        g.className = 'tl-cell is-ghost';
+        g.setAttribute('aria-hidden', 'true');
+        return g;
+      }
+
+      function syncGhosts() {
+        // Remove existing ghosts
+        Array.prototype.slice.call(track.querySelectorAll('.tl-cell.is-ghost')).forEach(function (g) {
+          g.parentNode.removeChild(g);
+        });
+        var co = Math.floor(visible / 2);
+        var before = co;
+        var after = visible - 1 - co;
+        var first = track.querySelector('.tl-cell:not(.is-ghost)');
+        for (var i = 0; i < before; i++) track.insertBefore(makeGhost(), first);
+        for (var j = 0; j < after; j++) track.appendChild(makeGhost());
+        return { before: before, after: after, centerOffset: co };
+      }
+
+      var total = realCells.length;
+      var visible = getVisible();
+      var pad = syncGhosts();
+      var maxIdx = total - 1;
+      var idx = 0;
+      root.style.setProperty('--tl-cells', total);
+
+      function windowYears() {
+        var s = Math.max(0, idx - pad.before);
+        var e = Math.min(total - 1, idx - pad.before + visible - 1);
+        var first = realCells[s] && realCells[s].querySelector('.tl-cell-year');
+        var last = realCells[e] && realCells[e].querySelector('.tl-cell-year');
+        if (!first || !last) return '';
+        if (s === e) return first.textContent;
+        return first.textContent + ' — ' + last.textContent;
+      }
+
+      function render() {
+        root.style.setProperty('--tl-idx', idx);
+        var pct = (maxIdx > 0 ? (idx / maxIdx) * 100 : 0);
+        root.style.setProperty('--tl-progress-pct', pct + '%');
+        var winStart = idx - pad.before;
+        var winEnd = winStart + visible - 1;
+        for (var i = 0; i < realCells.length; i++) {
+          var inWindow = i >= winStart && i <= winEnd;
+          realCells[i].classList.toggle('is-active', inWindow);
+          realCells[i].classList.toggle('is-center', i === idx);
+        }
+        if (prevBtn) prevBtn.disabled = idx === 0;
+        if (nextBtn) nextBtn.disabled = idx >= maxIdx;
+        if (winLabel) winLabel.textContent = windowYears();
+        if (progLabel) progLabel.textContent = (idx + 1) + ' / ' + (maxIdx + 1);
+      }
+
+      function move(dir) {
+        var next = Math.max(0, Math.min(maxIdx, idx + dir));
+        if (next === idx) return;
+        idx = next;
+        render();
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { move(-1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { move(1); });
+
+      // Drag / swipe (vertical)
+      var startY = 0, dragging = false, dragLock = false;
+      viewport.addEventListener('pointerdown', function (e) {
+        dragging = true; dragLock = false; startY = e.clientY;
+        viewport.classList.add('is-dragging');
+      });
+      window.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        var dy = e.clientY - startY;
+        if (Math.abs(dy) > 8) dragLock = true;
+      });
+      window.addEventListener('pointerup', function (e) {
+        if (!dragging) return;
+        dragging = false;
+        viewport.classList.remove('is-dragging');
+        if (!dragLock) return;
+        var dy = e.clientY - startY;
+        var threshold = 40;
+        if (Math.abs(dy) >= threshold) move(dy > 0 ? -1 : 1);
+      });
+      window.addEventListener('pointercancel', function () {
+        dragging = false; viewport.classList.remove('is-dragging');
+      });
+
+      // Wheel — local scroll inside viewport snaps the counter
+      var wheelLock = false;
+      viewport.addEventListener('wheel', function (e) {
+        if (Math.abs(e.deltaY) < 5) return;
+        if (wheelLock) { e.preventDefault(); return; }
+        var dir = e.deltaY > 0 ? 1 : -1;
+        var canMove = (dir > 0 && idx < maxIdx) || (dir < 0 && idx > 0);
+        if (!canMove) return;
+        e.preventDefault();
+        wheelLock = true;
+        move(dir);
+        setTimeout(function () { wheelLock = false; }, 750);
+      }, { passive: false });
+
+      // Keyboard
+      root.tabIndex = 0;
+      root.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowUp') { move(-1); e.preventDefault(); }
+        if (e.key === 'ArrowDown') { move(1); e.preventDefault(); }
+      });
+
+      // Re-evaluate visible on resize
+      window.addEventListener('resize', function () {
+        var v = getVisible();
+        if (v !== visible) {
+          visible = v;
+          pad = syncGhosts();
+          maxIdx = total - 1;
+          idx = Math.max(0, Math.min(maxIdx, idx));
+          render();
+        }
+      });
+
+      render();
+    })();
+  </script>
   <section class="bg-white py-20 md:py-28 min-h-[640px] lg:min-h-[720px] flex items-center border-t border-gavia-deep/10">
     <div class="max-w-7xl mx-auto px-6 md:px-8 w-full">
       <div class="max-w-3xl mb-12">
