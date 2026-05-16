@@ -945,7 +945,7 @@ body.is-near-nav .back-home { opacity: 1; pointer-events: auto; }
   color: rgba(229, 231, 235, 0.65);
   background: transparent;
   border: 1px solid rgba(229, 231, 235, 0.18);
-  border-radius: 4px;
+  border-radius: 8px;
   text-decoration: none;
   transition: color 220ms, border-color 220ms, background 220ms;
 }

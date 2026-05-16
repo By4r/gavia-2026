@@ -183,6 +183,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0 }).observe(revealSpacer);
   }
 
+  // Fast-scroll flash fix: hero-zone'u geçer geçmez hero'yu gizle.
+  // Observer'ın gecikmesinde hero focus-chip'leri footer-reveal alanında bir an
+  // gözüküyordu — scroll listener anında hide eder, observer back-up rolünde kalır.
+  const heroZoneEl = document.querySelector('.hero-zone');
+  if (heroZoneEl && heroStickyEl) {
+    const syncHeroHide = () => {
+      const past = window.scrollY > (heroZoneEl.offsetTop + heroZoneEl.offsetHeight - 1);
+      heroStickyEl.classList.toggle('is-hidden', past);
+    };
+    syncHeroHide();
+    window.addEventListener('scroll', syncHeroHide, { passive: true });
+    window.addEventListener('resize', syncHeroHide, { passive: true });
+  }
+
   // Products scroll-lock (Thoughtworks-style): sticky pane + IntersectionObserver.
   // Mobile (<768) ve prefers-reduced-motion'da observer çalışmaz, kartlar default
   // görünür kalır (CSS fallback). Footer reveal observer'ı ayrı kapsam, çakışma yok.
