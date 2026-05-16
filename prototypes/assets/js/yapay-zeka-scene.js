@@ -131,8 +131,8 @@ const STAGE_TABLE_DEFAULT = {
   '01': { z: 6,  rot: 0.0015, opacity: 1.00, orbit: 0, size: 0.07 },
   '02': { z: 7,  rot: 0.0020, opacity: 1.00, orbit: 1, size: 0.10 },
   '03': { z: 4,  rot: 0.0010, opacity: 1.00, orbit: 0, size: 0.12 },
-  '04': { z: 9,  rot: 0.0012, opacity: 0.85, orbit: 0, size: 0.07 },
-  '05': { z: 12, rot: 0.0008, opacity: 0.65, orbit: 0, size: 0.06 }
+  '04': { z: 9,  rot: 0.0030, opacity: 0.85, orbit: 0, size: 0.07 },
+  '05': { z: 12, rot: 0.0026, opacity: 0.65, orbit: 0, size: 0.06 }
 };
 
 // V3 — Particle cinematic choreography (Plan A hybrid + boost)
