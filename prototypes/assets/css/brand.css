@@ -7,19 +7,43 @@
    korundu. Brand intro section'da normal <img> olarak kullanılır, mask hilesine
    gerek kalmadı. Yasin Bey nihai logo verirse bu asset replace edilir. */
 
-/* === Queulat — eski gaviaworks.com markasından miras === */
+/* === Queulat — eski gaviaworks.com markasından miras ===
+   Tüm weight'leri mount et: Medium (500), Bold (700, range 600-700), Black (900, range 800-900).
+   Sayfalar font-weight: 500/600/700/800 hangisini isterse Queulat dosyalarından karşılansın —
+   yoksa tarayıcı uygun match bulamayıp Manrope fallback'e düşüyor. */
+@font-face {
+  font-family: 'Queulat';
+  src: url('../fonts/Queulat-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Queulat';
+  src: url('../fonts/Queulat-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
 @font-face {
   font-family: 'Queulat';
   src: url('../fonts/Queulat-Bold.otf') format('opentype');
-  font-weight: 700;
+  font-weight: 600 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Queulat';
   src: url('../fonts/Queulat-BoldItalic.otf') format('opentype');
-  font-weight: 700;
+  font-weight: 600 700;
   font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Queulat';
+  src: url('../fonts/Queulat-Black.otf') format('opentype');
+  font-weight: 800 900;
+  font-style: normal;
   font-display: swap;
 }
 @font-face {
