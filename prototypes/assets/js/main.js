@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!mobileMenu) return;
     const mobileNav = mobileMenu.querySelector('nav');
     if (!mobileNav) return;
-    document.querySelectorAll('header[data-header] nav.hidden.lg\\:flex [data-mega-trigger]').forEach(trigger => {
+    document.querySelectorAll('header[data-header] .hidden.lg\\:flex [data-mega-trigger]').forEach(trigger => {
       const toggleBtn = trigger.querySelector('[data-mega-toggle]');
       if (!toggleBtn) return;
       const label = (toggleBtn.firstChild?.textContent || toggleBtn.textContent || '').trim();
