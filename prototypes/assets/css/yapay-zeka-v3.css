@@ -1726,6 +1726,11 @@ body.is-ready { opacity: 1; }
 .card--dark .card__title em,
 .card--mint .card__title em { color: var(--d-ink); }
 
+/* Light cards on .panel--dark: .panel--dark h3 (0,1,1) would otherwise win over .card__title (0,1,0)
+   and paint the body text in --d-ink, leaving only <em> readable on a white background. */
+.panel--dark .card--off .card__title,
+.panel--dark .card--off .card__title em { color: var(--ink); }
+
 .card__cta {
   margin-top: 18px;
   display: inline-flex;
