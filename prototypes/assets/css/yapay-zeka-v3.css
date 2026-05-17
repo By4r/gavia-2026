@@ -54,7 +54,7 @@ html, body {
   padding: 0;
   background: var(--bg-white);
   color: var(--ink);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -83,9 +83,9 @@ img, svg { display: block; max-width: 100%; }
   max-width: 980px;
 }
 
-/* ────────── Typography tokens (Apple-style) ────────── */
+/* ────────── Typography tokens ────────── */
 h1, h2, h3, h4 {
-  font-family: inherit;
+  font-family: 'Queulat', 'Manrope', system-ui, sans-serif;
   margin: 0;
   color: var(--ink);
   font-weight: 600;
@@ -2140,7 +2140,7 @@ body.is-ready { opacity: 1; }
   position: absolute;
   top: 16px;
   right: 20px;
-  font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.20em;
