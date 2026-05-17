@@ -1,22 +1,49 @@
 <!DOCTYPE html>
-<html lang="tr" data-yz-version="v2">
+<html lang="tr" data-yz-version="v3-apple-dense">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yapay Zeka — Gavia Works</title>
   <meta name="description" content="Yapay zekayı işin içine koyuyoruz. Otomasyon, AI agent, veri ve belge zekası, etik AI." />
 
+  <link rel="icon" type="image/png" href="./assets/logo/favicon.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="./assets/css/yapay-zeka-v2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/brand.css" />
+  <link rel="stylesheet" href="./assets/css/yapay-zeka-v3.css" />
 
-  <!-- Entry transition: sayfa açılır açılmaz body.is-ready ekle → CSS sıralı reveal -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gavia-deep': '#020837',
+            'gavia-night': '#141533',
+            'gavia-dark': '#0A0E27',
+            'gavia-mint': '#3FD5AD',
+            'gavia-mint-bright': '#4FE5BD',
+            'gavia-light': '#E9EEF1',
+            'gavia-muted': '#6B7280',
+            'gavia-border': '#1F2740',
+          },
+          fontFamily: {
+            display: ['Queulat', 'Manrope', 'system-ui', 'sans-serif'],
+            hero: ['QueulatAlt', 'Queulat', 'Manrope', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'Geist', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
   <script>
     (function () {
       function ready() {
-        // rAF: ilk paint sonrası class ekle, transition tetiklenir
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
             document.body.classList.add('is-ready');
@@ -30,172 +57,940 @@
       }
     })();
   </script>
+
+  <!-- Page-local: main + sections footer-fixed-bottom (z:0) üstünde opak otursun (hero-zone pattern yok) -->
+  <style>
+    body > main { position: relative; z-index: 2; }
+  </style>
 </head>
-<body data-yz-version="v2">
+<body class="bg-gavia-deep text-white antialiased" data-yz-version="v3-apple-dense">
 
-  <!-- Geri Dön — sol üst, mouse-near-top reveal (default GİZLİ) -->
-  <a class="back-home" href="./index.html" aria-label="Ana sayfaya dön">
-    <span aria-hidden="true">←</span>
-    <span class="back-home__label">Ana Sayfa</span>
-  </a>
+  <!-- ========== GAVIA HEADER (standart, tüm sayfalardan miras) ========== -->
+  <header data-header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="w-full px-6 md:px-10 lg:px-14">
+      <div class="flex items-center justify-between h-20">
 
-  <!-- Persistent 6-slot video background (3 unique src) — all preload=auto + autoplay for decoder warm-up -->
-  <div class="site-background" aria-hidden="true">
-    <video class="site-bg__video is-active" data-stage="00" src="./assets/video/yz-bg-hero.mp4"    autoplay loop muted playsinline preload="auto"></video>
-    <video class="site-bg__video"           data-stage="01" src="./assets/video/yz-bg-flow.mp4"    loop muted playsinline preload="auto"></video>
-    <video class="site-bg__video"           data-stage="02" src="./assets/video/yz-bg-network.mp4" autoplay loop muted playsinline preload="auto"></video>
-    <video class="site-bg__video"           data-stage="03" src="./assets/video/yz-bg-flow.mp4"    loop muted playsinline preload="auto"></video>
-    <video class="site-bg__video"           data-stage="04" src="./assets/video/yz-bg-hero.mp4"    loop muted playsinline preload="auto"></video>
-    <video class="site-bg__video"           data-stage="05" src="./assets/video/yz-bg-hero.mp4"    loop muted playsinline preload="auto"></video>
-    <div class="site-background__overlay"></div>
-  </div>
+        <a href="./index.html" class="flex items-center gap-2">
+          <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto" />
+        </a>
 
-  <!-- 3D scene (Three.js, reads --scene-accent CSS var) -->
-  <div id="scene-canvas" aria-hidden="true"></div>
+        <div class="hidden lg:flex items-center gap-6">
+        <nav class="flex items-center gap-1 whitespace-nowrap">
+
+          <!-- Hizmetler -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Hizmetler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <a href="./hizmetler/ozel-yazilim.html" class="mega-showcase mega-showcase-billboard mega-showcase-left" data-mega-showcase>
+                  <div class="mega-showcase-media">
+                    <img data-mega-image
+                         src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=70"
+                         data-fallback="https://picsum.photos/seed/gavia-code/900/600"
+                         alt="" />
+                  </div>
+                  <div class="mega-showcase-body">
+                    <h4 data-mega-title class="font-display font-bold text-white text-base mb-1">Özel Yazılım Sistemleri</h4>
+                    <p data-mega-desc class="text-sm text-gray-300 mb-3">CRM, ERP, portal, panel, e-ticaret — uçtan uca.</p>
+                  </div>
+                </a>
+                <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="./hizmetler/ozel-yazilim.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-code/900/600"
+                     data-mega-title="Özel Yazılım Sistemleri"
+                     data-mega-desc="CRM, ERP, portal, panel, e-ticaret — uçtan uca.">
+                    <span class="mega-link-icon"><i class="fa-solid fa-code"></i></span>
+                    <span><span class="block font-semibold text-white">Özel Yazılım Sistemleri</span><span class="block text-sm text-gray-400 mt-0.5">CRM, ERP, portal, panel, e-ticaret.</span></span>
+                  </a>
+                  <a href="./hizmetler/mobil-uygulama.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-mobile/900/600"
+                     data-mega-title="Mobil Uygulama"
+                     data-mega-desc="iOS, Android, Flutter, React Native.">
+                    <span class="mega-link-icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                    <span><span class="block font-semibold text-white">Mobil Uygulama</span><span class="block text-sm text-gray-400 mt-0.5">iOS, Android, Flutter, React Native.</span></span>
+                  </a>
+                  <a href="./hizmetler/sistem-entegrasyonu.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-integration/900/600"
+                     data-mega-title="Sistem Entegrasyonu"
+                     data-mega-desc="CRM/ERP, ödeme, kargo, pazaryeri orkestrasyonu.">
+                    <span class="mega-link-icon"><i class="fa-solid fa-network-wired"></i></span>
+                    <span><span class="block font-semibold text-white">Sistem Entegrasyonu</span><span class="block text-sm text-gray-400 mt-0.5">CRM/ERP, ödeme, kargo, pazaryeri.</span></span>
+                  </a>
+                  <a href="./hizmetler/bulut-guvenlik.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-cloud/900/600"
+                     data-mega-title="Bulut & Güvenlik"
+                     data-mega-desc="Bulut mimarisi, KVKK uyumu, DevSecOps.">
+                    <span class="mega-link-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <span><span class="block font-semibold text-white">Bulut & Güvenlik</span><span class="block text-sm text-gray-400 mt-0.5">Bulut mimarisi, KVKK, DevSecOps.</span></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yapay Zekâ — current page -->
+          <a href="./yapay-zeka.html" class="px-4 py-2 text-sm font-bold text-gavia-mint transition-colors">Yapay Zekâ</a>
+
+          <!-- Ürünler -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Ürünler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <a href="./urunler/crm.html" class="mega-showcase mega-showcase-billboard mega-showcase-left" data-mega-showcase>
+                  <div class="mega-showcase-media">
+                    <img data-mega-image
+                         src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=70"
+                         data-fallback="https://picsum.photos/seed/gavia-crm/900/600"
+                         alt="" />
+                  </div>
+                  <div class="mega-showcase-body">
+                    <h4 data-mega-title class="font-display font-bold text-white text-base mb-1">Gavia CRM</h4>
+                    <p data-mega-desc class="text-sm text-gray-300 mb-3">Satış, müşteri, teklif.</p>
+                  </div>
+                </a>
+                <div class="lg:col-span-3">
+                  <p class="text-xs uppercase tracking-wider text-gavia-muted mb-3">Ana Vitrin</p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-5">
+                    <a href="./urunler/crm.html" class="mega-link"
+                       data-mega-image-src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=70"
+                       data-mega-image-fallback="https://picsum.photos/seed/gavia-crm/900/600"
+                       data-mega-title="Gavia CRM"
+                       data-mega-desc="Satış, müşteri, teklif."><span class="mega-link-icon"><i class="fa-solid fa-users"></i></span><span><span class="block font-semibold text-white">Gavia CRM</span><span class="block text-sm text-gray-400 mt-0.5">Satış, müşteri, teklif.</span></span></a>
+                    <a href="./urunler/flow.html" class="mega-link"
+                       data-mega-image-src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=70"
+                       data-mega-image-fallback="https://picsum.photos/seed/gavia-flow/900/600"
+                       data-mega-title="Gavia Flow"
+                       data-mega-desc="İş akışı, onay, otomasyon."><span class="mega-link-icon"><i class="fa-solid fa-diagram-project"></i></span><span><span class="block font-semibold text-white">Gavia Flow</span><span class="block text-sm text-gray-400 mt-0.5">İş akışı, onay, otomasyon.</span></span></a>
+                    <a href="./urunler/assistant.html" class="mega-link"
+                       data-mega-image-src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=70"
+                       data-mega-image-fallback="https://picsum.photos/seed/gavia-assistant/900/600"
+                       data-mega-title="Gavia Assistant"
+                       data-mega-desc="AI destekli asistan."><span class="mega-link-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span><span class="block font-semibold text-white">Gavia Assistant</span><span class="block text-sm text-gray-400 mt-0.5">AI destekli asistan.</span></span></a>
+                    <a href="./urunler/insight.html" class="mega-link"
+                       data-mega-image-src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=70"
+                       data-mega-image-fallback="https://picsum.photos/seed/gavia-insight/900/600"
+                       data-mega-title="Gavia Insight"
+                       data-mega-desc="Veri analitiği, tahminleme."><span class="mega-link-icon"><i class="fa-solid fa-chart-line"></i></span><span><span class="block font-semibold text-white">Gavia Insight</span><span class="block text-sm text-gray-400 mt-0.5">Veri analitiği, tahminleme.</span></span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="./calismalar.html" class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors">Çalışmalar</a>
+          <a href="./surdurulebilirlik.html" class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors">Sürdürülebilirlik</a>
+
+          <!-- Gavia -->
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">
+              Gavia <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+            </button>
+            <div class="mega-panel">
+              <div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <a href="./hakkimizda.html" class="mega-showcase mega-showcase-billboard mega-showcase-left" data-mega-showcase>
+                  <div class="mega-showcase-media">
+                    <img data-mega-image
+                         src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=70"
+                         data-fallback="https://picsum.photos/seed/gavia-about/900/600"
+                         alt="" />
+                  </div>
+                  <div class="mega-showcase-body">
+                    <h4 data-mega-title class="font-display font-bold text-white text-base mb-1">Hakkımızda</h4>
+                    <p data-mega-desc class="text-sm text-gray-300 mb-3">Gavia kimdir, neyi neden yapar.</p>
+                  </div>
+                </a>
+                <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <a href="./hakkimizda.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-about/900/600"
+                     data-mega-title="Hakkımızda"
+                     data-mega-desc="Gavia kimdir, neyi neden yapar."><span class="mega-link-icon"><i class="fa-solid fa-circle-info"></i></span><span><span class="block font-semibold text-white">Hakkımızda</span><span class="block text-sm text-gray-400 mt-0.5">Gavia kimdir, ne yapar.</span></span></a>
+                  <a href="./yaklasim.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-approach/900/600"
+                     data-mega-title="Yaklaşım"
+                     data-mega-desc="Analiz → Tasarım → Yazılım → AI."><span class="mega-link-icon"><i class="fa-solid fa-compass"></i></span><span><span class="block font-semibold text-white">Yaklaşım</span><span class="block text-sm text-gray-400 mt-0.5">Analiz → Tasarım → Yazılım → AI.</span></span></a>
+                  <a href="./ekip.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-team/900/600"
+                     data-mega-title="Ekip"
+                     data-mega-desc="Stüdyo arkasındaki insanlar."><span class="mega-link-icon"><i class="fa-solid fa-people-group"></i></span><span><span class="block font-semibold text-white">Ekip</span><span class="block text-sm text-gray-400 mt-0.5">Stüdyo arkasındaki insanlar.</span></span></a>
+                  <a href="./kariyer.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-career/900/600"
+                     data-mega-title="Kariyer"
+                     data-mega-desc="Açık pozisyonlar ve staj fırsatları."><span class="mega-link-icon"><i class="fa-solid fa-briefcase"></i></span><span><span class="block font-semibold text-white">Kariyer</span><span class="block text-sm text-gray-400 mt-0.5">Açık pozisyonlar ve staj.</span></span></a>
+                  <a href="./referanslar.html" class="mega-link"
+                     data-mega-image-src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=70"
+                     data-mega-image-fallback="https://picsum.photos/seed/gavia-clients/900/600"
+                     data-mega-title="Referanslar"
+                     data-mega-desc="Çalıştığımız markalar ve müşteri görüşleri."><span class="mega-link-icon"><i class="fa-solid fa-handshake"></i></span><span><span class="block font-semibold text-white">Referanslar</span><span class="block text-sm text-gray-400 mt-0.5">Çalıştığımız markalar.</span></span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="./iletisim.html" class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors">İletişim</a>
+        </nav>
+
+        <!-- Dil seçici -->
+        <div class="relative" data-lang-switcher>
+          <button type="button"
+                  class="flex items-center gap-1 px-2 py-1.5 text-sm font-semibold text-gray-200 hover:text-gavia-mint transition-colors"
+                  aria-haspopup="listbox" aria-expanded="false" aria-label="Dil seç / Select language"
+                  data-lang-trigger>
+            <span data-lang-current>EN</span>
+            <i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i>
+          </button>
+          <ul role="listbox" aria-label="Languages"
+              class="hidden absolute right-0 mt-2 min-w-[180px] rounded-lg border border-gavia-border bg-gavia-deep/95 backdrop-blur-md shadow-xl py-1 z-50"
+              data-lang-menu>
+            <li role="option" aria-selected="true" aria-current="true" tabindex="0" data-lang="en"
+                class="flex items-center justify-between gap-3 px-3 py-2 text-sm text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
+              <span><span class="font-mono text-xs opacity-60 mr-2">EN</span>English</span>
+              <i class="fa-solid fa-check text-xs text-gavia-mint" data-lang-check></i>
+            </li>
+            <li role="option" aria-selected="false" tabindex="-1" data-lang="tr"
+                class="flex items-center justify-between gap-3 px-3 py-2 text-sm text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
+              <span><span class="font-mono text-xs opacity-60 mr-2">TR</span>Türkçe</span>
+              <i class="fa-solid fa-check text-xs text-gavia-mint hidden" data-lang-check></i>
+            </li>
+          </ul>
+        </div>
+        </div>
+
+        <button data-mobile-menu-btn class="lg:hidden p-2 text-gray-200 hover:text-gavia-mint" aria-label="Menü">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <div data-mobile-menu class="hidden lg:hidden pb-6">
+        <nav class="flex flex-col gap-1 border-t border-gavia-border pt-4">
+          <a href="./hizmetler/ozel-yazilim.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Hizmetler</a>
+          <a href="./yapay-zeka.html" class="px-3 py-2 text-gavia-mint">Yapay Zekâ</a>
+          <a href="./urunler/crm.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Ürünler</a>
+          <a href="./calismalar.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Çalışmalar</a>
+          <a href="./surdurulebilirlik.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Sürdürülebilirlik</a>
+          <a href="./hakkimizda.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Gavia</a>
+          <a href="./iletisim.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">İletişim</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
   <main>
 
-    <!-- Hero //00 -->
-    <header class="hero" data-stage="00" id="section-00">
-      <div class="shell">
-        <div class="hero-inner">
-          <div class="label">//00 Yapay Zeka</div>
-          <div class="hero-title">
-            <h1>Yapay zekayı <em>işin içine</em> koyuyoruz.</h1>
-          </div>
-          <p class="hero-lead">Otomasyondan agent mimarisine, veri zekasından etik sınırlara — kurumsal yapay zekayı, çalışan modellere dönüştürüyoruz.</p>
+    <!-- ═══════════════ 03. HERO — full 100vh cinematic with video BG ═══════════════ -->
+    <header class="hero" id="hero">
+      <video class="hero__video" autoplay loop muted playsinline preload="auto">
+        <source src="./assets/video/yz-bg-network.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__veil" aria-hidden="true"></div>
+      <div class="hero__stamp" aria-hidden="true">00 — YAPAY ZEKA</div>
+
+      <div class="hero__inner">
+        <span class="eyebrow eyebrow--center" data-reveal>Yapay Zeka</span>
+
+        <h1 class="hero__title" data-reveal data-reveal-delay="100">
+          Yapay zekayı <em>işin içine</em> koyuyoruz.
+        </h1>
+
+        <p class="hero__lead" data-reveal data-reveal-delay="200">
+          Otomasyondan agent mimarisine, veri zekasından etik sınırlara —
+          kurumsal yapay zekayı, çalışan modellere dönüştürüyoruz.
+        </p>
+
+        <div class="hero__ctas" data-reveal data-reveal-delay="300">
+          <a href="#mimari" class="btn btn-primary">
+            Mimariye in
+            <svg class="btn-primary__icon btn-primary__icon--down" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="./iletisim.html" class="btn btn-link">30 dk AI Keşfi</a>
         </div>
       </div>
     </header>
 
-    <!-- 01 Otomasyon -->
-    <section class="chapter" data-stage="01" id="section-01">
-      <div class="chapter__pin">
-        <div class="shell chapter__fade">
-          <div class="chapter-grid">
-            <div class="chapter__media">
-              <div class="label">//01 Otomasyon</div>
-              <h2>Süreçleri otomatikleştirmek değil; <em>yeniden tasarlamak</em>.</h2>
-              <p class="lead">Manuel adımları ortadan kaldıran, sistemler arası akan ve insan onayını doğru yerde tutan otomasyonlar tasarlıyoruz.</p>
-              <ul>
-                <li><span class="num">01</span><span class="txt">Workflow keşfi ve süreç haritası</span></li>
-                <li><span class="num">02</span><span class="txt">Sistemler arası entegrasyon (ERP, CRM, e-posta, dosya)</span></li>
-                <li><span class="num">03</span><span class="txt">İnsan-onay ve istisna yönetimi</span></li>
-                <li><span class="num">04</span><span class="txt">İzlenebilirlik ve denetim kayıtları</span></li>
-              </ul>
-            </div>
-          </div>
+    <!-- ═══════════════ 04. STAT GRID — editorial "by the numbers" ═══════════════ -->
+    <section class="stat-grid" aria-label="Anahtar metrikler">
+      <div class="stat-grid__header" data-reveal data-reveal-direction="up">
+        <span class="stat-grid__eyebrow">Rakamlarla</span>
+        <h2 class="stat-grid__heading">Hızlı kararlar için <em>net çıktılar</em>.</h2>
+      </div>
+      <div class="stat-grid__inner">
+        <div class="stat" data-reveal data-reveal-direction="scale">
+          <div class="stat__label">Katman</div>
+          <div class="stat__number"><em>4</em></div>
+          <div class="stat__caption">Veri, model, agent ve gözlem — birbirini bilen dört bağımsız parça.</div>
+        </div>
+        <div class="stat" data-reveal data-reveal-direction="scale" data-reveal-delay="100">
+          <div class="stat__label">Hızlanma</div>
+          <div class="stat__number">10<span class="stat__unit">x</span></div>
+          <div class="stat__caption">Manuel süreç döngüsüne göre tipik hız kazanımı.</div>
+        </div>
+        <div class="stat" data-reveal data-reveal-direction="scale" data-reveal-delay="200">
+          <div class="stat__label">Hata düşüşü</div>
+          <div class="stat__number">%80</div>
+          <div class="stat__caption">Manuel adımlardan kaynaklanan yanlışların ortalama azalması.</div>
+        </div>
+        <div class="stat" data-reveal data-reveal-direction="scale" data-reveal-delay="300">
+          <div class="stat__label">Keşif</div>
+          <div class="stat__number">30<span class="stat__unit">dk</span></div>
+          <div class="stat__caption">Bir görüşme yeterli. Çıkışta net bir yol haritası elinizde.</div>
         </div>
       </div>
     </section>
 
-    <!-- 02 AI Agent -->
-    <section class="chapter" data-stage="02" id="section-02">
-      <div class="chapter__pin">
-        <div class="shell chapter__fade">
-          <div class="chapter-grid">
-            <div class="chapter__media">
-              <div class="label">//02 AI Agent</div>
-              <h2>Konuşan değil, <em>karar veren</em> agent'lar.</h2>
-              <p class="lead">Görevleri bölen, araçları çağıran, sonuçları doğrulayan ve gerektiğinde devreden insanı haberdar eden agent mimarileri kuruyoruz.</p>
-              <ul>
-                <li><span class="num">01</span><span class="txt">Çok-adımlı planlama ve tool calling</span></li>
-                <li><span class="num">02</span><span class="txt">Bağlam yönetimi ve uzun-vadeli hafıza</span></li>
-                <li><span class="num">03</span><span class="txt">Güvenli araç entegrasyonları (RBAC, audit)</span></li>
-                <li><span class="num">04</span><span class="txt">Operasyonel gözlem ve performans takibi</span></li>
-              </ul>
+    <!-- ═══════════════ 05. HIGHLIGHTS — horizontal pin-scroll gallery ═══════════════ -->
+    <section class="panel panel--dark panel--pin" id="highlights" aria-labelledby="hl-title">
+      <div class="pin-section" data-pin-section>
+        <div class="pin-section__inner">
+          <div class="section-banner section-banner--rich">
+            <div class="section-banner__left">
+              <span class="section-banner__eyebrow" data-reveal>Yetenekler</span>
+              <h2 id="hl-title" class="section-banner__title" data-reveal data-reveal-delay="80">AI işin merkezinde <em>nasıl yaşar</em>.</h2>
+              <p class="section-banner__lead" data-reveal data-reveal-delay="160">Otomasyondan agent mimarisine, veri zekasından etik sınırlara — altı temel yetenek, tek bir kurumsal altyapıda buluşuyor.</p>
             </div>
+            <a href="#mimari" class="section-banner__cta" data-reveal data-reveal-delay="240">Mimariye in</a>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 03 Veri & Belge Zekası -->
-    <section class="chapter" data-stage="03" id="section-03">
-      <div class="chapter__pin">
-        <div class="shell chapter__fade">
-          <div class="chapter-grid">
-            <div class="chapter__media">
-              <div class="label">//03 Veri &amp; Belge Zekası</div>
-              <h2>Belgeleri okuyan, veriyi <em>anlamlandıran</em> sistemler.</h2>
-              <p class="lead">RAG mimarisi, OCR + yapılandırılmış çıkarım ve şirket veri kaynaklarına bağlanan soru-cevap arayüzleri.</p>
-              <ul>
-                <li><span class="num">01</span><span class="txt">Belge ingest pipeline'ı (PDF, Word, taranmış)</span></li>
-                <li><span class="num">02</span><span class="txt">Vektör indeks + hibrit arama</span></li>
-                <li><span class="num">03</span><span class="txt">Kaynaklı yanıt ve alıntı zinciri</span></li>
-                <li><span class="num">04</span><span class="txt">Erişim politikaları ve yetki bazlı görünürlük</span></li>
-              </ul>
-
-              <details class="more">
-                <summary>Read more — teknik yaklaşım</summary>
-                <div class="more__body">
-                  <p>Chunking stratejisini içerik tipine göre seçiyoruz: yapılandırılmış raporlar için semantic chunk, sözleşme metinleri için clause-aware bölümleme. Embedding modeli Türkçe ağırlıklı projelerde çok-dilli modellerle, finansal/teknik metinlerde domain-spesifik modellerle değişiyor. Yanıt katmanında her cümleyi kaynak belgeye geri bağlayan citation grafiği üretiyoruz — kullanıcı "bu cümle nereden geldi?" diye sorduğunda tek tıkla orijinal pasaja iniyor.</p>
+          <div class="gallery" aria-label="Yapay zeka yetenekleri">
+            <div class="gallery__row" data-pin-track>
+              <a href="#otomasyon" class="card card--off" data-reveal>
+                <figure class="card__media">
+                  <img class="card__media-img"
+                       src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"
+                       alt="Devre kartı detayı — akan süreç ve veri yolu görseli" loading="lazy" />
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Otomasyon</div>
+                  <h3 class="card__title">Manuel adımı kaldır. <em>Akan</em> süreçler.</h3>
+                  <span class="card__cta">Süreç tasarımı</span>
                 </div>
-              </details>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+              </a>
 
-    <!-- 04 Etik AI & KVKK -->
-    <section class="chapter" data-stage="04" id="section-04">
-      <div class="chapter__pin">
-        <div class="shell chapter__fade">
-          <div class="chapter-grid">
-            <div class="chapter__media">
-              <div class="label">//04 Etik AI &amp; KVKK</div>
-              <h2>Sınırları <em>kod öncesi</em> çekiyoruz.</h2>
-              <p class="lead">Veri minimizasyonu, anonimleştirme, kullanıcı onayı ve modelin nereye dokunmaması gerektiği — projeyi başlatırken konuşulan konular.</p>
-              <ul>
-                <li><span class="num">01</span><span class="txt">KVKK uyumlu veri akış tasarımı</span></li>
-                <li><span class="num">02</span><span class="txt">PII tespiti ve maskleme</span></li>
-                <li><span class="num">03</span><span class="txt">Model log'larında saklama politikası</span></li>
-                <li><span class="num">04</span><span class="txt">Açıklanabilirlik ve kullanıcı itirazı</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+              <a href="#agent" class="card card--off" data-reveal data-reveal-delay="80">
+                <figure class="card__media">
+                  <img class="card__media-img"
+                       src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80"
+                       alt="Soyut AI dalga örüntüsü — karar veren agent görseli" loading="lazy" />
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>AI Agent</div>
+                  <h3 class="card__title">Konuşan değil, <em>karar veren</em>.</h3>
+                  <span class="card__cta">Agent mimarisi</span>
+                </div>
+              </a>
 
-    <!-- 05 CTA Konuşalım -->
-    <section class="chapter cta" data-stage="05" id="section-05">
-      <div class="shell chapter__fade">
-        <div class="chapter-grid">
-          <div class="chapter__media">
-            <div class="label">//05 Konuşalım</div>
-            <h2>Yapay zekanın <em>doğru yerini</em> birlikte tanımlayalım.</h2>
-            <div class="cta-actions">
-              <a href="./index.html" class="btn-ghost">Ana sayfa</a>
-              <a href="./iletisim.html" class="btn-primary">
-                Projenizi Anlatalım
-                <svg class="btn-primary__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <a href="#veri" class="card card--off" data-reveal data-reveal-delay="160">
+                <figure class="card__media">
+                  <img class="card__media-img"
+                       src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+                       alt="Veri panosu ve grafikler — belge zekası görseli" loading="lazy" />
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Veri &amp; Belge</div>
+                  <h3 class="card__title">Belgeyi okuyan, veriyi <em>anlamlandıran</em>.</h3>
+                  <span class="card__cta">RAG ve OCR</span>
+                </div>
+              </a>
+
+              <a href="#etik" class="card card--off" data-reveal data-reveal-delay="240">
+                <figure class="card__media">
+                  <img class="card__media-img"
+                       src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=80"
+                       alt="Sade gökyüzü dokusu — bulut güvenliği ve etik görseli" loading="lazy" />
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Etik &amp; KVKK</div>
+                  <h3 class="card__title">Sınırlar <em>kod öncesi</em>.</h3>
+                  <span class="card__cta">Uyum tasarımı</span>
+                </div>
+              </a>
+
+              <a href="#karsilastir" class="card card--off" data-reveal data-reveal-delay="320">
+                <figure class="card__media">
+                  <img class="card__media-img"
+                       src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80"
+                       alt="Analitik gösterge tablosu — önce/sonra metrikleri görseli" loading="lazy" />
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Önce / Sonra</div>
+                  <h3 class="card__title">Zaman, hata, maliyet — <em>üçü birden</em>.</h3>
+                  <span class="card__cta">Karşılaştırma</span>
+                </div>
+              </a>
+
+              <a href="#sss" class="card card--off" data-reveal data-reveal-delay="400">
+                <figure class="card__media">
+                  <img class="card__media-img"
+                       src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80"
+                       alt="Açık defter ve kalem — sık sorulan sorular görseli" loading="lazy" />
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Sık sorulanlar</div>
+                  <h3 class="card__title">Veri, model, maliyet — <em>net cevaplar</em>.</h3>
+                  <span class="card__cta">SSS</span>
+                </div>
               </a>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ═══════════════ 05. PRODUCT VIEWER — image-backdrop layer switcher ═══════════════ -->
+    <section class="product-viewer product-viewer--backdrop" id="mimari" aria-labelledby="pv-title">
+      <!-- Full-bleed background: 4 cross-faded images, dark veil overlay -->
+      <div class="product-viewer__bg" data-mimari-stage aria-hidden="true">
+        <!-- Veri katmanı — soft server room corridor, sakin altyapı hissi -->
+        <img class="compare-slider__img is-active" data-layer="veri"
+             src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=80"
+             alt="" loading="lazy" />
+        <!-- Model katmanı — soft digital gradient mesh, sade hesaplama hissi -->
+        <img class="compare-slider__img" data-layer="model"
+             src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=2400&q=80"
+             alt="" loading="lazy" />
+        <!-- Agent katmanı — temiz devre kartı macro, akan orkestra hissi -->
+        <img class="compare-slider__img" data-layer="agent"
+             src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=80"
+             alt="" loading="lazy" />
+        <!-- Gözlem katmanı — soft data viz / işaret okuma -->
+        <img class="compare-slider__img" data-layer="gozlem"
+             src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2400&q=80"
+             alt="" loading="lazy" />
+        <div class="product-viewer__veil"></div>
+      </div>
+
+      <!-- Foreground content sits on top of the backdrop -->
+      <div class="product-viewer__content">
+        <header class="ps-header" data-reveal>
+          <span class="ps-eyebrow">Mimari</span>
+          <p id="pv-title" class="ps-headline">
+            Katmanlı bir AI altyapısı.<br />
+            <em>Tek</em> tıkla görünür.
+          </p>
+          <p class="ps-headline-sub">
+            Veri katmanı, model katmanı, agent katmanı ve gözlem —
+            her bir katman bağımsız değiştirilebilir, birbirini bilir.
+          </p>
+        </header>
+
+        <div class="product-viewer__layer-label" data-mimari-label>
+          <span class="product-viewer__layer-eyebrow" data-layer-eyebrow>Veri Katmanı</span>
+          <p class="product-viewer__layer-title" data-layer-title>Belge ingest, OCR, vektör indeks — şirket verisi.</p>
+        </div>
+
+        <div class="compare-slider__center" data-reveal data-reveal-delay="200">
+          <div class="compare-slider__tabs" role="tablist" data-mimari-tabs>
+            <button class="compare-slider__tab is-active" role="tab" aria-selected="true" data-target="veri"
+                    data-eyebrow="Veri Katmanı" data-title="Belge ingest, OCR, vektör indeks — şirket verisi.">Veri Katmanı</button>
+            <button class="compare-slider__tab" role="tab" aria-selected="false" data-target="model"
+                    data-eyebrow="Model Katmanı" data-title="Doğru model, doğru görev — gecikme + maliyet dengesi.">Model</button>
+            <button class="compare-slider__tab" role="tab" aria-selected="false" data-target="agent"
+                    data-eyebrow="Agent Katmanı" data-title="Planlama, tool calling, hafıza — agent orkestrasyonu.">Agent</button>
+            <button class="compare-slider__tab" role="tab" aria-selected="false" data-target="gozlem"
+                    data-eyebrow="Gözlem Katmanı" data-title="Token, gecikme, audit — her çağrı görünür.">Gözlem</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 06. CAPABILITY 01 — OTOMASYON ═══════════════ -->
+    <section class="panel" id="otomasyon" aria-labelledby="otomasyon-title">
+      <header class="ps-header" data-reveal>
+        <span class="ps-eyebrow">Otomasyon</span>
+        <p id="otomasyon-title" class="ps-headline">
+          Süreçleri otomatikleştirmek değil;<br />
+          <em>yeniden tasarlamak</em>.
+        </p>
+      </header>
+
+      <div class="feature">
+        <div class="feature__body" data-reveal data-reveal-direction="left">
+          <p class="feature__lead">
+            Manuel adımları ortadan kaldıran, sistemler arası akan ve insan
+            onayını doğru yerde tutan otomasyonlar tasarlıyoruz. Süreç
+            haritasından canlı izlenebilirliğe kadar.
+          </p>
+          <ol class="feature__list">
+            <li><span class="num">01</span><span class="txt">Workflow keşfi ve süreç haritası</span></li>
+            <li><span class="num">02</span><span class="txt">Sistemler arası entegrasyon (ERP, CRM, e-posta, dosya)</span></li>
+            <li><span class="num">03</span><span class="txt">İnsan-onay ve istisna yönetimi</span></li>
+            <li><span class="num">04</span><span class="txt">İzlenebilirlik ve denetim kayıtları</span></li>
+          </ol>
+        </div>
+        <div class="feature__media feature__media--photo" data-reveal data-reveal-direction="right" data-reveal-delay="160" aria-hidden="true">
+          <img class="feature__media-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80" alt="" loading="lazy" />
+          <div class="feature__media-veil"></div>
+          <div class="feature__media-glyph">01</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FULL-BLEED VIDEO MOMENT (Apple "Watch the film" pattern) ═══════════════ -->
+    <section class="video-bleed" aria-label="Yapay zeka mimarisi tanıtım videosu">
+      <div class="video-bleed__media">
+        <video class="video-bleed__video" autoplay loop muted playsinline preload="metadata" poster="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=2400&q=60">
+          <source src="./assets/video/yz-bg-network.mp4" type="video/mp4" />
+        </video>
+        <div class="video-bleed__veil"></div>
+        <div class="video-bleed__content">
+          <span class="video-bleed__eyebrow" data-reveal>Yapay zeka, işin içinde</span>
+          <h2 class="video-bleed__title" data-reveal data-reveal-delay="100">
+            Modeli kuran değil; <em>süreci</em> kuran.
+          </h2>
+          <p class="video-bleed__lead" data-reveal data-reveal-delay="200">
+            Bir model çağırıp bırakmıyoruz. Veri katmanından operasyonel
+            gözlem panellerine kadar bütün altyapıyı birlikte kuruyoruz.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 07. CAPABILITY 02 — AI AGENT (off-white) ═══════════════ -->
+    <section class="panel panel--off" id="agent" aria-labelledby="agent-title">
+      <header class="ps-header" data-reveal>
+        <span class="ps-eyebrow">AI Agent</span>
+        <p id="agent-title" class="ps-headline">
+          Konuşan değil,<br />
+          <em>karar veren</em> agent'lar.
+        </p>
+      </header>
+
+      <div class="feature feature--reverse">
+        <div class="feature__body" data-reveal data-reveal-direction="right">
+          <p class="feature__lead">
+            Görevleri bölen, araçları çağıran, sonuçları doğrulayan ve
+            gerektiğinde devreden insanı haberdar eden agent mimarileri kuruyoruz.
+            Tool calling, bağlam yönetimi ve operasyonel gözlem standart.
+          </p>
+          <ol class="feature__list">
+            <li><span class="num">01</span><span class="txt">Çok-adımlı planlama ve tool calling</span></li>
+            <li><span class="num">02</span><span class="txt">Bağlam yönetimi ve uzun-vadeli hafıza</span></li>
+            <li><span class="num">03</span><span class="txt">Güvenli araç entegrasyonları (RBAC, audit)</span></li>
+            <li><span class="num">04</span><span class="txt">Operasyonel gözlem ve performans takibi</span></li>
+          </ol>
+        </div>
+        <div class="feature__media feature__media--photo" data-reveal data-reveal-direction="left" data-reveal-delay="160" aria-hidden="true">
+          <img class="feature__media-img" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80" alt="" loading="lazy" />
+          <div class="feature__media-veil"></div>
+          <div class="feature__media-glyph">02</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 08. CAPABILITY 03 — VERİ & BELGE (off-white) ═══════════════ -->
+    <section class="panel panel--off" id="veri" aria-labelledby="veri-title">
+      <header class="ps-header" data-reveal>
+        <span class="ps-eyebrow">Veri &amp; Belge</span>
+        <p id="veri-title" class="ps-headline">
+          Belgeleri okuyan, veriyi<br />
+          <em>anlamlandıran</em> sistemler.
+        </p>
+      </header>
+
+      <div class="feature">
+        <div class="feature__body" data-reveal data-reveal-direction="left">
+          <p class="feature__lead">
+            RAG mimarisi, OCR + yapılandırılmış çıkarım ve şirket veri
+            kaynaklarına bağlanan soru-cevap arayüzleri. Her cümle
+            kaynak belgeye geri bağlı.
+          </p>
+          <ol class="feature__list">
+            <li><span class="num">01</span><span class="txt">Belge ingest pipeline'ı (PDF, Word, taranmış)</span></li>
+            <li><span class="num">02</span><span class="txt">Vektör indeks + hibrit arama</span></li>
+            <li><span class="num">03</span><span class="txt">Kaynaklı yanıt ve alıntı zinciri</span></li>
+            <li><span class="num">04</span><span class="txt">Erişim politikaları ve yetki bazlı görünürlük</span></li>
+          </ol>
+
+          <details class="more">
+            <summary>Teknik yaklaşım — daha fazla</summary>
+            <div class="more__body">
+              <p>Chunking stratejisini içerik tipine göre seçiyoruz: yapılandırılmış
+              raporlar için semantic chunk, sözleşme metinleri için clause-aware
+              bölümleme. Embedding modeli Türkçe ağırlıklı projelerde çok-dilli
+              modellerle, finansal/teknik metinlerde domain-spesifik modellerle
+              değişiyor.</p>
+            </div>
+          </details>
+        </div>
+        <div class="feature__media feature__media--photo" data-reveal data-reveal-direction="scale" data-reveal-delay="160" aria-hidden="true">
+          <img class="feature__media-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80" alt="" loading="lazy" />
+          <div class="feature__media-veil"></div>
+          <div class="feature__media-glyph">03</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 08.5 SPLIT MEDIA — operasyonel hat (sol video, sağ yazı) ═══════════════ -->
+    <section class="split-media" aria-label="Operasyonel hat — canlı yapay zeka sistemleri">
+      <div class="split-media__inner">
+        <div class="split-media__media" data-reveal data-reveal-direction="left">
+          <div class="split-media__frame">
+            <video class="split-media__video" autoplay loop muted playsinline preload="metadata"
+                   poster="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=70">
+              <source src="./assets/video/yz-bg-network.mp4" type="video/mp4" />
+            </video>
+            <div class="split-media__veil" aria-hidden="true"></div>
+            <span class="split-media__chip" aria-hidden="true">
+              <span class="split-media__chip-dot"></span>Canlı
+            </span>
+          </div>
+        </div>
+        <div class="split-media__body" data-reveal data-reveal-direction="right" data-reveal-delay="200">
+          <span class="ps-eyebrow">Operasyon</span>
+          <h2 class="split-media__headline">
+            Modeli kuran değil; <em>operasyonu</em> kuran ekip.
+          </h2>
+          <p class="split-media__lead">
+            Demo değil, üretim ortamı. Veri akışı, gözlem, hata yönetimi ve maliyet
+            kontrolü ilk günden itibaren panele bağlı çalışıyor.
+          </p>
+          <ul class="split-media__list">
+            <li><span class="split-media__check" aria-hidden="true">✓</span><span>Canlı gözlem panelleri — token, gecikme, hata oranı görünür</span></li>
+            <li><span class="split-media__check" aria-hidden="true">✓</span><span>Otomatik geri çekilme (fallback) ve insan onayı eşikleri</span></li>
+            <li><span class="split-media__check" aria-hidden="true">✓</span><span>Bütçe alarmları + maliyet/kullanım raporları, takım bazlı</span></li>
+          </ul>
+          <a href="#altyapi" class="split-media__cta">Altyapıyı incele <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 09. CAPABILITY 04 — ETİK & KVKK (white) ═══════════════ -->
+    <section class="panel" id="etik" aria-labelledby="etik-title">
+      <header class="ps-header" data-reveal>
+        <span class="ps-eyebrow">Etik AI &amp; KVKK</span>
+        <p id="etik-title" class="ps-headline">
+          Sınırları <em>kod öncesi</em><br />
+          çekiyoruz.
+        </p>
+      </header>
+
+      <div class="feature feature--reverse">
+        <div class="feature__body" data-reveal data-reveal-direction="up">
+          <p class="feature__lead">
+            Veri minimizasyonu, anonimleştirme, kullanıcı onayı ve modelin
+            nereye dokunmaması gerektiği — projeyi başlatırken konuşulan konular.
+            Açıklanabilirlik standart, log politikası yazılı.
+          </p>
+          <ol class="feature__list">
+            <li><span class="num">01</span><span class="txt">KVKK uyumlu veri akış tasarımı</span></li>
+            <li><span class="num">02</span><span class="txt">PII tespiti ve maskleme</span></li>
+            <li><span class="num">03</span><span class="txt">Model log'larında saklama politikası</span></li>
+            <li><span class="num">04</span><span class="txt">Açıklanabilirlik ve kullanıcı itirazı</span></li>
+          </ol>
+        </div>
+        <div class="feature__media feature__media--photo" data-reveal data-reveal-direction="up" data-reveal-delay="200" aria-hidden="true">
+          <img class="feature__media-img" src="https://images.unsplash.com/photo-1614851099511-773084f6911d?auto=format&fit=crop&w=1600&q=80" alt="" loading="lazy" />
+          <div class="feature__media-veil"></div>
+          <div class="feature__media-glyph">04</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 10. SHARED FEATURES — paylaşılan altyapı (horizontal pin-scroll) ═══════════════ -->
+    <section class="shared-features panel--pin" id="altyapi" aria-labelledby="sf-title">
+      <div class="pin-section" data-pin-section>
+        <div class="pin-section__inner">
+          <header class="ps-header" data-reveal>
+            <span class="ps-eyebrow">Paylaşılan altyapı</span>
+            <p id="sf-title" class="ps-headline">
+              Her projede <em>aynı</em> standart.
+            </p>
+            <p class="ps-headline-sub">
+              Bir kez kurulan, bütün projelerin paylaştığı altyapı.
+              Gözlem, denetim, sürüm yönetimi — proje farkı yok.
+            </p>
+          </header>
+
+          <div class="gallery" aria-label="Paylaşılan altyapı yetenekleri">
+            <div class="gallery__row" data-pin-track>
+
+              <a href="#telemetri" class="card card--icon card--white" data-reveal>
+                <figure class="card__media card__media--icon">
+                  <span class="card__icon-frame" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+                  </span>
+                  <span class="card__icon-num" aria-hidden="true">01</span>
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Gözlem</div>
+                  <h3 class="card__title">Token, gecikme, hata. <em>Her çağrı</em> sayılı.</h3>
+                  <span class="card__cta">Telemetri</span>
+                </div>
+              </a>
+
+              <a href="#audit" class="card card--icon card--white" data-reveal data-reveal-delay="100">
+                <figure class="card__media card__media--icon">
+                  <span class="card__icon-frame" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+                  </span>
+                  <span class="card__icon-num" aria-hidden="true">02</span>
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Denetim</div>
+                  <h3 class="card__title">Kim sordu, model ne dedi. <em>İzlenebilir</em>.</h3>
+                  <span class="card__cta">Audit trail</span>
+                </div>
+              </a>
+
+              <a href="#versiyon" class="card card--icon card--white" data-reveal data-reveal-delay="200">
+                <figure class="card__media card__media--icon">
+                  <span class="card__icon-frame" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8 6h6a2 2 0 0 1 2 2v2"/><path d="M8 18h6a2 2 0 0 0 2-2v-2"/></svg>
+                  </span>
+                  <span class="card__icon-num" aria-hidden="true">03</span>
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Sürüm</div>
+                  <h3 class="card__title">Prompt, model, veri. <em>Üçü</em> birden versiyonlu.</h3>
+                  <span class="card__cta">Yönetim</span>
+                </div>
+              </a>
+
+              <a href="#rbac" class="card card--icon card--white" data-reveal data-reveal-delay="300">
+                <figure class="card__media card__media--icon">
+                  <span class="card__icon-frame" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                  </span>
+                  <span class="card__icon-num" aria-hidden="true">04</span>
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Erişim</div>
+                  <h3 class="card__title">Rol, yetki, sınır. <em>Tek noktada</em>.</h3>
+                  <span class="card__cta">RBAC</span>
+                </div>
+              </a>
+
+              <a href="#butce" class="card card--icon card--white" data-reveal data-reveal-delay="400">
+                <figure class="card__media card__media--icon">
+                  <span class="card__icon-frame" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h6v6"/></svg>
+                  </span>
+                  <span class="card__icon-num" aria-hidden="true">05</span>
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Maliyet</div>
+                  <h3 class="card__title">Bütçe, kullanım, model seçimi. <em>Şeffaf</em>.</h3>
+                  <span class="card__cta">Bütçe izleme</span>
+                </div>
+              </a>
+
+              <a href="#devir" class="card card--icon card--white" data-reveal data-reveal-delay="500">
+                <figure class="card__media card__media--icon">
+                  <span class="card__icon-frame" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h12l4 4v9H4z"/><path d="M16 7V4H8v3"/><path d="M9 13h6"/></svg>
+                  </span>
+                  <span class="card__icon-num" aria-hidden="true">06</span>
+                </figure>
+                <div class="card__body">
+                  <div class="card__eyebrow"><span class="card__dot" aria-hidden="true"></span>Devir</div>
+                  <h3 class="card__title">Dökümante, anahtar teslim. <em>Birlikte</em> götürülür.</h3>
+                  <span class="card__cta">Hand-off</span>
+                </div>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 11. COMPARISON TABLE ═══════════════ -->
+    <section class="compare" id="karsilastir" aria-labelledby="cmp-title">
+      <header class="ps-header" data-reveal>
+        <span class="ps-eyebrow">Önce / Sonra</span>
+        <p id="cmp-title" class="ps-headline">
+          Aynı işi, <em>farklı</em> şekilde yapmak.
+        </p>
+        <p class="ps-headline-sub">
+          Süreci AI'a havale etmiyoruz; süreci AI ile birlikte yeniden tasarlıyoruz.
+          Aşağıdaki tablo, tipik bir kurumsal proje için tipik bir tabloya yakındır.
+        </p>
+      </header>
+
+      <div class="compare__table" data-reveal data-reveal-delay="200">
+        <div class="compare__row compare__row--head">
+          <div class="compare__cell">&nbsp;</div>
+          <div class="compare__cell">AI olmadan</div>
+          <div class="compare__cell compare__head-mint">Gavia ile</div>
+        </div>
+        <div class="compare__row">
+          <div class="compare__cell compare__cell--label">Belge analizi</div>
+          <div class="compare__cell compare__cell--neg">Manuel okuma, hata payı yüksek</div>
+          <div class="compare__cell compare__cell--pos">Otomatik çıkarım + kaynaklı yanıt</div>
+        </div>
+        <div class="compare__row">
+          <div class="compare__cell compare__cell--label">Süreç döngüsü</div>
+          <div class="compare__cell compare__cell--neg">Saatler / günler</div>
+          <div class="compare__cell compare__cell--pos">Dakikalar, insan onayında durur</div>
+        </div>
+        <div class="compare__row">
+          <div class="compare__cell compare__cell--label">Veri sınırı</div>
+          <div class="compare__cell compare__cell--neg">Tahmini, projeye göre değişir</div>
+          <div class="compare__cell compare__cell--pos">KVKK uyumlu, yazılı politika</div>
+        </div>
+        <div class="compare__row">
+          <div class="compare__cell compare__cell--label">İzlenebilirlik</div>
+          <div class="compare__cell compare__cell--neg">Log parçalı, kimse bakmıyor</div>
+          <div class="compare__cell compare__cell--pos">Telemetri + audit trail standart</div>
+        </div>
+        <div class="compare__row">
+          <div class="compare__cell compare__cell--label">Devir</div>
+          <div class="compare__cell compare__cell--neg">Yazılım kara kutu, bağımlılık yüksek</div>
+          <div class="compare__cell compare__cell--pos">Dökümante, anahtar teslim</div>
+        </div>
+        <div class="compare__row">
+          <div class="compare__cell compare__cell--label">Model sürümü</div>
+          <div class="compare__cell compare__cell--neg">Sabit, güncelleme ayrı proje</div>
+          <div class="compare__cell compare__cell--pos">Versiyonlu, değiştirilebilir</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 12. FAQ ═══════════════ -->
+    <section class="faq" id="sss" aria-labelledby="faq-title">
+      <header class="ps-header" data-reveal>
+        <span class="ps-eyebrow">Sık sorulanlar</span>
+        <p id="faq-title" class="ps-headline">
+          Veri, model, maliyet —<br />
+          <em>net</em> cevaplar.
+        </p>
+      </header>
+
+      <div class="faq__list">
+        <details class="faq__item" data-reveal>
+          <summary class="faq__summary">Verimi kim eğitir, nerede tutulur?</summary>
+          <div class="faq__body">
+            Genelde modeli eğitmiyoruz — açık veya kapalı kaynak temel modelleri RAG ve prompt mimarisiyle sizin verinize bağlıyoruz. Veri sizde kalıyor; gerekirse şirket içi (self-hosted) çalışan modellerle de kuruyoruz.
+          </div>
+        </details>
+        <details class="faq__item" data-reveal data-reveal-delay="100">
+          <summary class="faq__summary">Hangi modeli kullanıyorsunuz?</summary>
+          <div class="faq__body">
+            Projeye göre değişir. Türkçe-ağırlıklı görevlerde çok-dilli modeller; teknik/finansal metinlerde domain-spesifik; düşük gecikme isteyen agent görevlerinde Haiku/Gemini Flash sınıfı modeller. Karar, kullanım senaryosu + maliyet + gecikme üçlüsüyle alınır.
+          </div>
+        </details>
+        <details class="faq__item" data-reveal data-reveal-delay="200">
+          <summary class="faq__summary">KVKK uyumu nasıl sağlanır?</summary>
+          <div class="faq__body">
+            Projeyi başlatırken yazılı veri akış haritası çıkarıyoruz. PII tespiti + maskleme, log saklama süresi, modelin nereye dokunmaması gerektiği — hepsi sözleşmeyle netleşir. Açıklanabilirlik ve kullanıcı itirazı süreçleri standart.
+          </div>
+        </details>
+        <details class="faq__item" data-reveal data-reveal-delay="300">
+          <summary class="faq__summary">Maliyet nasıl hesaplanır?</summary>
+          <div class="faq__body">
+            Tek seferlik kurulum + aylık altyapı + kullanım bazlı model maliyeti. Kullanım bazlı kısım için ayrı bütçe izleme aracı sağlıyoruz; aylık tavan + uyarı eşiği belirleniyor.
+          </div>
+        </details>
+        <details class="faq__item" data-reveal data-reveal-delay="400">
+          <summary class="faq__summary">Projeyi siz mi yönetiyorsunuz, biz mi?</summary>
+          <div class="faq__body">
+            Birlikte. Sürüm yönetimi, audit ve gözlem panellerini sizin ekibinizin kullanabileceği şekilde teslim ediyoruz. İsterseniz Gavia operasyonel destek de veriyor (SLA'ya göre).
+          </div>
+        </details>
+        <details class="faq__item" data-reveal data-reveal-delay="500">
+          <summary class="faq__summary">Süre ne kadar?</summary>
+          <div class="faq__body">
+            Tipik bir kapsamlı kurumsal AI projesi 8–14 hafta sürer. Pilot (1 senaryo + 1 entegrasyon) 3–4 haftada canlıya alınabilir. Süreyi, veri durumu ve onay döngüleri belirliyor.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 13. CTA FINAL ═══════════════ -->
+    <section class="cta-final" id="konusalim" aria-labelledby="cta-title">
+      <div class="shell shell--narrow">
+        <span class="eyebrow eyebrow--center" data-reveal data-reveal-direction="up">Konuşalım</span>
+        <h2 id="cta-title" class="cta-final__title" data-reveal data-reveal-direction="scale" data-reveal-delay="100">
+          Yapay zekanın <em>doğru yerini</em> birlikte tanımlayalım.
+        </h2>
+        <p class="cta-final__lead" data-reveal data-reveal-direction="up" data-reveal-delay="200">
+          30 dakikalık keşif görüşmesi — kullanım senaryosu, veri durumu ve
+          olası yol haritası birlikte ele alınır.
+        </p>
+        <div class="cta-final__ctas" data-reveal data-reveal-direction="up" data-reveal-delay="300">
+          <a href="./index.html" class="btn btn-link btn-link--back">
+            <svg class="btn-link__icon btn-link__icon--back" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Ana sayfa
+          </a>
+          <a href="./iletisim.html" class="btn btn-primary">
+            İletişim
+            <svg class="btn-primary__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Persistent scroll rail (right side, chapter indicator + segments) -->
-  <aside class="scroll-rail" aria-hidden="true">
-    <div class="scroll-rail__label">//00 YAPAY ZEKA</div>
-    <ol class="scroll-rail__segments">
-      <li data-stage="00" class="is-active"></li>
-      <li data-stage="01"></li>
-      <li data-stage="02"></li>
-      <li data-stage="03"></li>
-      <li data-stage="04"></li>
-      <li data-stage="05"></li>
-    </ol>
-    <div class="scroll-rail__cue">SCROLL</div>
-  </aside>
+  <!-- Footer reveal spacer — final section yukarı kayınca fixed footer açığa çıkar -->
+  <div class="footer-reveal-spacer"></div>
 
-  <!-- Back-home reveal: mouse top edge (≤140px) toggles body.is-near-nav -->
+  <!-- ========== GAVIA FOOTER (standart) ========== -->
+  <footer class="footer-fixed-bottom relative bg-gavia-deep border-t border-gavia-mint/30 shadow-[0_-1px_0_rgba(63,213,173,0.08)_inset] overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-gavia-mint to-transparent"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20 md:pb-24">
+      <div class="max-w-xl">
+        <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto mb-6" />
+        <p class="text-sm text-gray-400 leading-relaxed mb-6 max-w-sm">
+          AI destekli özel yazılım ve dijital ürün stüdyosu.
+        </p>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="X" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="GitHub" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="border-t border-gavia-border mt-16 pt-8 flex flex-col md:flex-row justify-between gap-3 text-xs text-gavia-muted">
+        <a href="mailto:info@gaviaworks.com" class="text-sm text-gray-400 hover:text-gavia-mint transition-colors">info@gaviaworks.com</a>
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          <a href="./kvkk.html" class="hover:text-gavia-mint transition-colors">KVKK Aydınlatma</a>
+          <span class="opacity-30">·</span>
+          <a href="./cerez-politikasi.html" class="hover:text-gavia-mint transition-colors">Çerez Politikası</a>
+          <span class="opacity-30">·</span>
+          <a href="./gizlilik-politikasi.html" class="hover:text-gavia-mint transition-colors">Gizlilik Politikası</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/main.js"></script>
+  <script src="./assets/js/yapay-zeka-pinscroll.js"></script>
+
+  <!-- FAQ single-open accordion: opening one closes the others -->
+  <script>
+    (function () {
+      var items = document.querySelectorAll('.faq__list .faq__item');
+      if (!items.length) return;
+      items.forEach(function (item) {
+        item.addEventListener('toggle', function () {
+          if (!item.open) return;
+          items.forEach(function (other) {
+            if (other !== item && other.open) other.open = false;
+          });
+        });
+      });
+    })();
+  </script>
+
   <script>
     (function () {
       var MOUSE_REVEAL_Y = 140;
@@ -205,14 +1000,100 @@
     })();
   </script>
 
-  <!-- Three.js scene (shared, reads --scene-accent CSS var) -->
-  <script type="module" src="./assets/js/yapay-zeka-scene.js"></script>
+  <script>
+    (function () {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          el.classList.add('is-revealed');
+        });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) {
+        io.observe(el);
+      });
+    })();
+  </script>
 
-  <!-- GSAP + ScrollTrigger + Lenis -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
-  <script type="module" src="./assets/js/yapay-zeka-scroll-v2.js"></script>
+  <script>
+    (function () {
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href');
+          if (!id || id === '#') return;
+          var target = document.querySelector(id);
+          if (!target) return;
+          e.preventDefault();
+          var top = target.getBoundingClientRect().top + window.scrollY - 56;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        });
+      });
+    })();
+  </script>
+
+  <!-- Mimari layer slider — tabs switch the background image + label -->
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll('[data-mimari-tabs] .compare-slider__tab');
+      var imgs = document.querySelectorAll('[data-mimari-stage] .compare-slider__img');
+      var eyebrow = document.querySelector('[data-mimari-label] [data-layer-eyebrow]');
+      var title = document.querySelector('[data-mimari-label] [data-layer-title]');
+      if (!tabs.length || !imgs.length) return;
+      tabs.forEach(function (t) {
+        t.addEventListener('click', function () {
+          tabs.forEach(function (x) { x.classList.remove('is-active'); x.setAttribute('aria-selected','false'); });
+          t.classList.add('is-active'); t.setAttribute('aria-selected','true');
+          var target = t.getAttribute('data-target');
+          imgs.forEach(function (i) { i.classList.toggle('is-active', i.getAttribute('data-layer') === target); });
+          if (eyebrow) eyebrow.textContent = t.getAttribute('data-eyebrow') || t.textContent;
+          if (title) title.textContent = t.getAttribute('data-title') || '';
+        });
+      });
+    })();
+  </script>
+
+  <!-- Stat count-up animation (triggers when stat-grid enters viewport) -->
+  <script>
+    (function () {
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+      function animateNumber(el) {
+        var raw = el.textContent.trim();
+        // Parse: "10x", "%80", "30dk", "4"  →  prefix + number + suffix
+        var m = raw.match(/^(\D*)(\d+(?:\.\d+)?)(\D*)$/);
+        if (!m) return;
+        var prefix = m[1], target = parseFloat(m[2]), suffix = m[3];
+        var duration = 1200;
+        var start = performance.now();
+        function tick(now) {
+          var p = Math.min(1, (now - start) / duration);
+          var v = target * easeOut(p);
+          var formatted = (target % 1 === 0) ? Math.round(v) : v.toFixed(1);
+          el.textContent = prefix + formatted + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      if (!('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateNumber(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      document.querySelectorAll('.stat-grid .stat__number, .hero__stats .hero__stat-n').forEach(function (el) {
+        io.observe(el);
+      });
+    })();
+  </script>
 
 </body>
 </html>
