@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <link rel="stylesheet" href="../assets/css/brand.css" />
+  <link rel="stylesheet" href="../assets/css/brand.css?v=tur4r3" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -208,6 +208,14 @@
       font-family: 'Queulat','Manrope',system-ui,sans-serif;
       font-weight: 700; color: var(--gavia-deep);
       font-size: 1.25rem; letter-spacing: -.01em;
+    }
+
+
+    /* Soft cyan border on all case visuals (ozel-yazilim referansı) */
+    .gv-media,
+    .case-gallery-mini-carousel {
+      border: 1px solid rgba(63,213,173,0.18) !important;
+      box-shadow: none !important;
     }
 
     /* Case study hero — slightly more cinematic than service hero */
@@ -430,7 +438,12 @@
         </div>
         <div class="col-span-2 md:col-span-4 lg:col-span-1">
           <div class="case-meta-label">Hizmetler</div>
-          <div class="-ml-1"><span class="meta-chip">Strateji</span><span class="meta-chip">Web & Mobil</span><span class="meta-chip">Etkileşim</span></div>
+          <div class="meta-services" data-meta-services>
+            <span class="meta-chip">Strateji</span>
+            <span class="meta-chip">Web & Mobil</span>
+            <span class="meta-chip">Etkileşim</span>
+            <button type="button" class="meta-more-btn" data-more-count="1" aria-expanded="false" aria-label="Tüm hizmetleri göster">+1</button>
+          </div>
         </div>
       </div>
     </div>
@@ -453,49 +466,116 @@
     </div>
   </section>
 
-  <!-- ========== 02 / ÇÖZÜM & PROJE ========== -->
+    <!-- ========== 02 / ÜRÜN — yazı + görsel + CTA ========== -->
   <section class="bg-gavia-light pt-20 md:pt-24 pb-14 md:pb-16 border-t border-gavia-deep/8">
-    <div class="max-w-6xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-      <div class="lg:col-span-5">
-        <div class="gv-overline mb-5"><span class="font-mono text-gavia-mint/80">02</span> <span>Çözüm</span></div>
-        <h2 class="font-display font-bold text-gavia-deep text-2xl md:text-[2rem] tracking-tight leading-[1.2]">
+    <div class="max-w-6xl mx-auto px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <div class="lg:col-span-6">
+        <div class="gv-overline mb-5"><span class="font-mono text-gavia-mint/80">02</span> <span>Ürün</span></div>
+        <h2 class="font-display font-bold text-gavia-deep text-2xl md:text-[2rem] tracking-tight leading-[1.2] mb-5">
           <!-- TODO: Yasin Bey copy --> Süreci, marka dilini ve teknolojiyi tek bir deneyimde buluşturduk.
         </h2>
-      </div>
-      <div class="lg:col-span-7">
         <p class="text-base md:text-[17px] text-gavia-deep/75 leading-[1.7] mb-5">
           <!-- TODO: Yasin Bey copy --> Tasarım dilinden veri modeline kadar her katmanı projenin gerçek ihtiyaçlarına göre kurguladık. Kullanıcı yolculuğunu sadeleştiren mikro etkileşimler, performansı yormayan bir teknik altyapı ve operasyonu rahatlatan bir yönetim paneliyle uçtan uca bir çözüm teslim ettik.
         </p>
         <p class="text-base md:text-[17px] text-gavia-deep/75 leading-[1.7] mb-8">
           <!-- TODO: Yasin Bey copy --> Canlıya çıktıktan sonra da bırakmadık: kullanım analitiğiyle gözle görülür kararlar aldık, küçük iyileştirmelerle ölçülebilir kazanımlar elde ettik.
         </p>
+        <!-- TODO: Canlı proje linki - Yasin Bey'den alınacak -->
         <a href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gavia-deep text-white text-sm font-semibold hover:bg-gavia-mint hover:text-gavia-deep transition-colors group">
           <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           <span>Projeyi canlıda gör</span>
           <i class="fa-solid fa-arrow-right text-xs opacity-70 group-hover:translate-x-1 transition-transform"></i>
         </a>
-        <!-- TODO: Yasin Bey gerçek proje URL'sini href'e ekle -->
+      </div>
+      <div class="lg:col-span-6">
+        <div class="gv-media gv-media-wide"
+             style="background-image:url('https://images.unsplash.com/photo-1583791126827-bbb0a3a2c0f3?auto=format&fit=crop&w=1600&q=70');"
+             role="img" aria-label="Proje ana görseli"></div>
       </div>
     </div>
   </section>
 
-  <!-- ========== 03 / VISUAL GALLERY (horizontal scroll, single row) ========== -->
-  <section class="bg-gavia-light pt-10 md:pt-12 pb-20 md:pb-24">
+  <!-- ========== 03 / ALT-ROW 1 — sol görsel, sağ yazı ========== -->
+  <section class="case-alt-row bg-white border-t border-gavia-deep/8">
     <div class="max-w-6xl mx-auto px-6 md:px-8">
-      <div class="flex items-end justify-between gap-6 mb-10">
-        <div class="gv-overline"><span class="font-mono text-gavia-mint/80">03</span> <span>Vitrin</span></div>
-        <span class="hidden md:inline-flex items-center gap-2 text-xs text-gavia-deep/45 font-medium">
-          <i class="fa-solid fa-arrows-left-right text-[10px]"></i>
-          <span>kaydır</span>
-        </span>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <div class="gv-media gv-media-wide"
+             style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=70');"
+             role="img" aria-label="Vitrin görseli"></div>
+        <div>
+          <div class="gv-overline"><span class="font-mono text-gavia-mint/80">03</span> <span>Vitrin</span></div>
+          <h3 class="font-display font-bold text-gavia-deep text-2xl md:text-[1.75rem] tracking-tight leading-[1.2] mb-4">
+            <!-- TODO: Yasin Bey copy --> Marka diliyle hizalı bir vitrin tasarımı.
+          </h3>
+          <p class="text-base md:text-[17px] text-gavia-deep/75 leading-[1.7]">
+            <!-- TODO: Yasin Bey copy --> Ferah bir görsel hiyerarşi, sade tipografi ve hızlı bir keşif akışı; kullanıcının aradığını en kısa yolda bulmasını sağlayan, marka diline sadık bir vitrin kurguladık.
+          </p>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="gallery-strip" role="region" aria-label="Fresh Selective görsel galeri">
-        <div class="gallery-item gallery-item-wide"      style="background-image:url('https://images.unsplash.com/photo-1583791126827-bbb0a3a2c0f3?auto=format&fit=crop&w=1600&q=70');"></div>
-        <div class="gallery-item gallery-item-portrait"  style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=70');"></div>
-        <div class="gallery-item gallery-item-landscape" style="background-image:url('https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=70');"></div>
-        <div class="gallery-item gallery-item-square"    style="background-image:url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=70');"></div>
-        <div class="gallery-item gallery-item-wide"      style="background-image:url('https://images.unsplash.com/photo-1583791126827-bbb0a3a2c0f3?auto=format&fit=crop&w=1600&q=70');"></div>
+  <!-- ========== 04 / ALT-ROW 2 — sol yazı, sağ görsel ========== -->
+  <section class="case-alt-row bg-gavia-light border-t border-gavia-deep/8">
+    <div class="max-w-6xl mx-auto px-6 md:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <div class="lg:order-2 gv-media gv-media-wide"
+             style="background-image:url('https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=70');"
+             role="img" aria-label="Akış görseli"></div>
+        <div class="lg:order-1">
+          <div class="gv-overline"><span class="font-mono text-gavia-mint/80">04</span> <span>Akış</span></div>
+          <h3 class="font-display font-bold text-gavia-deep text-2xl md:text-[1.75rem] tracking-tight leading-[1.2] mb-4">
+            <!-- TODO: Yasin Bey copy --> Akıcı bir kullanım deneyimi.
+          </h3>
+          <p class="text-base md:text-[17px] text-gavia-deep/75 leading-[1.7]">
+            <!-- TODO: Yasin Bey copy --> Etkileşim katmanlarını sadeleştirdik; kullanıcıyı en az tıkla, en hızlı sonuca götüren bir akış kurduk. Operasyon ekibinin yönetim panelinden takip ettiği veri, kullanıcı tarafında doğrudan değer üretiyor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 05 / GALLERY — mini carousel + lightbox ========== -->
+  <section class="bg-white pt-16 md:pt-20 pb-20 md:pb-24 border-t border-gavia-deep/8">
+    <div class="max-w-6xl mx-auto px-6 md:px-8">
+      <div class="case-gallery-mini" role="region" aria-label="Galeri">
+        <div class="lg:order-2">
+          <div class="gv-overline mb-5"><span class="font-mono text-gavia-mint/80">05</span> <span>Galeri</span></div>
+          <h3 class="font-display font-bold text-gavia-deep text-2xl md:text-[1.75rem] tracking-tight leading-[1.2] mb-4">
+            Tasarım sisteminden ekran haritasına.
+          </h3>
+          <p class="text-base md:text-[17px] text-gavia-deep/75 leading-[1.7]">
+            Projeyi inşa ederken üretilen anahtar görseller; vitrin, akış ve yönetim panelinden seçilmiş kareler. Görsele tıklayarak büyük boyutta inceleyebilirsiniz.
+          </p>
+        </div>
+
+        <div class="case-gallery-mini-carousel lg:order-1"
+             data-gallery
+             role="region"
+             aria-roledescription="carousel"
+             aria-label="Görsel galerisi"
+             aria-live="polite">
+          <div class="gallery-track" data-track>
+            <button type="button" class="gallery-slide" data-slide data-lightbox-src="https://images.unsplash.com/photo-1583791126827-bbb0a3a2c0f3?auto=format&fit=crop&w=1600&q=70" aria-current="true" aria-label="1. görseli büyüt" style="background-image:url('https://images.unsplash.com/photo-1583791126827-bbb0a3a2c0f3?auto=format&fit=crop&w=1600&q=70');"></button>
+            <button type="button" class="gallery-slide" data-slide data-lightbox-src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=70" aria-label="2. görseli büyüt" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=70');"></button>
+            <button type="button" class="gallery-slide" data-slide data-lightbox-src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=70" aria-label="3. görseli büyüt" style="background-image:url('https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=70');"></button>
+            <button type="button" class="gallery-slide" data-slide data-lightbox-src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=70" aria-label="4. görseli büyüt" style="background-image:url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=70');"></button>
+            <button type="button" class="gallery-slide" data-slide data-lightbox-src="https://images.unsplash.com/photo-1583791126827-bbb0a3a2c0f3?auto=format&fit=crop&w=1600&q=70" aria-label="5. görseli büyüt" style="background-image:url('https://images.unsplash.com/photo-1583791126827-bbb0a3a2c0f3?auto=format&fit=crop&w=1600&q=70');"></button>
+          </div>
+          <button type="button" class="gallery-prev" data-prev aria-label="Önceki görsel">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="gallery-next" data-next aria-label="Sonraki görsel">
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
+          <div class="gallery-dots" role="tablist" aria-label="Galeri sayfaları">
+            <button type="button" data-dot="0" class="active" aria-label="1. görsele git"></button>
+            <button type="button" data-dot="1" aria-label="2. görsele git"></button>
+            <button type="button" data-dot="2" aria-label="3. görsele git"></button>
+            <button type="button" data-dot="3" aria-label="4. görsele git"></button>
+            <button type="button" data-dot="4" aria-label="5. görsele git"></button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -504,7 +584,7 @@
   <section class="bg-white py-20 md:py-24 border-t border-gavia-deep/8">
     <div class="max-w-6xl mx-auto px-6 md:px-8">
       <div class="mb-10">
-        <div class="gv-overline"><span class="font-mono text-gavia-mint/80">04</span> <span>Sonuçlar</span></div>
+        <div class="gv-overline"><span class="font-mono text-gavia-mint/80">06</span> <span>Sonuçlar</span></div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
         <div class="kpi-soft">

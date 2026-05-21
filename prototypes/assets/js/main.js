@@ -531,4 +531,178 @@ document.addEventListener('DOMContentLoaded', () => {
     new window.Swiper(container, { slidesPerView: 1, spaceBetween: 24, breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 4 } } });
   }
   initServicesSlider();
+
+  // === M14 — Çalışmalar tab filter ===
+  function initWorkFilter() {
+    const bar = document.querySelector('[data-work-filter]');
+    const grid = document.querySelector('[data-work-grid]');
+    if (!bar || !grid) return;
+    const buttons = bar.querySelectorAll('button[data-filter]');
+    const tiles = grid.querySelectorAll('.work-tile');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        buttons.forEach(b => {
+          const on = b === btn;
+          b.classList.toggle('active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        tiles.forEach(t => {
+          const cat = t.dataset.category;
+          const show = filter === 'all' || cat === filter;
+          t.classList.toggle('hidden-by-filter', !show);
+        });
+      });
+    });
+  }
+  initWorkFilter();
+
+  // === M15 — Case meta services accordion ===
+  function initMetaServicesAccordion() {
+    document.querySelectorAll('.meta-more-btn').forEach(btn => {
+      const more = btn.dataset.moreCount || '';
+      const collapsedHTML = '+' + more;
+      const expandedHTML  = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+      btn.addEventListener('click', () => {
+        const wrap = btn.closest('.meta-services');
+        if (!wrap) return;
+        const isOpen = wrap.classList.toggle('expanded');
+        btn.innerHTML = isOpen ? expandedHTML : collapsedHTML;
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        btn.setAttribute('aria-label', isOpen ? 'Hizmetleri daralt' : 'Tüm hizmetleri göster');
+      });
+    });
+  }
+  initMetaServicesAccordion();
+
+  // === M17 — Case gallery carousel ===
+  function initCaseGalleryCarousel() {
+    document.querySelectorAll('[data-gallery]').forEach(gallery => {
+      const track = gallery.querySelector('[data-track]');
+      const slides = gallery.querySelectorAll('[data-slide]');
+      const prev = gallery.querySelector('[data-prev]');
+      const next = gallery.querySelector('[data-next]');
+      const dots = gallery.querySelectorAll('[data-dot]');
+      if (!track || slides.length === 0) return;
+
+      let index = 0;
+      const last = slides.length - 1;
+
+      const render = () => {
+        track.style.transform = `translateX(${-index * 100}%)`;
+        slides.forEach((s, i) => s.setAttribute('aria-current', i === index ? 'true' : 'false'));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        if (prev) prev.disabled = false;
+        if (next) next.disabled = false;
+      };
+
+      const go = (i) => {
+        if (i < 0) i = last;
+        if (i > last) i = 0;
+        index = i;
+        render();
+      };
+
+      prev && prev.addEventListener('click', () => go(index - 1));
+      next && next.addEventListener('click', () => go(index + 1));
+      dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+
+      // Keyboard — yalnızca gallery odaklıyken
+      gallery.setAttribute('tabindex', '0');
+      gallery.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); }
+      });
+
+      // Touch swipe
+      let startX = null, dx = 0, dragging = false;
+      const onStart = (x) => { startX = x; dx = 0; dragging = true; };
+      const onMove  = (x) => { if (dragging && startX != null) dx = x - startX; };
+      const onEnd   = () => {
+        if (!dragging) return;
+        const threshold = 40;
+        if (Math.abs(dx) > 8) gallery._suppressClick = true;
+        if (dx > threshold) go(index - 1);
+        else if (dx < -threshold) go(index + 1);
+        startX = null; dx = 0; dragging = false;
+      };
+      gallery.addEventListener('touchstart', (e) => onStart(e.touches[0].clientX), { passive: true });
+      gallery.addEventListener('touchmove',  (e) => onMove(e.touches[0].clientX),  { passive: true });
+      gallery.addEventListener('touchend',   onEnd);
+      // Pointer drag (desktop trackpad/mouse)
+      gallery.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'touch') return;
+        onStart(e.clientX);
+      });
+      gallery.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch') return;
+        onMove(e.clientX);
+      });
+      gallery.addEventListener('pointerup',     (e) => { if (e.pointerType !== 'touch') onEnd(); });
+      gallery.addEventListener('pointercancel', (e) => { if (e.pointerType !== 'touch') onEnd(); });
+
+      render();
+    });
+  }
+  initCaseGalleryCarousel();
+
+  // === REV-3 — Case lightbox (galeri tıklama → fullscreen modal) ===
+  function initCaseLightbox() {
+    const lb = document.querySelector('[data-lightbox]');
+    if (!lb) return;
+    const img      = lb.querySelector('[data-lightbox-img]');
+    const closeBtn = lb.querySelector('[data-lightbox-close]');
+    const prevBtn  = lb.querySelector('[data-lightbox-prev]');
+    const nextBtn  = lb.querySelector('[data-lightbox-next]');
+    const triggers = document.querySelectorAll('[data-lightbox-src]');
+    if (!triggers.length) return;
+
+    const srcs = [...triggers].map(t => t.dataset.lightboxSrc);
+    let idx = 0;
+    let lastFocused = null;
+
+    const show = (i) => {
+      idx = (i + srcs.length) % srcs.length;
+      img.src = srcs[idx];
+      img.alt = `Galeri görseli ${idx + 1}`;
+    };
+    const open = (i) => {
+      lastFocused = document.activeElement;
+      show(i);
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+      closeBtn && closeBtn.focus();
+    };
+    const close = () => {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lightbox-open');
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    };
+
+    triggers.forEach((t, i) => {
+      t.addEventListener('click', (e) => {
+        const gallery = t.closest('[data-gallery]');
+        if (gallery && gallery._suppressClick) {
+          gallery._suppressClick = false;
+          return;
+        }
+        e.preventDefault();
+        open(i);
+      });
+    });
+
+    closeBtn && closeBtn.addEventListener('click', close);
+    prevBtn  && prevBtn.addEventListener('click', () => show(idx - 1));
+    nextBtn  && nextBtn.addEventListener('click', () => show(idx + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')     close();
+      if (e.key === 'ArrowLeft')  show(idx - 1);
+      if (e.key === 'ArrowRight') show(idx + 1);
+    });
+  }
+  initCaseLightbox();
 });

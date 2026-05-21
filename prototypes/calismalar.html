@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <link rel="stylesheet" href="./assets/css/brand.css" />
+  <link rel="stylesheet" href="./assets/css/brand.css?v=tur4r3" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -486,8 +486,19 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-        <a href="./calismalar/icmas-academy.html" class="work-tile group">
+      <!-- Tab filter (M14) -->
+      <div class="filter-tabs" role="tablist" aria-label="Çalışma kategorisi filtresi" data-work-filter>
+        <button type="button" data-filter="all" class="active" aria-pressed="true">Tümü</button>
+        <button type="button" data-filter="web-mobil" aria-pressed="false">Web &amp; Mobil</button>
+        <button type="button" data-filter="etkinlik" aria-pressed="false">Etkinlik / Fuar</button>
+        <button type="button" data-filter="egitim" aria-pressed="false">Eğitim</button>
+        <button type="button" data-filter="sosyal" aria-pressed="false">Sosyal</button>
+        <button type="button" data-filter="endustri" aria-pressed="false">Endüstri</button>
+        <button type="button" data-filter="turizm" aria-pressed="false">Turizm</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" data-work-grid>
+        <a href="./calismalar/icmas-academy.html" class="work-tile group" data-category="egitim">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Eğitim</div>
@@ -495,7 +506,7 @@
             <p class="work-desc">Strateji · Web &amp; Yazılım · Mobil · Etkileşim</p>
           </div>
         </a>
-        <a href="./calismalar/fresh-selective.html" class="work-tile group">
+        <a href="./calismalar/fresh-selective.html" class="work-tile group" data-category="web-mobil">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Perakende</div>
@@ -503,7 +514,7 @@
             <p class="work-desc">Web · Mobil Site · iOS &amp; Android</p>
           </div>
         </a>
-        <a href="./calismalar/gucumuz-bir.html" class="work-tile group">
+        <a href="./calismalar/gucumuz-bir.html" class="work-tile group" data-category="sosyal">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Sosyal</div>
@@ -511,7 +522,7 @@
             <p class="work-desc">Strateji · Web &amp; Mobil · Uygulama</p>
           </div>
         </a>
-        <a href="./calismalar/next-big-move-to-turkiye.html" class="work-tile group">
+        <a href="./calismalar/next-big-move-to-turkiye.html" class="work-tile group" data-category="etkinlik">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1483450388369-9ed95738483c?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Yatırım</div>
@@ -519,7 +530,7 @@
             <p class="work-desc">Strateji · Web &amp; Mobil · Etkileşim</p>
           </div>
         </a>
-        <a href="./calismalar/aselsan.html" class="work-tile group">
+        <a href="./calismalar/aselsan.html" class="work-tile group" data-category="endustri">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Savunma</div>
@@ -527,7 +538,7 @@
             <p class="work-desc">Strateji · Web &amp; Mobil · Etkileşim</p>
           </div>
         </a>
-        <a href="./calismalar/antalya-bilim-universitesi.html" class="work-tile group">
+        <a href="./calismalar/antalya-bilim-universitesi.html" class="work-tile group" data-category="egitim">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Yükseköğretim</div>
@@ -535,7 +546,7 @@
             <p class="work-desc">Strateji · Web &amp; Yazılım · Mobil</p>
           </div>
         </a>
-        <a href="./calismalar/tokal-crm.html" class="work-tile group">
+        <a href="./calismalar/tokal-crm.html" class="work-tile group" data-category="web-mobil">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">CRM · Sanayi</div>
@@ -543,7 +554,7 @@
             <p class="work-desc">Mobil Uygulama · iOS &amp; Android</p>
           </div>
         </a>
-        <a href="./calismalar/trakya-turizm-rotasi.html" class="work-tile group">
+        <a href="./calismalar/trakya-turizm-rotasi.html" class="work-tile group" data-category="turizm">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Turizm</div>
@@ -551,7 +562,7 @@
             <p class="work-desc">Web · Mobil Site · iOS &amp; Android · Etkileşim</p>
           </div>
         </a>
-        <a href="./calismalar/turkey-expo-kuveyt.html" class="work-tile group">
+        <a href="./calismalar/turkey-expo-kuveyt.html" class="work-tile group" data-category="etkinlik">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Etkinlik</div>
@@ -559,7 +570,7 @@
             <p class="work-desc">Strateji · Web &amp; Mobil · Etkileşim</p>
           </div>
         </a>
-        <a href="./calismalar/qatar-air-show.html" class="work-tile group">
+        <a href="./calismalar/qatar-air-show.html" class="work-tile group" data-category="etkinlik">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Havacılık</div>
@@ -567,7 +578,7 @@
             <p class="work-desc">Strateji · Web &amp; Mobil · Etkileşim</p>
           </div>
         </a>
-        <a href="./calismalar/high-tech-port-by-musiad.html" class="work-tile group">
+        <a href="./calismalar/high-tech-port-by-musiad.html" class="work-tile group" data-category="etkinlik">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Sanayi · Teknopark</div>
@@ -575,7 +586,7 @@
             <p class="work-desc">Kurumsal Web · Etkinlik Platformu</p>
           </div>
         </a>
-        <a href="./calismalar/global-sat-show.html" class="work-tile group">
+        <a href="./calismalar/global-sat-show.html" class="work-tile group" data-category="etkinlik">
           <div class="work-img" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=70');"></div>
           <div class="work-meta">
             <div class="work-tag">Uydu · Telekom</div>
