@@ -1296,11 +1296,11 @@ header[data-header] [data-mobile-menu-btn]:focus-visible {
    main.js initCookieBanner() tarafından dinamik inject edilir.
    data-no-cookie body attribute'lu sayfalarda skip edilir. */
 .cookie-banner {
-  position: fixed;
-  left: 16px;
+  position: fixed !important;
+  left: 16px !important;
   right: 16px;
-  bottom: 16px;
-  z-index: 90;
+  bottom: 16px !important;
+  z-index: 100 !important;
   background: #020837;
   border: 1px solid rgba(63,213,173,0.25);
   border-radius: 14px;
@@ -1313,9 +1313,9 @@ header[data-header] [data-mobile-menu-btn]:focus-visible {
 .cookie-banner.is-visible { opacity: 1; transform: translateY(0); }
 @media (min-width: 768px) {
   .cookie-banner {
-    left: 24px;
+    left: 24px !important;
     right: auto;
-    bottom: 24px;
+    bottom: 24px !important;
     max-width: 520px;
     padding: 18px 22px;
   }
