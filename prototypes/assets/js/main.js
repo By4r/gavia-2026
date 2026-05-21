@@ -510,4 +510,25 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (e.key === 'ArrowRight') renderAt(currentIndex + 1);
     });
   })();
+
+  // M7 — Hizmetler slider altyapısı (pasif).
+  // 5+ kart olunca aktive et: index.html'deki Swiper CDN yorumunu aç + window.Swiper geldiğinde init et.
+  function initServicesSlider() {
+    const container = document.querySelector('[data-services-slider]');
+    if (!container) return;
+    const cards = container.querySelectorAll('.service-card');
+    if (cards.length <= 4) return; // 4 kart varsa grid kal
+    if (typeof window.Swiper !== 'function') return; // CDN yorum kapalı → no-op
+    container.classList.add('swiper');
+    const wrapper = document.createElement('div');
+    wrapper.className = 'swiper-wrapper';
+    cards.forEach(card => {
+      card.classList.add('swiper-slide');
+      wrapper.appendChild(card);
+    });
+    container.innerHTML = '';
+    container.appendChild(wrapper);
+    new window.Swiper(container, { slidesPerView: 1, spaceBetween: 24, breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 4 } } });
+  }
+  initServicesSlider();
 });

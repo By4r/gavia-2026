@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gavia Works — Enerji Talep Tahminleme vakası: YEK üreticisi için saatlik üretim/talep eşleştirme ve depolama tetikleme." />
+  <title>Enerji Talep Tahminleme — Gavia Works</title>
+
+  <link rel="icon" type="image/png" href="../assets/logo/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/brand.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: {
+        'gavia-deep': '#020837', 'gavia-night': '#141533', 'gavia-dark': '#0A0E27',
+        'gavia-mint': '#3FD5AD', 'gavia-mint-bright': '#4FE5BD',
+        'gavia-light': '#E9EEF1', 'gavia-muted': '#6B7280', 'gavia-border': '#1F2740',
+      },
+      fontFamily: {
+        display: ['Queulat', 'Manrope', 'system-ui', 'sans-serif'],
+        hero: ['QueulatAlt', 'Queulat', 'Manrope', 'system-ui', 'sans-serif'],
+        sans: ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+    } } };
+  </script>
+
+  <style>
+    body { background-color: #020514; }
+    body > section, body > div.hero-zone { position: relative; z-index: 2; }
+    .gv-media { position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; background-size: cover; background-position: center; background-color: var(--gavia-night); border: 1px solid rgba(63,213,173,0.18); }
+    .gv-overline { display: inline-flex; align-items: center; gap: .65rem; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gavia-mint); font-weight: 600; }
+    .gv-overline::before { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--gavia-mint); opacity: .6; }
+    .section-divider { display: flex; align-items: center; justify-content: center; max-width: 360px; margin: 0 auto 0; }
+    .section-divider .line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(2,8,55,0.18)); }
+    .section-divider .line + .line { background: linear-gradient(to left, transparent, rgba(2,8,55,0.18)); }
+    .section-divider .dot { width: 6px; height: 6px; margin: 0 14px; background: var(--gavia-mint); border-radius: 50%; box-shadow: 0 0 0 4px rgba(63,213,173,0.18); }
+    .case-chip { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .75rem; border-radius: 999px; background: rgba(63,213,173,0.14); border: 1px solid rgba(63,213,173,0.35); color: var(--gavia-mint); font-size: .72rem; font-weight: 600; letter-spacing: .04em; }
+  </style>
+</head>
+<body class="bg-gavia-light text-gavia-deep antialiased gv-light-page">
+  <header data-header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="w-full px-6 md:px-10 lg:px-14">
+      <div class="flex items-center justify-between h-20">
+        <a href="../index.html" class="flex items-center gap-2">
+          <img src="../assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-10 w-auto" />
+        </a>
+        <div class="hidden lg:flex items-center gap-6">
+        <nav class="flex items-center gap-1 whitespace-nowrap">
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">Hizmetler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i></button>
+            <div class="mega-panel"><div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+              <a href="../hizmetler/ozel-yazilim.html" class="mega-showcase mega-showcase-billboard mega-showcase-left" data-mega-showcase>
+                <div class="mega-showcase-media"><img data-mega-image src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=70" alt="" /></div>
+                <div class="mega-showcase-body"><h4 data-mega-title class="font-display font-bold text-white text-base mb-1">Özel Yazılım Sistemleri</h4><p data-mega-desc class="text-sm text-gray-300 mb-3">CRM, ERP, portal, panel, e-ticaret — uçtan uca.</p></div>
+              </a>
+              <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                <a href="../hizmetler/ozel-yazilim.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-code"></i></span><span><span class="block font-semibold text-white">Özel Yazılım Sistemleri</span><span class="block text-sm text-gray-400 mt-0.5">CRM, ERP, portal, panel, e-ticaret.</span></span></a>
+                <a href="../hizmetler/mobil-uygulama.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-mobile-screen-button"></i></span><span><span class="block font-semibold text-white">Mobil Uygulama</span><span class="block text-sm text-gray-400 mt-0.5">iOS, Android, Flutter, React Native.</span></span></a>
+                <a href="../hizmetler/sistem-entegrasyonu.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-network-wired"></i></span><span><span class="block font-semibold text-white">Sistem Entegrasyonu</span><span class="block text-sm text-gray-400 mt-0.5">CRM/ERP, ödeme, kargo, pazaryeri.</span></span></a>
+                <a href="../hizmetler/bulut-guvenlik.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-shield-halved"></i></span><span><span class="block font-semibold text-white">Bulut & Güvenlik</span><span class="block text-sm text-gray-400 mt-0.5">Bulut mimarisi, KVKK, DevSecOps.</span></span></a>
+              </div>
+            </div></div>
+          </div>
+          <a href="../yapay-zeka.html" class="px-4 py-2 text-sm font-bold text-white hover:text-gavia-mint flex items-center gap-2">Yapay Zekâ <span class="inline-flex items-center justify-center text-[10px] font-bold px-1.5 py-0.5 rounded bg-gavia-mint text-gavia-deep leading-none">AI</span></a>
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">Ürünler <i class="fa-solid fa-chevron-down text-xs opacity-60"></i></button>
+            <div class="mega-panel"><div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+              <a href="../urunler/crm.html" class="mega-showcase mega-showcase-billboard mega-showcase-left" data-mega-showcase><div class="mega-showcase-media"><img data-mega-image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=70" alt="" /></div><div class="mega-showcase-body"><h4 data-mega-title class="font-display font-bold text-white text-base mb-1">Gavia CRM</h4><p data-mega-desc class="text-sm text-gray-300 mb-3">Satış, müşteri, teklif.</p></div></a>
+              <div class="lg:col-span-3"><p class="text-xs uppercase tracking-wider text-gavia-muted mb-3">Ana Vitrin</p><div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-5">
+                <a href="../urunler/crm.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-users"></i></span><span><span class="block font-semibold text-white">Gavia CRM</span><span class="block text-sm text-gray-400 mt-0.5">Satış, müşteri, teklif.</span></span></a>
+                <a href="../urunler/flow.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-diagram-project"></i></span><span><span class="block font-semibold text-white">Gavia Flow</span><span class="block text-sm text-gray-400 mt-0.5">İş akışı, onay, otomasyon.</span></span></a>
+                <a href="../urunler/assistant.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span><span class="block font-semibold text-white">Gavia Assistant</span><span class="block text-sm text-gray-400 mt-0.5">AI destekli asistan.</span></span></a>
+                <a href="../urunler/insight.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-chart-line"></i></span><span><span class="block font-semibold text-white">Gavia Insight</span><span class="block text-sm text-gray-400 mt-0.5">Veri analitiği, tahminleme.</span></span></a>
+              </div></div>
+            </div></div>
+          </div>
+          <a href="../calismalar.html" class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors">Çalışmalar</a>
+          <a href="../surdurulebilirlik.html" class="px-4 py-2 text-sm font-medium text-gavia-mint transition-colors">Sürdürülebilirlik</a>
+          <div class="mega-trigger" data-mega-trigger>
+            <button data-mega-toggle class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors inline-flex items-center gap-1.5">Gavia <i class="fa-solid fa-chevron-down text-xs opacity-60"></i></button>
+            <div class="mega-panel"><div class="mega-inner grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+              <a href="../hakkimizda.html" class="mega-showcase mega-showcase-billboard mega-showcase-left" data-mega-showcase><div class="mega-showcase-media"><img data-mega-image src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=70" alt="" /></div><div class="mega-showcase-body"><h4 data-mega-title class="font-display font-bold text-white text-base mb-1">Hakkımızda</h4><p data-mega-desc class="text-sm text-gray-300 mb-3">Gavia kimdir, neyi neden yapar.</p></div></a>
+              <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                <a href="../hakkimizda.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-circle-info"></i></span><span><span class="block font-semibold text-white">Hakkımızda</span><span class="block text-sm text-gray-400 mt-0.5">Gavia kimdir, ne yapar.</span></span></a>
+                <a href="../yaklasim.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-compass"></i></span><span><span class="block font-semibold text-white">Yaklaşım</span><span class="block text-sm text-gray-400 mt-0.5">Analiz → Tasarım → Yazılım → AI.</span></span></a>
+                <a href="../ekip.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-people-group"></i></span><span><span class="block font-semibold text-white">Ekip</span><span class="block text-sm text-gray-400 mt-0.5">Stüdyo arkasındaki insanlar.</span></span></a>
+                <a href="../kariyer.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-briefcase"></i></span><span><span class="block font-semibold text-white">Kariyer</span><span class="block text-sm text-gray-400 mt-0.5">Açık pozisyonlar ve staj.</span></span></a>
+                <a href="../referanslar.html" class="mega-link"><span class="mega-link-icon"><i class="fa-solid fa-handshake"></i></span><span><span class="block font-semibold text-white">Referanslar</span><span class="block text-sm text-gray-400 mt-0.5">Çalıştığımız markalar.</span></span></a>
+              </div>
+            </div></div>
+          </div>
+          <a href="../iletisim.html" class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors">İletişim</a>
+        </nav>
+          <div class="relative" data-lang-switcher>
+            <button type="button" class="flex items-center gap-1 px-2 py-1.5 text-sm font-semibold text-gray-200 hover:text-gavia-mint transition-colors" aria-haspopup="listbox" aria-expanded="false" aria-label="Dil seç / Select language" data-lang-trigger>
+              <span data-lang-current class="text-gavia-mint font-bold">EN</span><i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i>
+            </button>
+            <ul role="listbox" aria-label="Languages" class="hidden absolute right-0 mt-2 min-w-[140px] rounded-lg border border-gavia-border bg-gavia-deep/95 backdrop-blur-md shadow-xl py-1 z-50" data-lang-menu>
+              <li role="option" aria-selected="true" aria-current="true" tabindex="0" data-lang="en" class="flex items-center justify-between gap-3 px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none"><span><span class="font-mono text-xs opacity-60 mr-2">EN</span>English</span></li>
+              <li role="option" aria-selected="false" tabindex="-1" data-lang="tr" class="flex items-center justify-between gap-3 px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none"><span><span class="font-mono text-xs opacity-60 mr-2">TR</span>Türkçe</span></li>
+              <li role="option" aria-selected="false" tabindex="-1" data-lang="de" class="flex items-center justify-between gap-3 px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none"><span><span class="font-mono text-xs opacity-60 mr-2">DE</span>Deutsch</span></li>
+              <li role="option" aria-selected="false" tabindex="-1" data-lang="es" class="flex items-center justify-between gap-3 px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none"><span><span class="font-mono text-xs opacity-60 mr-2">ES</span>Español</span></li>
+            </ul>
+          </div>
+        </div>
+        <button data-mobile-menu-btn class="lg:hidden p-2 text-gray-200 hover:text-gavia-mint" aria-label="Menü"><i class="fa-solid fa-bars text-xl"></i></button>
+      </div>
+      <div data-mobile-menu class="hidden lg:hidden pb-6">
+        <nav class="flex flex-col gap-1 border-t border-gavia-border pt-4">
+          <a href="../hizmetler/ozel-yazilim.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Hizmetler</a>
+          <a href="../yapay-zeka.html" class="px-3 py-2 text-white hover:text-gavia-mint flex items-center gap-2">Yapay Zekâ <span class="inline-flex items-center justify-center text-[10px] font-bold px-1.5 py-0.5 rounded bg-gavia-mint text-gavia-deep leading-none">AI</span></a>
+          <a href="../urunler/crm.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Ürünler</a>
+          <a href="../calismalar.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Çalışmalar</a>
+          <a href="../surdurulebilirlik.html" class="px-3 py-2 text-gavia-mint">Sürdürülebilirlik</a>
+          <a href="../hakkimizda.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Gavia</a>
+          <a href="../iletisim.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">İletişim</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative bg-gavia-deep min-h-[360px] sm:min-h-[420px] md:min-h-[500px] flex items-center pt-28 md:pt-32 pb-10 overflow-hidden" style="background-image: linear-gradient(120deg, rgba(2,8,55,0.92) 0%, rgba(2,8,55,0.78) 45%, rgba(2,8,55,0.55) 80%, rgba(2,8,55,0.45) 100%), url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=2400&q=80'); background-size: cover; background-position: center;">
+    <div class="absolute top-1/3 -left-32 w-[520px] h-[520px] bg-gavia-mint/10 rounded-full blur-[160px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[420px] h-[420px] bg-gavia-mint/8 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-6 md:px-8 w-full">
+      <nav class="flex items-center justify-center gap-2 text-xs text-gray-300/80 mb-8" aria-label="Breadcrumb">
+        <a href="../index.html" class="hover:text-gavia-mint transition-colors">Ana Sayfa</a>
+        <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
+        <a href="../surdurulebilirlik.html" class="hover:text-gavia-mint transition-colors">Sürdürülebilirlik</a>
+        <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
+        <span class="text-gavia-mint">Enerji Talep Tahminleme</span>
+      </nav>
+      <div class="max-w-3xl mx-auto text-center">
+        <span class="case-chip mb-5"><i class="fa-solid fa-bolt text-[10px]"></i> AI & Enerji · YEK Üreticisi</span>
+        <h1 class="font-display font-extrabold text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.05] drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] mt-5">
+          Hangi saat ne kadar üretim, ne kadar <em class="not-italic"><span class="italic underline decoration-gavia-mint decoration-2 underline-offset-[8px]">talep</span></em>?
+        </h1>
+        <p class="mt-5 text-base md:text-lg text-gray-300 max-w-xl mx-auto leading-relaxed">
+          Yenilenebilir enerji üreticisi için saatlik tahminleme ve depolama tetikleme; arzın değişkenliğini akıllı zamanlamayla kazanca çevirme.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÖZET -->
+  <section class="bg-gavia-light py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-6 md:px-8">
+      <figure class="gv-media mb-6 md:float-right md:ml-10 md:mb-4 md:w-[55%]" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=2000&q=75'); aspect-ratio: 4 / 3;"></figure>
+      <div class="gv-overline mb-5"><span>Özet</span></div>
+      <h2 class="font-display font-bold text-gavia-deep text-2xl md:text-[2rem] tracking-tight leading-[1.2] mb-5">
+        Rüzgâr ne zaman eserse essin — depo, ne zaman boşalacağını bilsin.
+      </h2>
+      <div class="space-y-5 text-base md:text-[17px] text-gavia-deep/75 leading-[1.7]">
+        <p>
+          Müşteri, rüzgâr ve güneş bazlı YEK portföyüne sahip bir üretici. Üretim doğası gereği değişken; spot piyasa ve ikili anlaşma karması içinde her saat ayrı bir karar gerektiriyor. Tarihsel verilerde örüntü vardı, ama elle yakalanması zor; bazı saatlerde depodan satış, bazılarında şarjın yapılması gerekirken kararlar tecrübeyle alınıyordu.
+        </p>
+        <p>
+          Üretim öngörüsündeki her sapma, ya dengesizlik cezası ya da kaçırılmış satış fırsatı olarak geri dönüyordu. Operasyon ekibi günde defalarca tablo açıp, hava durumu kanallarını izleyip, fiyat panellerini takip ediyor; karar her vardiyada ayrı bir kişinin sezgisiyle alınıyordu. Bu durum hem sürdürülebilir değildi hem de bilginin kuruma ait olmasını engelliyordu.
+        </p>
+        <p>
+          Çözüm: meteoroloji, geçmiş üretim, piyasa fiyatı ve tüketim profili verisini birleştiren bir tahminleme katmanı + depolama tetikleme algoritması. Hava verisi her saat güncelleniyor, model gün-önce tahmini sürekli yeniliyor; depo şarj/desarj kararları otomatik öneri olarak operasyon ekibinin önüne düşüyor. Karar yine insanda, ama artık veriye yaslanmış bir karar.
+        </p>
+        <p>
+          Algoritmanın tahmin başarısı, gerçek üretim verisi geldikçe geriye dönük olarak ölçülüyor; sapma büyüdüğünde model yeniden besleniyor. Operasyon ekranı yalnız öneri sunmuyor; her önerinin gerekçesini — hava tahmini, fiyat eğilimi, depo doluluğu — şeffaf biçimde gösteriyor. Böylece sistem operatörün yerine değil, yanında çalışıyor.
+        </p>
+      </div>
+      <div class="clear-both"></div>
+    </div>
+  </section>
+
+  <!-- DEVAM -->
+  <section class="section-fade-top bg-gavia-light py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6 md:px-8">
+      <div class="section-divider" aria-hidden="true"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+      <div class="mt-14 md:mt-16 text-center">
+        <span class="gv-overline mb-5">Devam</span>
+        <h3 class="font-display font-extrabold text-3xl md:text-5xl text-gavia-deep tracking-tight mb-4">Hikâye burada bitmiyor.</h3>
+        <p class="text-base md:text-lg text-gavia-deep/70 max-w-2xl mx-auto mb-10">Diğer vakaları inceleyin ya da sürdürülebilirlik yaklaşımımıza göz atın.</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="./esg-raporlama.html" class="focus-chip"><i class="fa-solid fa-chart-pie"></i><span>ESG Raporlama</span><i class="fa-solid fa-arrow-right text-xs opacity-60"></i></a>
+          <a href="./kagitsiz-onay.html" class="focus-chip"><i class="fa-solid fa-file-circle-check"></i><span>Kâğıtsız Onay</span><i class="fa-solid fa-arrow-right text-xs opacity-60"></i></a>
+          <a href="../surdurulebilirlik.html" class="focus-chip"><i class="fa-solid fa-leaf"></i><span>Sürdürülebilirlik</span><i class="fa-solid fa-arrow-right text-xs opacity-60"></i></a>
+          <a href="../iletisim.html" class="focus-chip"><i class="fa-solid fa-envelope"></i><span>İletişim</span><i class="fa-solid fa-arrow-right text-xs opacity-60"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-reveal-spacer"></div>
+
+  <footer class="footer-fixed-bottom relative bg-gavia-deep border-t border-gavia-mint/30 shadow-[0_-1px_0_rgba(63,213,173,0.08)_inset] overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-gavia-mint to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20 md:pb-24">
+      <div class="max-w-xl">
+        <img src="../assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto mb-6" />
+        <p class="text-sm text-gray-400 leading-relaxed mb-6 max-w-sm">AI destekli özel yazılım ve dijital ürün stüdyosu.</p>
+        <div class="flex gap-3">
+          <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="X" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="GitHub" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="border-t border-gavia-border mt-16 pt-8 flex flex-col md:flex-row justify-between gap-3 text-xs text-gavia-muted">
+        <p class="text-xs text-gavia-muted">© 2026 Tüm hakları saklıdır.</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          <a href="../kvkk.html" class="hover:text-gavia-mint transition-colors">KVKK Aydınlatma</a>
+          <span class="opacity-30">·</span>
+          <a href="../cerez-politikasi.html" class="hover:text-gavia-mint transition-colors">Çerez Politikası</a>
+          <span class="opacity-30">·</span>
+          <a href="../gizlilik-politikasi.html" class="hover:text-gavia-mint transition-colors">Gizlilik Politikası</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

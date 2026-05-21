@@ -83,21 +83,36 @@
 
     /* === Referans logo grid === */
     .ref-logo-cell {
-      display: flex; align-items: center; justify-content: center;
-      padding: clamp(16px, 4vw, 28px) clamp(10px, 3vw, 18px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: clamp(22px, 5vw, 36px) clamp(12px, 3vw, 22px);
       background: #fff;
       border-right: 1px solid rgba(2, 8, 55, 0.06);
       border-bottom: 1px solid rgba(2, 8, 55, 0.06);
       transition: background .25s, transform .35s;
+      min-height: 140px;
     }
     .ref-logo-cell img {
-      max-height: 42px; max-width: 100%; width: auto; height: auto;
-      object-fit: contain; opacity: .65;
+      max-height: 56px; max-width: 100%; width: auto; height: auto;
+      object-fit: contain; opacity: .7;
       filter: grayscale(100%);
       transition: opacity .3s, filter .3s, transform .35s;
     }
     .ref-logo-cell:hover { background: rgba(63, 213, 173, 0.04); }
     .ref-logo-cell:hover img { opacity: 1; filter: grayscale(0); transform: scale(1.04); }
+    .ref-logo-name {
+      font-size: 11px;
+      color: rgba(2, 8, 55, 0.55);
+      margin-top: 10px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .ref-cta-cell {
+      cursor: pointer;
+      color: #3FD5AD;
+    }
+    .ref-cta-cell:hover {
+      background: rgba(63, 213, 173, 0.08) !important;
+    }
 
     /* === Testimonial === */
     .testimonial {
@@ -505,19 +520,23 @@
         </p>
       </div>
 
-      <div class="ref-logo-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-0 border border-gavia-deep/10 rounded-2xl overflow-hidden">
-        <div class="ref-logo-cell"><img src="./assets/img/clients/01.png" alt="Türksat" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/02.png" alt="Eurasia Airshow" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/03.png" alt="Yeniçağa Kaymakamlığı" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/04.webp" alt="4 High Tech Port" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/05.png" alt="Antalya Bilim Üniversitesi" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/06.png" alt="Dr Saka" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/07.png" alt="Expo Turkey" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/08.png" alt="Müşteri" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/09.png" alt="Müşteri" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/10.webp" alt="Müşteri" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/11.png" alt="Müşteri" loading="lazy" /></div>
-        <div class="ref-logo-cell"><img src="./assets/img/clients/12.webp" alt="Müşteri" loading="lazy" /></div>
+      <div class="ref-logo-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-0 border border-gavia-deep/10 rounded-2xl overflow-hidden">
+        <div class="ref-logo-cell"><img src="./assets/img/clients/01.png" alt="Türksat" loading="lazy" /><span class="ref-logo-name">Türksat</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/02.png" alt="Eurasia Airshow" loading="lazy" /><span class="ref-logo-name">Eurasia Airshow</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/03.png" alt="Yeniçağa Kaymakamlığı" loading="lazy" /><span class="ref-logo-name">Yeniçağa Kaymakamlığı</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/04.webp" alt="4 High Tech Port" loading="lazy" /><span class="ref-logo-name">4 High Tech Port</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/05.png" alt="Antalya Bilim Üniversitesi" loading="lazy" /><span class="ref-logo-name">Antalya Bilim Üniversitesi</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/06.png" alt="Dr Saka" loading="lazy" /><span class="ref-logo-name">Dr Saka</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/07.png" alt="Expo Turkey" loading="lazy" /><span class="ref-logo-name">Expo Turkey</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/08.png" alt="Müşteri" loading="lazy" /><span class="ref-logo-name">Müşteri</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/09.png" alt="Müşteri" loading="lazy" /><span class="ref-logo-name">Müşteri</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/10.webp" alt="Müşteri" loading="lazy" /><span class="ref-logo-name">Müşteri</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/11.png" alt="Müşteri" loading="lazy" /><span class="ref-logo-name">Müşteri</span></div>
+        <div class="ref-logo-cell"><img src="./assets/img/clients/12.webp" alt="Müşteri" loading="lazy" /><span class="ref-logo-name">Müşteri</span></div>
+        <a href="./iletisim.html" class="ref-logo-cell ref-cta-cell">
+          <i class="fa-solid fa-plus text-2xl"></i>
+          <span class="text-sm font-semibold mt-2">Sen de katıl</span>
+        </a>
       </div>
     </div>
   </section>

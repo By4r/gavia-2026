@@ -107,3 +107,10 @@
 
 Bu kural 21 Mayıs 2026 — Gavia Works Tur 2'de Stats zemin renginin
 izinsiz değiştirilmesi sonrası eklendi.
+
+## Commit Mesajları
+- Commit mesajları İNGİLİZCE (global CLAUDE.md kuralı)
+- Açıklayıcı, conventional commits stiline yakın
+- Format: "Round N: <kısa özet>" + bullet'lar
+
+Bu kural 21 Mayıs 2026'da Beyar hatırlattı.
