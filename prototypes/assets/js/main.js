@@ -233,8 +233,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const sel = i.dataset.lang === code;
           i.setAttribute('aria-selected', String(sel));
           sel ? i.setAttribute('aria-current', 'true') : i.removeAttribute('aria-current');
-          const check = i.querySelector('[data-lang-check]');
-          if (check) check.classList.toggle('hidden', !sel);
+          i.classList.toggle('hidden', sel);
+          i.setAttribute('tabindex', sel ? '-1' : '0');
         });
       };
       syncList(menu);
@@ -244,6 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
       try { localStorage.setItem('gavia-lang', code); } catch {}
       closeMenu(false);
     }
+
+    let initialLang = 'en';
+    try { initialLang = localStorage.getItem('gavia-lang') || 'en'; } catch {}
+    selectLang(initialLang);
   }
 
   // Footer reveal: spacer height = footer height (kopma olmasın), hero gizleme
@@ -322,6 +326,47 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Cookie consent banner — dynamic DOM injection, localStorage-gated.
+  // Skipped on pages with data-no-cookie body attribute (yapay-zeka cinematic).
+  (function initCookieBanner() {
+    if (document.body.hasAttribute('data-no-cookie')) return;
+    let stored = null;
+    try { stored = localStorage.getItem('gavia-cookie-consent'); } catch {}
+    if (stored) return;
+
+    const cookiePath = /\/(hizmetler|urunler|calismalar|surdurulebilirlik)\//.test(window.location.pathname)
+      ? '../cerez-politikasi.html'
+      : './cerez-politikasi.html';
+
+    const banner = document.createElement('div');
+    banner.className = 'cookie-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-live', 'polite');
+    banner.setAttribute('aria-label', 'Çerez tercihi');
+    banner.innerHTML = `
+      <div class="cookie-banner__body">
+        <p class="cookie-banner__text">
+          Bu sitede deneyimi iyileştirmek için çerez kullanıyoruz.
+          <a href="${cookiePath}">Çerez Politikası</a>
+        </p>
+        <div class="cookie-banner__actions">
+          <button type="button" class="cookie-banner__btn cookie-banner__btn--ghost" data-cookie-decline>Reddet</button>
+          <button type="button" class="cookie-banner__btn cookie-banner__btn--primary" data-cookie-accept>Kabul Et</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(banner);
+    requestAnimationFrame(() => banner.classList.add('is-visible'));
+
+    const dismiss = (value) => {
+      try { localStorage.setItem('gavia-cookie-consent', value); } catch {}
+      banner.classList.remove('is-visible');
+      setTimeout(() => banner.remove(), 300);
+    };
+    banner.querySelector('[data-cookie-accept]').addEventListener('click', () => dismiss('accept'));
+    banner.querySelector('[data-cookie-decline]').addEventListener('click', () => dismiss('decline'));
+  })();
 
   // Case-study gallery lightbox — click .gallery-item to enlarge, with prev/next + keyboard nav.
   (function buildGalleryLightbox() {

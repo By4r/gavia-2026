@@ -243,7 +243,7 @@
       <div class="flex items-center justify-between h-20">
 
         <a href="./index.html" class="flex items-center gap-2">
-          <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto" />
+          <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-10 w-auto" />
         </a>
 
         <div class="hidden lg:flex items-center gap-6">
@@ -308,7 +308,7 @@
 
           <!-- Yapay Zekâ — direct link (one-page) -->
 
-          <a href="./yapay-zeka.html" class="px-4 py-2 text-sm font-bold text-gray-200 hover:text-gavia-mint transition-colors">Yapay Zekâ</a>
+          <a href="./yapay-zeka.html" class="px-4 py-2 text-sm font-bold text-white hover:text-gavia-mint flex items-center gap-2">Yapay Zekâ <span class="inline-flex items-center justify-center text-[10px] font-bold px-1.5 py-0.5 rounded bg-gavia-mint text-gavia-deep leading-none">AI</span></a>
 
           <!-- Ürünler -->
           <div class="mega-trigger" data-mega-trigger>
@@ -424,23 +424,29 @@
                     aria-expanded="false"
                     aria-label="Dil seç / Select language"
                     data-lang-trigger>
-              <span data-lang-current>EN</span>
+              <span data-lang-current class="text-gavia-mint font-bold">EN</span>
               <i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i>
             </button>
             <ul role="listbox"
                 aria-label="Languages"
-                class="hidden absolute right-0 mt-2 min-w-[180px] rounded-lg border border-gavia-border bg-gavia-deep/95 backdrop-blur-md shadow-xl py-1 z-50"
+                class="hidden absolute right-0 mt-2 min-w-[140px] rounded-lg border border-gavia-border bg-gavia-deep/95 backdrop-blur-md shadow-xl py-1 z-50"
                 data-lang-menu>
               <li role="option" aria-selected="true" aria-current="true" tabindex="0"
                   data-lang="en"
-                  class="flex items-center justify-between gap-3 px-3 py-2 text-sm text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
+                  class="flex items-center justify-between gap-3 px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
                 <span><span class="font-mono text-xs opacity-60 mr-2">EN</span>English</span>
-                <i class="fa-solid fa-check text-xs text-gavia-mint" data-lang-check></i>
               </li>
               <li role="option" aria-selected="false" tabindex="-1" data-lang="tr"
-                  class="flex items-center justify-between gap-3 px-3 py-2 text-sm text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
+                  class="flex items-center justify-between gap-3 px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
                 <span><span class="font-mono text-xs opacity-60 mr-2">TR</span>Türkçe</span>
-                <i class="fa-solid fa-check text-xs text-gavia-mint hidden" data-lang-check></i>
+              </li>
+              <li role="option" aria-selected="false" tabindex="-1" data-lang="de"
+                  class="flex items-center justify-between gap-3 px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
+                <span><span class="font-mono text-xs opacity-60 mr-2">DE</span>Deutsch</span>
+              </li>
+              <li role="option" aria-selected="false" tabindex="-1" data-lang="es"
+                  class="flex items-center justify-between gap-3 px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:bg-gavia-mint/10 focus:bg-gavia-mint/10 outline-none">
+                <span><span class="font-mono text-xs opacity-60 mr-2">ES</span>Español</span>
               </li>
               <!-- DE / AR / RU sonra eklenir: aynı <li> yapısı, JS dokunmasın -->
             </ul>
@@ -455,7 +461,7 @@
       <div data-mobile-menu class="hidden lg:hidden pb-6">
         <nav class="flex flex-col gap-1 border-t border-gavia-border pt-4">
           <a href="./hizmetler/ozel-yazilim.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Hizmetler</a>
-          <a href="./yapay-zeka.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Yapay Zekâ</a>
+          <a href="./yapay-zeka.html" class="px-3 py-2 text-white hover:text-gavia-mint flex items-center gap-2">Yapay Zekâ <span class="inline-flex items-center justify-center text-[10px] font-bold px-1.5 py-0.5 rounded bg-gavia-mint text-gavia-deep leading-none">AI</span></a>
           <a href="./urunler/crm.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Ürünler</a>
           <a href="./calismalar.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Çalışmalar</a>
           <a href="./surdurulebilirlik.html" class="px-3 py-2 text-gray-200 hover:text-gavia-mint">Sürdürülebilirlik</a>
@@ -466,14 +472,20 @@
             <p class="px-3 mb-2 text-xs uppercase tracking-wider text-gavia-muted">Dil / Language</p>
             <ul role="listbox" aria-label="Languages" class="flex flex-col">
               <li role="option" aria-selected="true" aria-current="true" data-lang="en"
-                  class="flex items-center justify-between px-3 py-2 text-sm text-gray-200 cursor-pointer hover:text-gavia-mint">
+                  class="flex items-center justify-between px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:text-gavia-mint">
                 <span><span class="font-mono text-xs opacity-60 mr-2">EN</span>English</span>
-                <i class="fa-solid fa-check text-xs text-gavia-mint" data-lang-check></i>
               </li>
               <li role="option" aria-selected="false" data-lang="tr"
-                  class="flex items-center justify-between px-3 py-2 text-sm text-gray-200 cursor-pointer hover:text-gavia-mint">
+                  class="flex items-center justify-between px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:text-gavia-mint">
                 <span><span class="font-mono text-xs opacity-60 mr-2">TR</span>Türkçe</span>
-                <i class="fa-solid fa-check text-xs text-gavia-mint hidden" data-lang-check></i>
+              </li>
+              <li role="option" aria-selected="false" data-lang="de"
+                  class="flex items-center justify-between px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:text-gavia-mint">
+                <span><span class="font-mono text-xs opacity-60 mr-2">DE</span>Deutsch</span>
+              </li>
+              <li role="option" aria-selected="false" data-lang="es"
+                  class="flex items-center justify-between px-3 py-1.5 text-xs text-gray-200 cursor-pointer hover:text-gavia-mint">
+                <span><span class="font-mono text-xs opacity-60 mr-2">ES</span>Español</span>
               </li>
             </ul>
           </div>
@@ -923,7 +935,7 @@
 
       <!-- Alt çubuk -->
       <div class="border-t border-gavia-border mt-16 pt-8 flex flex-col md:flex-row justify-between gap-3 text-xs text-gavia-muted">
-        <a href="mailto:info@gaviaworks.com" class="text-sm text-gray-400 hover:text-gavia-mint transition-colors">info@gaviaworks.com</a>
+        <p class="text-xs text-gavia-muted">© 2026 Tüm hakları saklıdır.</p>
         <div class="flex flex-wrap gap-x-5 gap-y-2">
           <a href="./kvkk.html" class="hover:text-gavia-mint transition-colors">KVKK Aydınlatma</a>
           <span class="opacity-30">·</span>

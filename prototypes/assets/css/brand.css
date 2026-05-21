@@ -1264,3 +1264,80 @@ header[data-header] [data-mobile-menu-btn]:focus-visible {
 .hero-zone, .hero-sticky { overflow-x: clip; }
 
 
+/* ========== Cookie consent banner (M10) ==========
+   main.js initCookieBanner() tarafından dinamik inject edilir.
+   data-no-cookie body attribute'lu sayfalarda skip edilir. */
+.cookie-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  background: #020837;
+  border: 1px solid rgba(63,213,173,0.25);
+  border-radius: 14px;
+  box-shadow: 0 24px 48px -16px rgba(0,0,0,0.5);
+  padding: 16px 18px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .28s ease, transform .28s ease;
+}
+.cookie-banner.is-visible { opacity: 1; transform: translateY(0); }
+@media (min-width: 768px) {
+  .cookie-banner {
+    left: 24px;
+    right: auto;
+    bottom: 24px;
+    max-width: 520px;
+    padding: 18px 22px;
+  }
+}
+.cookie-banner__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .cookie-banner__body { flex-direction: row; align-items: center; gap: 16px; }
+}
+.cookie-banner__text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(233,238,241,0.85);
+  margin: 0;
+  flex: 1;
+}
+.cookie-banner__text a {
+  color: #3FD5AD;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cookie-banner__text a:hover { color: #4FE5BD; }
+.cookie-banner__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.cookie-banner__btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.cookie-banner__btn--ghost {
+  background: transparent;
+  border-color: rgba(233,238,241,0.2);
+  color: rgba(233,238,241,0.75);
+}
+.cookie-banner__btn--ghost:hover {
+  border-color: rgba(233,238,241,0.4);
+  color: #E9EEF1;
+}
+.cookie-banner__btn--primary {
+  background: #3FD5AD;
+  color: #020837;
+}
+.cookie-banner__btn--primary:hover { background: #4FE5BD; }
