@@ -303,7 +303,7 @@
 
   <!-- ========== HERO — Sticky scroll-over zone (Thoughtworks pattern) ========== -->
   <div class="hero-zone">
-  <section class="hero-sticky pt-32 pb-14 md:pt-40 md:pb-16 overflow-hidden bg-gavia-deep">
+  <section class="hero-sticky min-h-screen flex items-center justify-center pt-32 pb-16 md:pt-40 md:pb-24 lg:pb-28 overflow-hidden bg-gavia-deep">
     <!-- z=0 EN ALT: hero video (server / datacenter loop) -->
     <video autoplay muted loop playsinline preload="auto" poster="./assets/img/hero-poster.jpg" class="absolute inset-0 w-full h-full object-cover z-0 bg-gavia-deep">
       <source src="./assets/video/hero-datacenter2.mp4" type="video/mp4" />
@@ -314,7 +314,7 @@
     <div class="relative z-20 max-w-6xl mx-auto px-6 md:px-8 text-center">
       <span class="badge-mint mb-8 inline-flex"><i class="fa-solid fa-sparkles mr-1.5"></i>Yapay Zekâ × Yazılım Stüdyosu</span>
 
-      <h1 class="font-hero font-black text-5xl md:text-7xl lg:text-8xl leading-[1.02] tracking-tight mb-8 text-white">
+      <h1 class="font-hero font-black text-[2.7rem] md:text-6xl lg:text-[5rem] leading-[1.02] tracking-tight mb-6 text-white">
         <!-- TODO: Yasin Bey copy -->
         Fikirden ölçeğe,<br />
         <span class="gradient-text-mint">AI destekli</span><br />
@@ -349,8 +349,8 @@
   </section>
   </div>
 
-  <!-- ========== BRAND INTRO — logo + açıklama (merkez) ========== -->
-  <section class="bg-white pt-20 pb-12 border-t border-gray-200">
+  <!-- ========== BRAND INTRO — logo + açıklama (merkez) — M6 pull-up bottom-sheet ========== -->
+  <section class="bg-white pt-20 pb-12 -mt-24 md:-mt-16 lg:-mt-20 relative z-30">
     <div class="max-w-3xl mx-auto px-6 md:px-8 text-center">
       <img src="./assets/logo/gavia-footer-dark.webp" alt="Gavia Works"
            class="h-14 md:h-16 w-auto mx-auto mb-8" />
@@ -365,74 +365,11 @@
     </div>
   </section>
 
-  <!-- ========== CLIENTS LOGO STRIP — beyaz kart + marquee ========== -->
-  <section class="bg-white pb-14">
-    <div class="max-w-7xl mx-auto px-6 md:px-8 mb-8">
-      <p class="text-center text-xs text-gavia-muted uppercase tracking-widest font-semibold">
-        Güvenen Markalar
-      </p>
-    </div>
-    <div class="logo-marquee">
-      <div class="logo-marquee-track">
-        <!-- 1. tur (12 logo) -->
-        <div class="logo-card"><img src="./assets/img/clients/01.png" alt="Müşteri 1" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/02.png" alt="Müşteri 2" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/03.png" alt="Müşteri 3" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/04.webp" alt="Müşteri 4" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/05.png" alt="Müşteri 5" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/06.png" alt="Müşteri 6" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/07.png" alt="Müşteri 7" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/08.png" alt="Müşteri 8" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/09.png" alt="Müşteri 9" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/10.webp" alt="Müşteri 10" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/11.png" alt="Müşteri 11" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/12.webp" alt="Müşteri 12" /></div>
-        <!-- 2. tur (loop için tekrar) -->
-        <div class="logo-card"><img src="./assets/img/clients/01.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/02.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/03.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/04.webp" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/05.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/06.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/07.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/08.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/09.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/10.webp" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/11.png" alt="" aria-hidden="true" /></div>
-        <div class="logo-card"><img src="./assets/img/clients/12.webp" alt="" aria-hidden="true" /></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== STATS — Itransition "At a Glance" 5-sütun ========== -->
-  <section class="bg-gavia-deep border-y border-gavia-border">
-    <div class="max-w-7xl mx-auto px-6 md:px-8 py-4">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">10+</div>
-          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Yıl Deneyim</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">50+</div>
-          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Tamamlanan Proje</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">10+</div>
-          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Sektör</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">4</div>
-          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Ürün Ailesi</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Teknik Destek</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 3. NE YAPIYORUZ — AÇIK ZEMİN ========== -->
+  <!-- ========== 3. NE YAPIYORUZ — AÇIK ZEMİN (buz) — M7: sıra yukarı çekildi ========== -->
+  <!-- 5+ hizmet kartı olduğunda aktive et:
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+  -->
   <section id="hizmetler" class="bg-gavia-light text-gavia-deep py-20 md:py-28">
     <div class="max-w-7xl mx-auto px-6 md:px-8">
       <div class="max-w-3xl mb-14">
@@ -447,9 +384,9 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-services-slider>
 
-        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all"><!-- TODO: alt sayfa -->
+        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all service-card"><!-- TODO: alt sayfa -->
           <div class="aspect-[3/2] overflow-hidden">
             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Özel Yazılım" class="image-cover-img group-hover:scale-105 transition-transform duration-500" />
           </div>
@@ -463,7 +400,7 @@
           </div>
         </a>
 
-        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all"><!-- TODO: alt sayfa -->
+        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all service-card"><!-- TODO: alt sayfa -->
           <div class="aspect-[3/2] overflow-hidden">
             <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80" alt="Mobil" class="image-cover-img group-hover:scale-105 transition-transform duration-500" />
           </div>
@@ -477,7 +414,7 @@
           </div>
         </a>
 
-        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all"><!-- TODO: alt sayfa -->
+        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all service-card"><!-- TODO: alt sayfa -->
           <div class="aspect-[3/2] overflow-hidden">
             <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="Sistem Entegrasyonu" class="image-cover-img group-hover:scale-105 transition-transform duration-500" />
           </div>
@@ -491,7 +428,7 @@
           </div>
         </a>
 
-        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all"><!-- TODO: alt sayfa -->
+        <a href="#" class="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-gavia-mint hover:shadow-xl transition-all service-card"><!-- TODO: alt sayfa -->
           <div class="aspect-[3/2] overflow-hidden">
             <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80" alt="Bulut Güvenlik" class="image-cover-img group-hover:scale-105 transition-transform duration-500" />
           </div>
@@ -509,7 +446,7 @@
   </section>
 
   <!-- ========== 4. AI SHOWCASE — KOYU + BG image ========== -->
-  <section id="ai" class="section-fade-top relative bg-gavia-night py-20 md:py-32 overflow-hidden">
+  <section id="ai" class="section-fade-top relative bg-gavia-deep py-20 md:py-32 overflow-hidden">
     <video autoplay loop muted playsinline preload="auto"
            class="absolute inset-0 w-full h-full object-cover z-0 opacity-55"
            aria-hidden="true">
@@ -583,8 +520,8 @@
     </div>
   </section>
 
-  <!-- ========== ÇALIŞMALARIMIZ — AÇIK ZEMİN (mavi duvarı kırıyor) ========== -->
-  <section id="calismalar" class="bg-gavia-light text-gavia-deep py-20 md:py-28">
+  <!-- ========== 5. ÇALIŞMALARIMIZ — BEYAZ ZEMİN ========== -->
+  <section id="calismalar" class="bg-white text-gavia-deep py-20 md:py-28">
     <div class="max-w-7xl mx-auto px-6 md:px-8">
       <div class="max-w-3xl mb-14">
         <span class="badge-mint badge-mint-dark mb-4"><i class="fa-solid fa-briefcase mr-1.5"></i>Çalışmalarımız</span>
@@ -661,8 +598,8 @@
     </div>
   </section>
 
-  <!-- ========== 5. ÜRÜN AİLESİ — GRADIENT KOYU + BG image + glows ========== -->
-  <section id="urunler" class="section-fade-top section-fade-bottom relative bg-gavia-deep py-20 md:py-32 overflow-hidden">
+  <!-- ========== 6. ÜRÜN AİLESİ — GRADIENT KOYU + BG image + glows ========== -->
+  <section id="urunler" class="section-fade-top section-fade-bottom relative bg-gavia-night py-20 md:py-32 overflow-hidden">
     <video autoplay loop muted playsinline preload="auto"
            class="absolute inset-0 w-full h-full object-cover z-0 opacity-55"
            aria-hidden="true">
@@ -723,8 +660,75 @@
     </div>
   </section>
 
-  <!-- ========== 6. SEKTÖRLER — BEYAZ ZEMİN, FULL IMAGE TILE ========== -->
-  <section id="sektorler" class="bg-white text-gavia-deep py-20 md:py-28">
+  <!-- ========== 7a. CLIENTS LOGO STRIP — Markalar+Stats yeniden taşındı (Ürünler → Sektörler arasına) ========== -->
+  <section class="bg-white pb-14 pt-20 md:pt-24">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 mb-8">
+      <p class="text-center text-xs text-gavia-muted uppercase tracking-widest font-semibold">
+        Güvenen Markalar
+      </p>
+    </div>
+    <div class="logo-marquee">
+      <div class="logo-marquee-track">
+        <!-- 1. tur (12 logo) -->
+        <div class="logo-card"><img src="./assets/img/clients/01.png" alt="Müşteri 1" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/02.png" alt="Müşteri 2" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/03.png" alt="Müşteri 3" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/04.webp" alt="Müşteri 4" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/05.png" alt="Müşteri 5" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/06.png" alt="Müşteri 6" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/07.png" alt="Müşteri 7" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/08.png" alt="Müşteri 8" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/09.png" alt="Müşteri 9" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/10.webp" alt="Müşteri 10" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/11.png" alt="Müşteri 11" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/12.webp" alt="Müşteri 12" /></div>
+        <!-- 2. tur (loop için tekrar) -->
+        <div class="logo-card"><img src="./assets/img/clients/01.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/02.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/03.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/04.webp" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/05.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/06.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/07.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/08.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/09.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/10.webp" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/11.png" alt="" aria-hidden="true" /></div>
+        <div class="logo-card"><img src="./assets/img/clients/12.webp" alt="" aria-hidden="true" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 7b. STATS — Itransition "At a Glance" 5-sütun ========== -->
+  <section class="bg-gavia-deep border-y border-gavia-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-4">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Yıl Deneyim</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Tamamlanan Proje</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Sektör</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label"><!-- TODO: Yasin Bey gerçek sayı -->Ürün Ailesi</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Teknik Destek</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 8. SEKTÖRLER — BEYAZ ZEMİN, FULL IMAGE TILE ========== -->
+  <section id="sektorler" class="bg-gavia-light text-gavia-deep py-20 md:py-28">
     <div class="max-w-7xl mx-auto px-6 md:px-8">
       <div class="max-w-3xl mb-14">
         <span class="badge-mint badge-mint-dark mb-4"><i class="fa-solid fa-layer-group mr-1.5"></i>Sektörler</span>
@@ -815,8 +819,8 @@
     </div>
   </section>
 
-  <!-- ========== 7. SÜRDÜRÜLEBİLİRLİK BANDI — AÇIK ZEMİN (mint accent) ========== -->
-  <section id="surdurulebilirlik" class="relative bg-gavia-light text-gavia-deep py-16 md:py-20 overflow-hidden">
+  <!-- ========== 9. SÜRDÜRÜLEBİLİRLİK BANDI — AÇIK ZEMİN (mint accent) ========== -->
+  <section id="surdurulebilirlik" class="relative bg-white text-gavia-deep py-16 md:py-20 overflow-hidden">
     <i class="fa-solid fa-leaf absolute top-1/2 right-[-3rem] sm:-right-12 -translate-y-1/2 text-gavia-mint/[0.18] text-[clamp(120px,40vw,300px)] pointer-events-none"></i>
     <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-gavia-mint/10 rounded-full blur-[120px] pointer-events-none"></div>
     <div class="relative max-w-7xl mx-auto px-6 md:px-8">
@@ -843,7 +847,7 @@
     </div>
   </section>
 
-  <!-- ========== 8. FINAL CTA — Video BG ekli, copy/butonlar aynı ========== -->
+  <!-- ========== 10. FINAL CTA — Video BG ekli, copy/butonlar aynı ========== -->
   <section id="cta" class="section-fade-top relative py-24 md:py-32 overflow-hidden bg-gavia-deep">
     <!-- Loop video BG -->
     <video
@@ -883,26 +887,26 @@
   <div class="footer-reveal-spacer"></div>
 
   <!-- ========== 9. FOOTER (fixed bottom:0 z-0 — UI aynen, mint divider üst kenarda) ========== -->
-  <footer class="footer-fixed-bottom relative bg-gavia-deep border-t border-gavia-mint/30 shadow-[0_-1px_0_rgba(63,213,173,0.08)_inset] overflow-hidden">
+  <footer class="footer-fixed-bottom footer-light relative border-t border-gavia-deep/15 overflow-hidden">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-gavia-mint to-transparent"></div>
 
     <div class="relative max-w-7xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20 md:pb-24">
       <div class="max-w-xl">
-        <img src="./assets/logo/gavia-footer.webp" alt="Gavia Works" class="h-8 w-auto mb-6" />
-        <p class="text-sm text-gray-400 leading-relaxed mb-6 max-w-sm">
+        <img src="./assets/logo/gavia-footer-dark.webp" alt="Gavia Works" class="h-8 w-auto mb-6" />
+        <p class="text-sm text-gavia-deep/75 leading-relaxed mb-6 max-w-sm">
           <!-- TODO: Yasin Bey copy -->AI destekli özel yazılım ve dijital ürün stüdyosu.
         </p>
         <div class="flex gap-3">
-          <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#" aria-label="X" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" aria-label="GitHub" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
-          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-gavia-border hover:border-gavia-mint hover:text-gavia-mint text-gray-400 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg border border-gavia-deep/15 hover:border-gavia-mint hover:text-gavia-mint text-gavia-deep/60 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="X" class="w-9 h-9 rounded-lg border border-gavia-deep/15 hover:border-gavia-mint hover:text-gavia-mint text-gavia-deep/60 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="GitHub" class="w-9 h-9 rounded-lg border border-gavia-deep/15 hover:border-gavia-mint hover:text-gavia-mint text-gavia-deep/60 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-gavia-deep/15 hover:border-gavia-mint hover:text-gavia-mint text-gavia-deep/60 inline-flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
         </div>
       </div>
 
       <!-- Alt çubuk -->
-      <div class="border-t border-gavia-border mt-16 pt-8 flex flex-col md:flex-row justify-between gap-3 text-xs text-gavia-muted">
-        <p class="text-xs text-gavia-muted">© 2026 Tüm hakları saklıdır.</p>
+      <div class="border-t border-gavia-deep/15 mt-16 pt-8 flex flex-col md:flex-row justify-between gap-3 text-xs text-gavia-deep/60">
+        <p class="text-xs text-gavia-deep/60">© 2026 Tüm hakları saklıdır.</p>
         <div class="flex flex-wrap gap-x-5 gap-y-2">
           <a href="./kvkk.html" class="hover:text-gavia-mint transition-colors">KVKK Aydınlatma</a>
           <span class="opacity-30">·</span>

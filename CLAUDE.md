@@ -92,3 +92,18 @@
 3. Minimal etki
 4. Patronla erken iterasyon, geç kod
 5. Statik onaylanmadan Laravel'e geçme
+
+## Görsel Karar Kuralı
+
+- Asla kendi başıma görsel karar (renk, gölge, border, spacing)
+  değiştirmem.
+- Eğer mevcut görsel bir sorun yaratıyorsa veya "soft bridge" gibi
+  bir iyileştirme önereceksem, ÖNCE Beyar'a sorarım ("Şu rengi
+  şununla değiştirmemi ister misin?"), onay almadan dokunmam.
+- Bu kural özellikle: arka plan renkleri, border renkleri, gölgeler,
+  spacing/padding büyük değişiklikleri, font ailesi değişiklikleri için.
+- İstisna: Plan dokümanında açıkça yazılı olan değişiklikler
+  (M5/M6/M7 gibi) tabii ki uygulanır.
+
+Bu kural 21 Mayıs 2026 — Gavia Works Tur 2'de Stats zemin renginin
+izinsiz değiştirilmesi sonrası eklendi.

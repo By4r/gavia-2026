@@ -186,7 +186,7 @@ body {
   .hero-sticky {
     position: relative !important;
     height: auto !important;
-    min-height: 0 !important;
+    min-height: 100vh !important;
     left: auto !important;
     right: auto !important;
     top: auto !important;
@@ -204,6 +204,10 @@ body {
   right: 0;
   z-index: 0 !important;
 }
+/* M8 — anasayfaya özel buz footer. Diğer 32 sayfa navy kalır. */
+.footer-light { background: var(--gavia-light); color: rgba(2, 8, 55, 0.65); }
+.footer-light a { color: rgba(2, 8, 55, 0.75); }
+.footer-light a:hover { color: var(--gavia-mint); }
 .footer-reveal-spacer {
   position: relative !important;
   /* Footer'ın gerçek yüksekliği kadar — iletişim'in alt kenarı footer'ın
